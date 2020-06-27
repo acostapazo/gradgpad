@@ -2,7 +2,7 @@ name: gradgpad
 
 install:
   run:
-  - pip install -U -r requirements/requirements.txt
+  - pip install -U -r requirements/dev.txt -r requirements/requirements.txt
 
 steps:
   clean:
