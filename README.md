@@ -1,4 +1,6 @@
-# grad-gpad [![ci](https://github.com/acostapazo/gradgpad/workflows/ci/badge.svg)](https://github.com/acostapazo/gradgpad/actions)
+# grad-gpad :moyai: [![version](https://img.shields.io/github/release/acostapazo/gradgpad/all.svg)](https://github.com/acostapazo/gradgpad/releases) [![ci](https://github.com/acostapazo/gradgpad/workflows/ci/badge.svg)](https://github.com/acostapazo/gradgpad/actions) [![pypi](https://img.shields.io/pypi/dm/gradgpad)](https://pypi.org/project/gradgpad/)
+
+
 
 Insert project description here
 
