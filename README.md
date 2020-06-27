@@ -1,6 +1,4 @@
-# python-lib-template [![ci](https://github.com/alice-biometrics/python-lib-template/workflows/ci/badge.svg)](https://github.com/alice-biometrics/python-lib-template/actions)
-
-<img src="https://github.com/alice-biometrics/custom-emojis/blob/master/images/alice_header.png" width=auto>
+# grad-gpad [![ci](https://github.com/acostapazo/gradgpad/workflows/ci/badge.svg)](https://github.com/acostapazo/gradgpad/actions)
 
 Insert project description here
 

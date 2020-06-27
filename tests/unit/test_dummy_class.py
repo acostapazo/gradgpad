@@ -4,7 +4,7 @@ import pytest
 from meiga.assertions import assert_success, assert_failure
 from meiga import Error
 
-from template.example.dummy_class import DummyCalculator
+from gradgpad.example.dummy_class import DummyCalculator
 
 
 @pytest.mark.unit
