@@ -1,0 +1,19 @@
+name: template
+
+install:
+  run:
+  - pip install -U -r requirements/requirements.txt
+
+steps:
+  clean:
+    run:
+    - rm -rf deps
+    - rm -rf output
+    - rm -rf docs/build
+    - find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
+  lint:
+    run:
+      - black .
+      - flake8 template
+  test:
+    run: pytest -v
