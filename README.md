@@ -2,6 +2,8 @@
 
 Insert project description here
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/acostapazo/gradgpad/blob/master/notebooks/reproducible-research.ipynb)
+
 
 ## Table of Contents
 - [Installation :computer:](#installation-computer)
