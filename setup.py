@@ -1,6 +1,6 @@
 import os
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 PACKAGE_NAME = "gradgpad"
@@ -30,7 +30,7 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
     ],
-    packages=["gradgpad"],
+    packages=find_packages(exclude=("tests*",)),
     include_package_data=True,
     zip_safe=False,
 )
