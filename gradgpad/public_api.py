@@ -1,7 +1,8 @@
-from tools.open_result_json import open_result_json
+import os
+
+CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 modules = []
-tools = ["open_result_json"]
 classes = []
 
-__all__ = modules + tools + classes
+__all__ = modules + classes
