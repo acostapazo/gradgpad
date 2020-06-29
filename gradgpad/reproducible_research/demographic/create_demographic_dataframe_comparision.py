@@ -2,12 +2,12 @@ import pandas as pd
 
 from typing import Dict
 
-from gradgpad.tools import bpcer_metric_retriever, create_dataframe
+from gradgpad.tools import create_dataframe, metric_retriever_providers
 
 
 def create_demographic_dataframe_comparision(metric, approach_results: Dict[str, Dict]):
-    # TODO metric provider
-    metric_retriever = bpcer_metric_retriever
+
+    metric_retriever = metric_retriever_providers(metric)
 
     # Create dataframes from result dict
     approach_dfs = {
@@ -20,7 +20,9 @@ def create_demographic_dataframe_comparision(metric, approach_results: Dict[str,
         df["Approach"] = [approach_name] * num_rows
 
     df_comparison = pd.concat(list(approach_dfs.values()))
-    df_comparison.rename(columns={"Error Rate (%)": f"{metric} (%)"}, inplace=True)
+
+    metric_name = str(df_comparison["Metric"][0].unique()[0])
+    df_comparison.rename(columns={"Error Rate (%)": f"{metric_name} (%)"}, inplace=True)
     df_comparison.rename(columns={"Protocol": ""}, inplace=True)
 
     return df_comparison

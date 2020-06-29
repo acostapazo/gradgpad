@@ -7,12 +7,12 @@ from gradgpad.reproducible_research import (
 from gradgpad.reproducible_research.demographic import (
     create_demographic_dataframe_comparision,
 )
-from gradgpad.tools import group_dataframe
+from gradgpad.tools import group_dataframe, Metric
 
 
 @pytest.mark.unit
 def test_should_group_dataframe():
-    metric = "BPCER"
+    metric = Metric.BPCER
     approach_results = {
         "Quality SVM RVC": quality_results_skin_tone,
         "Quality SVM LINEAR": quality_linear_results_skin_tone,

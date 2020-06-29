@@ -13,7 +13,7 @@ from gradgpad.reproducible_research import (
 from gradgpad.reproducible_research.demographic import (
     create_demographic_dataframe_comparision,
 )
-from gradgpad.tools import group_dataframe
+from gradgpad.tools import group_dataframe, Metric
 
 
 @pytest.mark.unit
@@ -21,28 +21,76 @@ from gradgpad.tools import group_dataframe
     "metric,approach_results,filename",
     [
         (
-            "BPCER",
+            Metric.BPCER,
             {
                 "Quality SVM RVC": quality_results_gender,
                 "Quality SVM LINEAR": quality_linear_results_gender,
             },
-            "tests/output/gender_comparision_bar_chart.png",
+            "tests/output/gender_bpcer_comparision_bar_chart.png",
         ),
         (
-            "BPCER",
+            Metric.BPCER,
             {
                 "Quality SVM RVC": quality_results_age,
                 "Quality SVM LINEAR": quality_linear_results_age,
             },
-            "tests/output/age_comparision_bar_chart.png",
+            "tests/output/age_bpcer_comparision_bar_chart.png",
         ),
         (
-            "BPCER",
+            Metric.BPCER,
             {
                 "Quality SVM RVC": quality_results_skin_tone,
                 "Quality SVM LINEAR": quality_linear_results_skin_tone,
             },
-            "tests/output/skin_tone_comparision_bar_chart.png",
+            "tests/output/skin_tone_bpcer_comparision_bar_chart.png",
+        ),
+        (
+            Metric.APCER_AGGREGATE,
+            {
+                "Quality SVM RVC": quality_results_gender,
+                "Quality SVM LINEAR": quality_linear_results_gender,
+            },
+            "tests/output/gender_apcer_aggregate_comparision_bar_chart.png",
+        ),
+        (
+            Metric.APCER_AGGREGATE,
+            {
+                "Quality SVM RVC": quality_results_age,
+                "Quality SVM LINEAR": quality_linear_results_age,
+            },
+            "tests/output/age_apcer_aggregate_comparision_bar_chart.png",
+        ),
+        (
+            Metric.APCER_AGGREGATE,
+            {
+                "Quality SVM RVC": quality_results_skin_tone,
+                "Quality SVM LINEAR": quality_linear_results_skin_tone,
+            },
+            "tests/output/skin_tone_apcer_aggregate_comparision_bar_chart.png",
+        ),
+        (
+            Metric.APCER_SPECIFIC,
+            {
+                "Quality SVM RVC": quality_results_gender,
+                "Quality SVM LINEAR": quality_linear_results_gender,
+            },
+            "tests/output/gender_apcer_specific_comparision_bar_chart.png",
+        ),
+        (
+            Metric.APCER_SPECIFIC,
+            {
+                "Quality SVM RVC": quality_results_age,
+                "Quality SVM LINEAR": quality_linear_results_age,
+            },
+            "tests/output/age_apcer_specific_comparision_bar_chart.png",
+        ),
+        (
+            Metric.APCER_AGGREGATE,
+            {
+                "Quality SVM RVC": quality_results_skin_tone,
+                "Quality SVM LINEAR": quality_linear_results_skin_tone,
+            },
+            "tests/output/skin_tone_apcer_specific_comparision_bar_chart.png",
         ),
     ],
 )
@@ -61,7 +109,7 @@ def test_should_create_demographic_df_and_comparision_bar_chart(
     "metric,approach_results,policy,filename",
     [
         (
-            "BPCER",
+            Metric.BPCER,
             {
                 "Quality SVM RVC": quality_results_skin_tone,
                 "Quality SVM LINEAR": quality_linear_results_skin_tone,
