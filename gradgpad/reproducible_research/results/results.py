@@ -22,9 +22,9 @@ quality_results_cross_dataset = {
 quality_linear_results_cross_dataset = {
     k: v for k, v in quality_linear_results.items() if "Cross-Dataset" in k
 }
-# auxiliary_results_cross_dataset = {
-#     k: v for k, v in auxiliary_results.items() if "Cross-Dataset" in k
-# }
+auxiliary_results_cross_dataset = {
+    k: v for k, v in auxiliary_results.items() if "Cross-Dataset" in k
+}
 
 
 # LODO
@@ -32,7 +32,7 @@ quality_results_lodo = {k: v for k, v in quality_results.items() if "LODO" in k}
 quality_linear_results_lodo = {
     k: v for k, v in quality_linear_results.items() if "LODO" in k
 }
-# auxiliary_results_lodo = {k: v for k, v in auxiliary_results.items() if "LODO" in k}
+auxiliary_results_lodo = {k: v for k, v in auxiliary_results.items() if "LODO" in k}
 
 
 # Cross-Device
@@ -42,9 +42,9 @@ quality_results_cross_device = {
 quality_linear_results_cross_device = {
     k: v for k, v in quality_linear_results.items() if "Cross-Device" in k
 }
-# auxiliary_results_cross_device = {
-#     k: v for k, v in auxiliary_results.items() if "Cross-Device" in k
-# }
+auxiliary_results_cross_device = {
+    k: v for k, v in auxiliary_results.items() if "Cross-Device" in k
+}
 
 # Unseen-Attack
 quality_results_unseen_attack = {
