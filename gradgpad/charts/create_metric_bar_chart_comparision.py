@@ -20,7 +20,7 @@ def create_metric_bar_chart_comparision(
         kind="bar",
         height=5,
         aspect=1,
-        palette=["skyblue", "sandybrown"],
+        palette=["skyblue", "sandybrown", "green"],
     )
     g.set(ylim=(0, max_y_limit))
     g.savefig(output_filename)

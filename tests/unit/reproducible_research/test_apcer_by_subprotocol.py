@@ -18,7 +18,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
 
 @pytest.mark.unit
 @pytest.mark.parametrize(
-    "title,working_point,approach_results_protocol, filter_common, filename",
+    "title,working_point,approach_results_protocol,filter_common,filename",
     [
         (
             "Cross-Dataset - APCER @ BPCER 5 %",

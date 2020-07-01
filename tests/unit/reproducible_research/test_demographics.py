@@ -9,6 +9,9 @@ from gradgpad.reproducible_research import (
     quality_linear_results_age,
     quality_linear_results_skin_tone,
     quality_results_skin_tone,
+    auxiliary_results_skin_tone,
+    auxiliary_results_age,
+    auxiliary_results_gender,
 )
 from gradgpad.reproducible_research.demographic import (
     create_demographic_dataframe_comparision,
@@ -25,6 +28,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_gender,
                 "Quality SVM LINEAR": quality_linear_results_gender,
+                "Auxiliary": auxiliary_results_gender,
             },
             "tests/output/gender_bpcer_comparision_bar_chart.png",
         ),
@@ -33,6 +37,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_age,
                 "Quality SVM LINEAR": quality_linear_results_age,
+                "Auxiliary": auxiliary_results_age,
             },
             "tests/output/age_bpcer_comparision_bar_chart.png",
         ),
@@ -41,6 +46,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_skin_tone,
                 "Quality SVM LINEAR": quality_linear_results_skin_tone,
+                "Auxiliary": auxiliary_results_skin_tone,
             },
             "tests/output/skin_tone_bpcer_comparision_bar_chart.png",
         ),
@@ -49,6 +55,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_gender,
                 "Quality SVM LINEAR": quality_linear_results_gender,
+                "Auxiliary": auxiliary_results_gender,
             },
             "tests/output/gender_apcer_aggregate_comparision_bar_chart.png",
         ),
@@ -57,6 +64,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_age,
                 "Quality SVM LINEAR": quality_linear_results_age,
+                "Auxiliary": auxiliary_results_age,
             },
             "tests/output/age_apcer_aggregate_comparision_bar_chart.png",
         ),
@@ -65,6 +73,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_skin_tone,
                 "Quality SVM LINEAR": quality_linear_results_skin_tone,
+                "Auxiliary": auxiliary_results_skin_tone,
             },
             "tests/output/skin_tone_apcer_aggregate_comparision_bar_chart.png",
         ),
@@ -73,6 +82,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_gender,
                 "Quality SVM LINEAR": quality_linear_results_gender,
+                "Auxiliary": auxiliary_results_gender,
             },
             "tests/output/gender_apcer_specific_comparision_bar_chart.png",
         ),
@@ -81,6 +91,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_age,
                 "Quality SVM LINEAR": quality_linear_results_age,
+                "Auxiliary": auxiliary_results_age,
             },
             "tests/output/age_apcer_specific_comparision_bar_chart.png",
         ),
@@ -89,6 +100,7 @@ from gradgpad.tools import group_dataframe, Metric
             {
                 "Quality SVM RVC": quality_results_skin_tone,
                 "Quality SVM LINEAR": quality_linear_results_skin_tone,
+                "Auxiliary": auxiliary_results_skin_tone,
             },
             "tests/output/skin_tone_apcer_specific_comparision_bar_chart.png",
         ),
@@ -113,6 +125,7 @@ def test_should_create_demographic_df_and_comparision_bar_chart(
             {
                 "Quality SVM RVC": quality_results_skin_tone,
                 "Quality SVM LINEAR": quality_linear_results_skin_tone,
+                "Auxiliary": auxiliary_results_skin_tone,
             },
             {
                 "Skin Tone - Yellow": [
