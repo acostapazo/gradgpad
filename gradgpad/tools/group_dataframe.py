@@ -7,7 +7,10 @@ import pandas as pd
 def group_dataframe(df: pd.DataFrame, policy: Dict):
 
     metric = df.columns[1]
-    metric_column_value = str(df["Metric"][0].unique()[0])
+    try:
+        metric_column_value = str(df["Metric"][0].unique()[0])
+    except AttributeError:
+        metric_column_value = str(df["Metric"][0])
 
     data_grouped = {"Metric": [], metric: [], "": [], "Approach": []}
     for key in df.keys():

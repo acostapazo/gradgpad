@@ -51,6 +51,21 @@ from gradgpad.tools import group_dataframe, Metric
             "tests/output/skin_tone_bpcer_comparision_bar_chart.png",
         ),
         (
+            Metric.BPCER,
+            {"Auxiliary": auxiliary_results_gender},
+            "tests/output/gender_bpcer_auxiliary_bar_chart.png",
+        ),
+        (
+            Metric.BPCER,
+            {"Auxiliary": auxiliary_results_age},
+            "tests/output/age_bpcer_auxiliary_bar_chart.png",
+        ),
+        (
+            Metric.BPCER,
+            {"Auxiliary": auxiliary_results_skin_tone},
+            "tests/output/skin_tone_bpcer_auxiliary_bar_chart.png",
+        ),
+        (
             Metric.BPCER_AT_APCER_10_SPECIFIC,
             {
                 "Quality SVM RVC": quality_results_gender,
@@ -103,6 +118,33 @@ from gradgpad.tools import group_dataframe, Metric
                 "Auxiliary": auxiliary_results_skin_tone,
             },
             "tests/output/skin_tone_bpcer_at_apcer_15_comparision_bar_chart.png",
+        ),
+        (
+            Metric.BPCER_AT_APCER_40_SPECIFIC,
+            {
+                "Quality SVM RVC": quality_results_gender,
+                "Quality SVM LINEAR": quality_linear_results_gender,
+                "Auxiliary": auxiliary_results_gender,
+            },
+            "tests/output/gender_bpcer_at_apcer_40_comparision_bar_chart.png",
+        ),
+        (
+            Metric.BPCER_AT_APCER_40_SPECIFIC,
+            {
+                "Quality SVM RVC": quality_results_age,
+                "Quality SVM LINEAR": quality_linear_results_age,
+                "Auxiliary": auxiliary_results_age,
+            },
+            "tests/output/age_bpcer_at_apcer_40_comparision_bar_chart.png",
+        ),
+        (
+            Metric.BPCER_AT_APCER_40_SPECIFIC,
+            {
+                "Quality SVM RVC": quality_results_skin_tone,
+                "Quality SVM LINEAR": quality_linear_results_skin_tone,
+                "Auxiliary": auxiliary_results_skin_tone,
+            },
+            "tests/output/skin_tone_bpcer_at_apcer_40_comparision_bar_chart.png",
         ),
         (
             Metric.APCER_AGGREGATE,
@@ -198,6 +240,25 @@ def test_should_create_demographic_df_and_comparision_bar_chart(
             "tests/output/skin_tone_bpcer_grouped_comparision_bar_chart.png",
         ),
         (
+            Metric.BPCER,
+            {"Auxiliary": auxiliary_results_skin_tone},
+            {
+                "Skin Tone - Yellow": [
+                    "Skin Tone - Light Yellow",
+                    "Skin Tone - Medium Yellow Brown",
+                ],
+                "Skin Tone - Pink": [
+                    "Skin Tone - Light Pink",
+                    "Skin Tone - Medium Pink Brown",
+                ],
+                "Skin Tone - Dark Brown": [
+                    "Skin Tone - Medium Dark Brown",
+                    "Skin Tone - Dark Brown",
+                ],
+            },
+            "tests/output/skin_tone_bpcer_grouped_auxiliary_bar_chart.png",
+        ),
+        (
             Metric.BPCER_AT_APCER_10_SPECIFIC,
             {
                 "Quality SVM RVC": quality_results_skin_tone,
@@ -242,6 +303,29 @@ def test_should_create_demographic_df_and_comparision_bar_chart(
                 ],
             },
             "tests/output/skin_tone_bpcer_at_apcer_15_grouped_comparision_bar_chart.png",
+        ),
+        (
+            Metric.BPCER_AT_APCER_40_SPECIFIC,
+            {
+                "Quality SVM RVC": quality_results_skin_tone,
+                "Quality SVM LINEAR": quality_linear_results_skin_tone,
+                "Auxiliary": auxiliary_results_skin_tone,
+            },
+            {
+                "Skin Tone - Yellow": [
+                    "Skin Tone - Light Yellow",
+                    "Skin Tone - Medium Yellow Brown",
+                ],
+                "Skin Tone - Pink": [
+                    "Skin Tone - Light Pink",
+                    "Skin Tone - Medium Pink Brown",
+                ],
+                "Skin Tone - Dark Brown": [
+                    "Skin Tone - Medium Dark Brown",
+                    "Skin Tone - Dark Brown",
+                ],
+            },
+            "tests/output/skin_tone_bpcer_at_apcer_40_grouped_comparision_bar_chart.png",
         ),
     ],
 )

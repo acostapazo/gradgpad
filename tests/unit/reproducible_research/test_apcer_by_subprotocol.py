@@ -12,6 +12,9 @@ from gradgpad.reproducible_research import (
     quality_linear_results_cross_device,
     quality_results_unseen_attack,
     quality_linear_results_unseen_attack,
+    auxiliary_results_cross_dataset,
+    auxiliary_results_lodo,
+    auxiliary_results_cross_device,
 )
 from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_subprotocol
 
@@ -26,6 +29,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_cross_dataset,
                 "Quality SVM LINEAR": quality_linear_results_cross_dataset,
+                "Auxiliary": auxiliary_results_cross_dataset,
             },
             "Cross-Dataset - ",
             "tests/output/cross_dataset_apcer_fixing_wp_bpcer_5_radar_chart.png",
@@ -36,6 +40,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_cross_dataset,
                 "Quality SVM LINEAR": quality_linear_results_cross_dataset,
+                "Auxiliary": auxiliary_results_cross_dataset,
             },
             "Cross-Dataset - ",
             "tests/output/cross_dataset_apcer_fixing_wp_bpcer_10_radar_chart.png",
@@ -46,6 +51,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_cross_dataset,
                 "Quality SVM LINEAR": quality_linear_results_cross_dataset,
+                "Auxiliary": auxiliary_results_cross_dataset,
             },
             "Cross-Dataset - ",
             "tests/output/cross_dataset_apcer_fixing_wp_bpcer_15_radar_chart.png",
@@ -56,6 +62,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_lodo,
                 "Quality SVM LINEAR": quality_linear_results_lodo,
+                "Auxiliary": auxiliary_results_lodo,
             },
             "LODO - ",
             "tests/output/lodo_apcer_fixing_wp_bpcer_5_radar_chart.png",
@@ -66,6 +73,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_lodo,
                 "Quality SVM LINEAR": quality_linear_results_lodo,
+                "Auxiliary": auxiliary_results_lodo,
             },
             "LODO - ",
             "tests/output/lodo_apcer_fixing_wp_bpcer_10_radar_chart.png",
@@ -74,8 +82,9 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "LODO - APCER @ BPCER 15 %",
             WorkingPoint.BPCER_15,
             {
-                "Quality SVM RVC": quality_results_cross_dataset,
-                "Quality SVM LINEAR": quality_linear_results_cross_dataset,
+                "Quality SVM RVC": quality_results_lodo,
+                "Quality SVM LINEAR": quality_linear_results_lodo,
+                "Auxiliary": auxiliary_results_lodo,
             },
             "LODO - ",
             "tests/output/lodo_apcer_fixing_wp_bpcer_15_radar_chart.png",
@@ -86,6 +95,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_cross_device,
                 "Quality SVM LINEAR": quality_linear_results_cross_device,
+                "Auxiliary": auxiliary_results_cross_device,
             },
             "Cross-Device - ",
             "tests/output/cross_device_apcer_fixing_wp_bpcer_5_radar_chart.png",
@@ -96,6 +106,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_cross_device,
                 "Quality SVM LINEAR": quality_linear_results_cross_device,
+                "Auxiliary": auxiliary_results_cross_device,
             },
             "Cross-Device - ",
             "tests/output/cross_device_apcer_fixing_wp_bpcer_10_radar_chart.png",
@@ -106,6 +117,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_cross_device,
                 "Quality SVM LINEAR": quality_linear_results_cross_device,
+                "Auxiliary": auxiliary_results_cross_device,
             },
             "Cross-Device - ",
             "tests/output/cross_device_apcer_fixing_wp_bpcer_15_radar_chart.png",
@@ -116,6 +128,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_unseen_attack,
                 "Quality SVM LINEAR": quality_linear_results_unseen_attack,
+                # "Auxiliary": auxiliary_results_unseen_attack,
             },
             "Unseen-Attack - ",
             "tests/output/unseen_attack_apcer_fixing_wp_bpcer_5_radar_chart.png",
@@ -126,6 +139,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_unseen_attack,
                 "Quality SVM LINEAR": quality_linear_results_unseen_attack,
+                # "Auxiliary": auxiliary_results_unseen_attack,
             },
             "Unseen-Attack - ",
             "tests/output/unseen_attack_apcer_fixing_wp_bpcer_10_radar_chart.png",
@@ -136,6 +150,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             {
                 "Quality SVM RVC": quality_results_unseen_attack,
                 "Quality SVM LINEAR": quality_linear_results_unseen_attack,
+                # "Auxiliary": auxiliary_results_unseen_attack,
             },
             "Unseen-Attack - ",
             "tests/output/unseen_attack_apcer_fixing_wp_bpcer_15_radar_chart.png",

@@ -30,6 +30,12 @@ class ApcerDetail:
     detail_values: List
     apcers: Dict[str, List]
 
+    def print(self):
+        for approach, apcers in self.apcers.items():
+            print(approach)
+            for i, apcer in enumerate(apcers):
+                print(f" | {self.detail_values[i]}: {apcer}")
+
 
 def create_apcer_by_pai(results_protocol, working_point: WorkingPoint):
     detail_values = []
@@ -70,5 +76,7 @@ def create_apcer_by_subprotocol(
                 "relative_working_points"
             ]["apcer"][value_bpcer(working_point)]
             apcers[approach_name].append(apcer_subprotocol)
+
+            print(f"{subprotocol_name} -> {apcer_subprotocol}")
 
     return ApcerDetail(detail_values, apcers)

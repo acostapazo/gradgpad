@@ -21,7 +21,10 @@ def create_demographic_dataframe_comparision(metric, approach_results: Dict[str,
 
     df_comparison = pd.concat(list(approach_dfs.values()))
 
-    metric_name = str(df_comparison["Metric"][0].unique()[0])
+    try:
+        metric_name = str(df_comparison["Metric"][0].unique()[0])
+    except AttributeError:
+        metric_name = str(df_comparison["Metric"][0])
     df_comparison.rename(columns={"Error Rate (%)": f"{metric_name} (%)"}, inplace=True)
     df_comparison.rename(columns={"Protocol": ""}, inplace=True)
 

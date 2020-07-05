@@ -322,6 +322,373 @@
         "false_rejection_rate": 11.674682990817665,
         "false_rejection_number": 267
     },
+    "Grandtest-Train-Type-PAI-I-Test-All": {
+        "hter": 8.85315254362277,
+        "acer": 33.88612198321371,
+        "sacer": 43.337341495408836,
+        "acer_info": {
+            "aggregate": {
+                "acer": 33.88612198321371,
+                "bpcer": 11.674682990817665,
+                "relative_working_points": {
+                    "bpcer": {
+                        "apcer_5": 100.0,
+                        "apcer_10": 87.5,
+                        "apcer_15": 70.0,
+                        "apcer_20": 50.0,
+                        "apcer_30": 27.997474747474755,
+                        "apcer_40": 20.638888888888886
+                    },
+                    "apcer": {
+                        "bpcer_5": 78.22474857892435,
+                        "bpcer_10": 74.72671622212505,
+                        "bpcer_15": 50.4882670164699,
+                        "bpcer_20": 41.40795802361172,
+                        "bpcer_30": 28.334062090074337,
+                        "bpcer_40": 27.678181023174464
+                    }
+                },
+                "max_apcer_pai": "makeup",
+                "apcer_per_pai": {
+                    "print": 11.664779161947905,
+                    "replay": 2.5398936170212765,
+                    "mask": 21.88976377952756,
+                    "makeup": 56.09756097560976,
+                    "partial": 20.070422535211268
+                },
+                "apcer_per_pai_fixing_bpcer": {
+                    "print": {
+                        "apcer_fixing_bpcer5": 22.209513023782563,
+                        "apcer_fixing_bpcer10": 13.149773499433747,
+                        "apcer_fixing_bpcer15": 8.832106455266137,
+                        "apcer_fixing_bpcer20": 6.17685919214798,
+                        "apcer_fixing_bpcer30": 3.363276021826419,
+                        "apcer_fixing_bpcer40": 1.6930917327293307
+                    },
+                    "replay": {
+                        "apcer_fixing_bpcer5": 6.071333586626141,
+                        "apcer_fixing_bpcer10": 3.247672872340426,
+                        "apcer_fixing_bpcer15": 1.7413563829787235,
+                        "apcer_fixing_bpcer20": 1.238981762917933,
+                        "apcer_fixing_bpcer30": 0.6019100580270794,
+                        "apcer_fixing_bpcer40": 0.28523936170212755
+                    },
+                    "mask": {
+                        "apcer_fixing_bpcer5": 37.455568053993254,
+                        "apcer_fixing_bpcer10": 24.17847769028871,
+                        "apcer_fixing_bpcer15": 18.23543307086614,
+                        "apcer_fixing_bpcer20": 14.672665916760405,
+                        "apcer_fixing_bpcer30": 9.038654259126702,
+                        "apcer_fixing_bpcer40": 6.503937007874015
+                    },
+                    "makeup": {
+                        "apcer_fixing_bpcer5": 80.94947735191637,
+                        "apcer_fixing_bpcer10": 63.59078590785908,
+                        "apcer_fixing_bpcer15": 43.90243902439025,
+                        "apcer_fixing_bpcer20": 29.268292682926827,
+                        "apcer_fixing_bpcer30": 14.634146341463413,
+                        "apcer_fixing_bpcer40": 9.75609756097561
+                    },
+                    "partial": {
+                        "apcer_fixing_bpcer5": 33.49974849094568,
+                        "apcer_fixing_bpcer10": 22.04496208017335,
+                        "apcer_fixing_bpcer15": 14.721510883482713,
+                        "apcer_fixing_bpcer20": 9.215962441314554,
+                        "apcer_fixing_bpcer30": 4.375382731169628,
+                        "apcer_fixing_bpcer40": 1.7605633802816902
+                    }
+                },
+                "acer_per_pai": {
+                    "print": 11.669731076382785,
+                    "replay": 7.1072883039194705,
+                    "mask": 16.782223385172614,
+                    "makeup": 33.88612198321371,
+                    "partial": 15.872552763014466
+                },
+                "num_samples_per_pai": {
+                    "print": 1766,
+                    "replay": 7520,
+                    "mask": 635,
+                    "makeup": 41,
+                    "partial": 284
+                },
+                "percentage_per_pai": {
+                    "print": 17.23599453445247,
+                    "replay": 73.39449541284404,
+                    "mask": 6.197540503611165,
+                    "makeup": 0.4001561585008784,
+                    "partial": 2.77181339059145
+                },
+                "wacer": 8.84339263731787,
+                "weighted_apcer_per_pai": {
+                    "print": 2.0105406988092915,
+                    "replay": 1.8641421042357993,
+                    "mask": 1.3566269763810268,
+                    "makeup": 0.22447784501268786,
+                    "partial": 0.5563146593792699
+                }
+            },
+            "specific": {
+                "acer": 43.337341495408836,
+                "bpcer": 11.674682990817665,
+                "relative_working_points": {
+                    "bpcer": {
+                        "apcer_5": 100.0,
+                        "apcer_10": 87.5,
+                        "apcer_15": 70.0,
+                        "apcer_20": 50.0,
+                        "apcer_30": 27.997474747474755,
+                        "apcer_40": 20.638888888888886
+                    },
+                    "apcer": {
+                        "bpcer_5": 78.22474857892435,
+                        "bpcer_10": 74.72671622212505,
+                        "bpcer_15": 50.4882670164699,
+                        "bpcer_20": 41.40795802361172,
+                        "bpcer_30": 28.334062090074337,
+                        "bpcer_40": 27.678181023174464
+                    }
+                },
+                "max_apcer_pai": "makeup_cosmetic",
+                "apcer_per_pai": {
+                    "print_low_quality": 19.141914191419144,
+                    "print_medium_quality": 4.545454545454546,
+                    "print_high_quality": 8.51063829787234,
+                    "replay_low_quality": 0.0,
+                    "replay_medium_quality": 2.4691358024691357,
+                    "replay_high_quality": 2.713382507903056,
+                    "mask_paper": 5.778894472361809,
+                    "mask_rigid": 49.44444444444444,
+                    "mask_silicone": 47.368421052631575,
+                    "makeup_cosmetic": 75.0,
+                    "makeup_impersonation": 26.666666666666668,
+                    "makeup_obfuscation": 70.0,
+                    "partial_funny_eyes": 56.41025641025641,
+                    "partial_periocular": 53.84615384615385,
+                    "partial_paper_glasses": 50.0,
+                    "partial_upper_half": 6.0606060606060606,
+                    "partial_lower_half": 25.0
+                },
+                "apcer_per_pai_fixing_bpcer": {
+                    "print_low_quality": {
+                        "apcer_fixing_bpcer5": 32.646864686468646,
+                        "apcer_fixing_bpcer10": 21.210121012101208,
+                        "apcer_fixing_bpcer15": 14.221122112211221,
+                        "apcer_fixing_bpcer20": 10.998349834983498,
+                        "apcer_fixing_bpcer30": 6.500900090009003,
+                        "apcer_fixing_bpcer40": 3.6798679867986794
+                    },
+                    "print_medium_quality": {
+                        "apcer_fixing_bpcer5": 15.331818181818182,
+                        "apcer_fixing_bpcer10": 5.909090909090909,
+                        "apcer_fixing_bpcer15": 2.727272727272727,
+                        "apcer_fixing_bpcer20": 1.3636363636363635,
+                        "apcer_fixing_bpcer30": 0.45454545454545453,
+                        "apcer_fixing_bpcer40": 0.0
+                    },
+                    "print_high_quality": {
+                        "apcer_fixing_bpcer5": 17.090425531914892,
+                        "apcer_fixing_bpcer10": 9.64804964539007,
+                        "apcer_fixing_bpcer15": 6.7867021276595745,
+                        "apcer_fixing_bpcer20": 4.195035460992908,
+                        "apcer_fixing_bpcer30": 2.021276595744681,
+                        "apcer_fixing_bpcer40": 0.8085106382978711
+                    },
+                    "replay_low_quality": {
+                        "apcer_fixing_bpcer5": 0.0,
+                        "apcer_fixing_bpcer10": 0.0,
+                        "apcer_fixing_bpcer15": 0.0,
+                        "apcer_fixing_bpcer20": 0.0,
+                        "apcer_fixing_bpcer30": 0.0,
+                        "apcer_fixing_bpcer40": 0.0
+                    },
+                    "replay_medium_quality": {
+                        "apcer_fixing_bpcer5": 6.034551867885201,
+                        "apcer_fixing_bpcer10": 3.2201646090534974,
+                        "apcer_fixing_bpcer15": 1.7950336700336702,
+                        "apcer_fixing_bpcer20": 1.1247394580727912,
+                        "apcer_fixing_bpcer30": 0.5405060708091014,
+                        "apcer_fixing_bpcer40": 0.2006172839506172
+                    },
+                    "replay_high_quality": {
+                        "apcer_fixing_bpcer5": 6.361771789853981,
+                        "apcer_fixing_bpcer10": 3.4103881278538815,
+                        "apcer_fixing_bpcer15": 1.7643572181243417,
+                        "apcer_fixing_bpcer20": 1.3984645491494803,
+                        "apcer_fixing_bpcer30": 0.684931506849315,
+                        "apcer_fixing_bpcer40": 0.37671232876712313
+                    },
+                    "mask_paper": {
+                        "apcer_fixing_bpcer5": 15.132806891600861,
+                        "apcer_fixing_bpcer10": 7.13149078726968,
+                        "apcer_fixing_bpcer15": 3.015075376884422,
+                        "apcer_fixing_bpcer20": 2.0208183776022963,
+                        "apcer_fixing_bpcer30": 1.256281407035176,
+                        "apcer_fixing_bpcer40": 0.5025125628140703
+                    },
+                    "mask_rigid": {
+                        "apcer_fixing_bpcer5": 70.31547619047619,
+                        "apcer_fixing_bpcer10": 51.11111111111111,
+                        "apcer_fixing_bpcer15": 46.24768518518519,
+                        "apcer_fixing_bpcer20": 39.73015873015873,
+                        "apcer_fixing_bpcer30": 28.326388888888893,
+                        "apcer_fixing_bpcer40": 20.678571428571427
+                    },
+                    "mask_silicone": {
+                        "apcer_fixing_bpcer5": 91.8922305764411,
+                        "apcer_fixing_bpcer10": 56.14035087719298,
+                        "apcer_fixing_bpcer15": 38.13596491228069,
+                        "apcer_fixing_bpcer20": 23.258145363408513,
+                        "apcer_fixing_bpcer30": 3.508771929824561,
+                        "apcer_fixing_bpcer40": 3.8972431077694254
+                    },
+                    "makeup_cosmetic": {
+                        "apcer_fixing_bpcer5": 93.75,
+                        "apcer_fixing_bpcer10": 87.95138888888889,
+                        "apcer_fixing_bpcer15": 62.5,
+                        "apcer_fixing_bpcer20": 37.5,
+                        "apcer_fixing_bpcer30": 25.0,
+                        "apcer_fixing_bpcer40": 18.75
+                    },
+                    "makeup_impersonation": {
+                        "apcer_fixing_bpcer5": 54.59523809523809,
+                        "apcer_fixing_bpcer10": 26.666666666666668,
+                        "apcer_fixing_bpcer15": 6.666666666666667,
+                        "apcer_fixing_bpcer20": 6.666666666666667,
+                        "apcer_fixing_bpcer30": 0.0,
+                        "apcer_fixing_bpcer40": 0.0
+                    },
+                    "makeup_obfuscation": {
+                        "apcer_fixing_bpcer5": 100.0,
+                        "apcer_fixing_bpcer10": 80.0,
+                        "apcer_fixing_bpcer15": 70.0,
+                        "apcer_fixing_bpcer20": 50.0,
+                        "apcer_fixing_bpcer30": 20.0,
+                        "apcer_fixing_bpcer40": 10.0
+                    },
+                    "partial_funny_eyes": {
+                        "apcer_fixing_bpcer5": 85.1007326007326,
+                        "apcer_fixing_bpcer10": 61.90883190883191,
+                        "apcer_fixing_bpcer15": 46.78418803418803,
+                        "apcer_fixing_bpcer20": 31.428571428571423,
+                        "apcer_fixing_bpcer30": 15.384615384615385,
+                        "apcer_fixing_bpcer40": 5.128205128205128
+                    },
+                    "partial_periocular": {
+                        "apcer_fixing_bpcer5": 78.37912087912088,
+                        "apcer_fixing_bpcer10": 53.84615384615385,
+                        "apcer_fixing_bpcer15": 30.76923076923077,
+                        "apcer_fixing_bpcer20": 15.384615384615385,
+                        "apcer_fixing_bpcer30": 10.224358974358998,
+                        "apcer_fixing_bpcer40": 0.0
+                    },
+                    "partial_paper_glasses": {
+                        "apcer_fixing_bpcer5": 66.66666666666666,
+                        "apcer_fixing_bpcer10": 50.0,
+                        "apcer_fixing_bpcer15": 40.0,
+                        "apcer_fixing_bpcer20": 30.0,
+                        "apcer_fixing_bpcer30": 14.430555555555566,
+                        "apcer_fixing_bpcer40": 6.666666666666667
+                    },
+                    "partial_upper_half": {
+                        "apcer_fixing_bpcer5": 14.69336219336219,
+                        "apcer_fixing_bpcer10": 8.014763014763014,
+                        "apcer_fixing_bpcer15": 3.48714416896235,
+                        "apcer_fixing_bpcer20": 1.5151515151515151,
+                        "apcer_fixing_bpcer30": 0.5050505050505051,
+                        "apcer_fixing_bpcer40": 0.5050505050505051
+                    },
+                    "partial_lower_half": {
+                        "apcer_fixing_bpcer5": 75.0,
+                        "apcer_fixing_bpcer10": 25.0,
+                        "apcer_fixing_bpcer15": 25.0,
+                        "apcer_fixing_bpcer20": 0.0,
+                        "apcer_fixing_bpcer30": 0.0,
+                        "apcer_fixing_bpcer40": 0.0
+                    }
+                },
+                "acer_per_pai": {
+                    "print_low_quality": 15.408298591118404,
+                    "print_medium_quality": 8.110068768136106,
+                    "print_high_quality": 10.092660644345003,
+                    "replay_low_quality": 5.8373414954088325,
+                    "replay_medium_quality": 7.071909396643401,
+                    "replay_high_quality": 7.19403274936036,
+                    "mask_paper": 8.726788731589737,
+                    "mask_rigid": 30.559563717631054,
+                    "mask_silicone": 29.52155202172462,
+                    "makeup_cosmetic": 43.337341495408836,
+                    "makeup_impersonation": 19.170674828742165,
+                    "makeup_obfuscation": 40.837341495408836,
+                    "partial_funny_eyes": 34.04246970053704,
+                    "partial_periocular": 32.760418418485756,
+                    "partial_paper_glasses": 30.837341495408833,
+                    "partial_upper_half": 8.867644525711864,
+                    "partial_lower_half": 18.337341495408833
+                },
+                "num_samples_per_pai": {
+                    "print_low_quality": 606,
+                    "print_medium_quality": 220,
+                    "print_high_quality": 940,
+                    "replay_low_quality": 160,
+                    "replay_medium_quality": 3564,
+                    "replay_high_quality": 3796,
+                    "mask_paper": 398,
+                    "mask_rigid": 180,
+                    "mask_silicone": 57,
+                    "makeup_cosmetic": 16,
+                    "makeup_impersonation": 15,
+                    "makeup_obfuscation": 10,
+                    "partial_funny_eyes": 39,
+                    "partial_periocular": 13,
+                    "partial_paper_glasses": 30,
+                    "partial_upper_half": 198,
+                    "partial_lower_half": 4
+                },
+                "percentage_per_pai": {
+                    "print_low_quality": 5.91450322076908,
+                    "print_medium_quality": 2.147179387077884,
+                    "print_high_quality": 9.174311926605505,
+                    "replay_low_quality": 1.5615850087839156,
+                    "replay_medium_quality": 34.78430607066172,
+                    "replay_high_quality": 37.0486043333984,
+                    "mask_paper": 3.8844427093499903,
+                    "mask_rigid": 1.7567831348819052,
+                    "mask_silicone": 0.5563146593792699,
+                    "makeup_cosmetic": 0.15615850087839156,
+                    "makeup_impersonation": 0.1463985945734921,
+                    "makeup_obfuscation": 0.09759906304899472,
+                    "partial_funny_eyes": 0.3806363458910794,
+                    "partial_periocular": 0.12687878196369315,
+                    "partial_paper_glasses": 0.2927971891469842,
+                    "partial_upper_half": 1.9324614483700957,
+                    "partial_lower_half": 0.03903962521959789
+                },
+                "wacer": 8.84339263731787,
+                "weighted_apcer_per_pai": {
+                    "print_low_quality": 1.132149131368339,
+                    "print_medium_quality": 0.09759906304899474,
+                    "print_high_quality": 0.7807925043919579,
+                    "replay_low_quality": 0.0,
+                    "replay_medium_quality": 0.8588717548311535,
+                    "replay_high_quality": 1.0052703494046458,
+                    "mask_paper": 0.2244778450126879,
+                    "mask_rigid": 0.8686316611360532,
+                    "mask_silicone": 0.2635174702322858,
+                    "makeup_cosmetic": 0.11711887565879367,
+                    "makeup_impersonation": 0.0390396252195979,
+                    "makeup_obfuscation": 0.06831934413429631,
+                    "partial_funny_eyes": 0.21471793870778838,
+                    "partial_periocular": 0.06831934413429631,
+                    "partial_paper_glasses": 0.1463985945734921,
+                    "partial_upper_half": 0.11711887565879368,
+                    "partial_lower_half": 0.009759906304899472
+                }
+            }
+        },
+        "false_rejection_rate": 11.674682990817665,
+        "false_rejection_number": 267
+    },
     "skin-tone-bias-grad-gpad-all": {
         "hter": 8.04825082431751,
         "acer": 18.480392156862745,

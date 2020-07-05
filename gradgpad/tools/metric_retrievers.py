@@ -6,7 +6,8 @@ class Metric(Enum):
     APCER_AGGREGATE = 2
     APCER_SPECIFIC = 3
     BPCER_AT_APCER_10_SPECIFIC = 4
-    BPCER_AT_APCER_15_SPECIFIC = 6
+    BPCER_AT_APCER_15_SPECIFIC = 5
+    BPCER_AT_APCER_40_SPECIFIC = 6
 
     @staticmethod
     def available():
@@ -16,6 +17,7 @@ class Metric(Enum):
             "APCER_SPECIFIC",
             "BPCER_AT_APCER_10_SPECIFIC",
             "BPCER_AT_APCER_15_SPECIFIC",
+            "BPCER_AT_APCER_40_SPECIFIC",
         ]
 
 
@@ -82,6 +84,17 @@ def bpcer_at_apcer_15_specific_metric_retriever(performance_info):
     return "$BPCER @ APCER=15%$", bpcer_at_apcer_15
 
 
+def bpcer_at_apcer_40_specific_metric_retriever(performance_info):
+    bpcer_at_apcer_40 = (
+        performance_info.get("acer_info", {})
+        .get("specific", {})
+        .get("relative_working_points", {})
+        .get("bpcer", {})
+        .get("apcer_40")
+    )
+    return "$BPCER @ APCER=40%$", bpcer_at_apcer_40
+
+
 def metric_retriever_providers(metric: Metric):
     providers = {
         Metric.BPCER: bpcer_metric_retriever,
@@ -89,6 +102,7 @@ def metric_retriever_providers(metric: Metric):
         Metric.APCER_SPECIFIC: apcer_specific_metric_retriever,
         Metric.BPCER_AT_APCER_10_SPECIFIC: bpcer_at_apcer_10_specific_metric_retriever,
         Metric.BPCER_AT_APCER_15_SPECIFIC: bpcer_at_apcer_15_specific_metric_retriever,
+        Metric.BPCER_AT_APCER_40_SPECIFIC: bpcer_at_apcer_40_specific_metric_retriever,
     }
 
     metric_retriever = providers.get(metric)

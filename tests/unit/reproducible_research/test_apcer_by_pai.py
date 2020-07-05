@@ -36,6 +36,16 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_pai
             "tests/output/grandtest_type_pai_I_apcer_by_pai_fixing_wp_bpcer_10_radar_chart.png",
         ),
         (
+            "APCER @ BPCER 15 %",
+            WorkingPoint.BPCER_15,
+            {
+                "Quality SVM RVC": quality_results["Grandtest-Type-PAI-I"],
+                "Quality SVM LINEAR": quality_linear_results["Grandtest-Type-PAI-I"],
+                "Auxiliary": auxiliary_results["Grandtest-Type-PAI-I"],
+            },
+            "tests/output/grandtest_type_pai_I_apcer_by_pai_fixing_wp_bpcer_15_radar_chart.png",
+        ),
+        (
             "APCER @ BPCER 5 %",
             WorkingPoint.BPCER_5,
             {
@@ -45,6 +55,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_pai
                 "Quality SVM LINEAR": quality_linear_results[
                     "Grandtest-Train-Type-PAI-I-Test-All"
                 ],
+                "Auxiliary": auxiliary_results["Grandtest-Train-Type-PAI-I-Test-All"],
             },
             "tests/output/grandtest_type_pai_I_test_all_apcer_by_pai_fixing_wp_bpcer_5_radar_chart.png",
         ),
@@ -58,8 +69,23 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_pai
                 "Quality SVM LINEAR": quality_linear_results[
                     "Grandtest-Train-Type-PAI-I-Test-All"
                 ],
+                "Auxiliary": auxiliary_results["Grandtest-Train-Type-PAI-I-Test-All"],
             },
             "tests/output/grandtest_type_pai_I_test_all_apcer_by_pai_fixing_wp_bpcer_10_radar_chart.png",
+        ),
+        (
+            "APCER @ BPCER 15 %",
+            WorkingPoint.BPCER_15,
+            {
+                "Quality SVM RVC": quality_results[
+                    "Grandtest-Train-Type-PAI-I-Test-All"
+                ],
+                "Quality SVM LINEAR": quality_linear_results[
+                    "Grandtest-Train-Type-PAI-I-Test-All"
+                ],
+                "Auxiliary": auxiliary_results["Grandtest-Train-Type-PAI-I-Test-All"],
+            },
+            "tests/output/grandtest_type_pai_I_test_all_apcer_by_pai_fixing_wp_bpcer_15_radar_chart.png",
         ),
     ],
 )
