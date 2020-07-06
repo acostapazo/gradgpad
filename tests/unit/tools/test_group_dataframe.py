@@ -14,7 +14,7 @@ from gradgpad.tools import group_dataframe, Metric
 def test_should_group_dataframe():
     metric = Metric.BPCER
     approach_results = {
-        "Quality SVM RVC": quality_results_skin_tone,
+        "Quality SVM RBF": quality_results_skin_tone,
         "Quality SVM LINEAR": quality_linear_results_skin_tone,
     }
     df = create_demographic_dataframe_comparision(metric, approach_results)

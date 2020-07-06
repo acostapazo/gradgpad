@@ -15,14 +15,14 @@ from gradgpad.tools.create_apcer_detail import (
         (
             WorkingPoint.BPCER_5,
             {
-                "Quality SVM RVC": quality_results["Grandtest-Type-PAI-I"],
+                "Quality SVM RBF": quality_results["Grandtest-Type-PAI-I"],
                 "Quality SVM LINEAR": quality_linear_results["Grandtest-Type-PAI-I"],
             },
         ),
         (
             WorkingPoint.BPCER_10,
             {
-                "Quality SVM RVC": quality_results["Grandtest-Type-PAI-I"],
+                "Quality SVM RBF": quality_results["Grandtest-Type-PAI-I"],
                 "Quality SVM LINEAR": quality_linear_results["Grandtest-Type-PAI-I"],
             },
         ),

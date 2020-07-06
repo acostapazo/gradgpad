@@ -24,10 +24,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
     "title,working_point,approach_results_protocol,filter_common,filename",
     [
         (
-            "Cross-Dataset - APCER @ BPCER 5 %",
+            "APCER @ BPCER 5 %",
             WorkingPoint.BPCER_5,
             {
-                "Quality SVM RVC": quality_results_cross_dataset,
+                "Quality SVM RBF": quality_results_cross_dataset,
                 "Quality SVM LINEAR": quality_linear_results_cross_dataset,
                 "Auxiliary": auxiliary_results_cross_dataset,
             },
@@ -35,10 +35,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/cross_dataset_apcer_fixing_wp_bpcer_5_radar_chart.png",
         ),
         (
-            "Cross-Dataset - APCER @ BPCER 10 %",
+            "APCER @ BPCER 10 %",
             WorkingPoint.BPCER_10,
             {
-                "Quality SVM RVC": quality_results_cross_dataset,
+                "Quality SVM RBF": quality_results_cross_dataset,
                 "Quality SVM LINEAR": quality_linear_results_cross_dataset,
                 "Auxiliary": auxiliary_results_cross_dataset,
             },
@@ -46,10 +46,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/cross_dataset_apcer_fixing_wp_bpcer_10_radar_chart.png",
         ),
         (
-            "Cross-Dataset - APCER @ BPCER 15 %",
+            "APCER @ BPCER 15 %",
             WorkingPoint.BPCER_15,
             {
-                "Quality SVM RVC": quality_results_cross_dataset,
+                "Quality SVM RBF": quality_results_cross_dataset,
                 "Quality SVM LINEAR": quality_linear_results_cross_dataset,
                 "Auxiliary": auxiliary_results_cross_dataset,
             },
@@ -57,10 +57,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/cross_dataset_apcer_fixing_wp_bpcer_15_radar_chart.png",
         ),
         (
-            "LODO - APCER @ BPCER 5 %",
+            "APCER @ BPCER 5 %",
             WorkingPoint.BPCER_5,
             {
-                "Quality SVM RVC": quality_results_lodo,
+                "Quality SVM RBF": quality_results_lodo,
                 "Quality SVM LINEAR": quality_linear_results_lodo,
                 "Auxiliary": auxiliary_results_lodo,
             },
@@ -68,10 +68,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/lodo_apcer_fixing_wp_bpcer_5_radar_chart.png",
         ),
         (
-            "LODO - APCER @ BPCER 10 %",
+            "APCER @ BPCER 10 %",
             WorkingPoint.BPCER_10,
             {
-                "Quality SVM RVC": quality_results_lodo,
+                "Quality SVM RBF": quality_results_lodo,
                 "Quality SVM LINEAR": quality_linear_results_lodo,
                 "Auxiliary": auxiliary_results_lodo,
             },
@@ -79,10 +79,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/lodo_apcer_fixing_wp_bpcer_10_radar_chart.png",
         ),
         (
-            "LODO - APCER @ BPCER 15 %",
+            "APCER @ BPCER 15 %",
             WorkingPoint.BPCER_15,
             {
-                "Quality SVM RVC": quality_results_lodo,
+                "Quality SVM RBF": quality_results_lodo,
                 "Quality SVM LINEAR": quality_linear_results_lodo,
                 "Auxiliary": auxiliary_results_lodo,
             },
@@ -90,10 +90,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/lodo_apcer_fixing_wp_bpcer_15_radar_chart.png",
         ),
         (
-            "Cross-Device - APCER @ BPCER 5 %",
+            "APCER @ BPCER 5 %",
             WorkingPoint.BPCER_5,
             {
-                "Quality SVM RVC": quality_results_cross_device,
+                "Quality SVM RBF": quality_results_cross_device,
                 "Quality SVM LINEAR": quality_linear_results_cross_device,
                 "Auxiliary": auxiliary_results_cross_device,
             },
@@ -104,7 +104,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "Cross-Device - APCER @ BPCER 10 %",
             WorkingPoint.BPCER_10,
             {
-                "Quality SVM RVC": quality_results_cross_device,
+                "Quality SVM RBF": quality_results_cross_device,
                 "Quality SVM LINEAR": quality_linear_results_cross_device,
                 "Auxiliary": auxiliary_results_cross_device,
             },
@@ -115,7 +115,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "Cross-Device - APCER @ BPCER 15 %",
             WorkingPoint.BPCER_15,
             {
-                "Quality SVM RVC": quality_results_cross_device,
+                "Quality SVM RBF": quality_results_cross_device,
                 "Quality SVM LINEAR": quality_linear_results_cross_device,
                 "Auxiliary": auxiliary_results_cross_device,
             },
@@ -123,10 +123,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/cross_device_apcer_fixing_wp_bpcer_15_radar_chart.png",
         ),
         (
-            "Unseen-Attack - APCER @ BPCER 5 %",
+            " APCER @ BPCER 5 %",
             WorkingPoint.BPCER_5,
             {
-                "Quality SVM RVC": quality_results_unseen_attack,
+                "Quality SVM RBF": quality_results_unseen_attack,
                 "Quality SVM LINEAR": quality_linear_results_unseen_attack,
                 # "Auxiliary": auxiliary_results_unseen_attack,
             },
@@ -134,10 +134,10 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/unseen_attack_apcer_fixing_wp_bpcer_5_radar_chart.png",
         ),
         (
-            "Unseen-Attack - APCER @ BPCER 10 %",
+            "APCER @ BPCER 10 %",
             WorkingPoint.BPCER_10,
             {
-                "Quality SVM RVC": quality_results_unseen_attack,
+                "Quality SVM RBF": quality_results_unseen_attack,
                 "Quality SVM LINEAR": quality_linear_results_unseen_attack,
                 # "Auxiliary": auxiliary_results_unseen_attack,
             },
@@ -145,7 +145,7 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_sub
             "tests/output/unseen_attack_apcer_fixing_wp_bpcer_10_radar_chart.png",
         ),
         (
-            "Unseen-Attack - APCER @ BPCER 15 %",
+            "APCER @ BPCER 15 %",
             WorkingPoint.BPCER_15,
             {
                 "Quality SVM RVC": quality_results_unseen_attack,

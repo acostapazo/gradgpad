@@ -5,7 +5,7 @@ def create_dataframe(metric_retriever, results):
 
     data = {"Metric": [], "Error Rate (%)": [], "Protocol": []}
 
-    for protocol_name, performance_info in results.items():
+    for protocol_name, performance_info in sorted(results.items()):
         metric, value = metric_retriever(performance_info)
         data["Metric"].append(metric)
         data["Error Rate (%)"].append(value)

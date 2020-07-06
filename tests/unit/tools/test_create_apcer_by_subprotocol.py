@@ -18,14 +18,14 @@ from gradgpad.tools.create_apcer_detail import (
         (
             WorkingPoint.BPCER_5,
             {
-                "Quality SVM RVC": quality_results_cross_dataset,
+                "Quality SVM RBF": quality_results_cross_dataset,
                 "Quality SVM LINEAR": quality_linear_results_cross_dataset,
             },
         ),
         (
             WorkingPoint.BPCER_10,
             {
-                "Quality SVM RVC": quality_results_cross_dataset,
+                "Quality SVM RBF": quality_results_cross_dataset,
                 "Quality SVM LINEAR": quality_linear_results_cross_dataset,
             },
         ),

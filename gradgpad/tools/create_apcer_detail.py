@@ -37,7 +37,9 @@ class ApcerDetail:
                 print(f" | {self.detail_values[i]}: {apcer}")
 
 
-def create_apcer_by_pai(results_protocol, working_point: WorkingPoint):
+def create_apcer_by_pai(
+    results_protocol, working_point: WorkingPoint, discard_pais: List[str] = None
+):
     detail_values = []
     apcers = {}
     for approach_name, result_protocol in results_protocol.items():
@@ -49,7 +51,9 @@ def create_apcer_by_pai(results_protocol, working_point: WorkingPoint):
         detail_values.clear()
         apcers[approach_name] = []
 
-        for pai, apcers_values in apcer_per_pai_fixing_bpcer.items():
+        for pai, apcers_values in sorted(apcer_per_pai_fixing_bpcer.items()):
+            if discard_pais and pai in discard_pais:
+                continue
             fancy_pai = pai.replace("_", " ").upper()
             detail_values.append(fancy_pai)
             apcer = apcers_values[working_point.value]
@@ -68,13 +72,14 @@ def create_apcer_by_subprotocol(
         detail_values.clear()
         apcers[approach_name] = []
 
-        for subprotocol_name, result_subprotocol in result_protocols.items():
+        for subprotocol_name, result_subprotocol in sorted(result_protocols.items()):
             if filter_common:
                 subprotocol_name = subprotocol_name.replace(filter_common, "")
             detail_values.append(subprotocol_name)
             apcer_subprotocol = result_subprotocol["acer_info"]["specific"][
                 "relative_working_points"
             ]["apcer"][value_bpcer(working_point)]
+
             apcers[approach_name].append(apcer_subprotocol)
 
             print(f"{subprotocol_name} -> {apcer_subprotocol}")
