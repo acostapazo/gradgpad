@@ -1,7 +1,10 @@
 import pytest
 from pandas import DataFrame
 
-from gradgpad.charts import create_metric_bar_chart_comparision
+from gradgpad.charts import (
+    create_metric_bar_chart_comparision,
+    create_demographic_dataframe_comparision,
+)
 from gradgpad.reproducible_research import (
     quality_results_gender,
     quality_linear_results_gender,
@@ -13,9 +16,7 @@ from gradgpad.reproducible_research import (
     auxiliary_results_age,
     auxiliary_results_gender,
 )
-from gradgpad.reproducible_research.demographic import (
-    create_demographic_dataframe_comparision,
-)
+
 from gradgpad.tools import group_dataframe, Metric
 
 

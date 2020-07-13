@@ -1,9 +1,11 @@
 import json
 import os
+import random
 from typing import List
 
 from gradgpad.annotations.annotation import Annotation
 from gradgpad.annotations.correspondences import ANNOTATION_CORRESPONDENCES
+from gradgpad.annotations.filter import Filter
 
 
 class Annotations:
@@ -42,6 +44,45 @@ class Annotations:
             "num_annotations": len(self.annotations),
             "correspondences": self.correspondences,
         }
+
+    def get_ids(self, filter: Filter = Filter()):
+        ids = []
+        for annotation in self.annotations:
+            if (
+                filter.gender
+                and annotation.attributes.person.gender != filter.gender.value
+            ):
+                continue
+            if filter.age and annotation.attributes.person.age != filter.age.value:
+                continue
+            if (
+                filter.skin_tone
+                and annotation.attributes.person.skin_tone != filter.skin_tone.value
+            ):
+                continue
+
+            if filter.dataset and annotation.dataset.value != filter.dataset.value:
+                continue
+            ids.append(annotation.id)
+
+        if filter.random_values:
+            if len(ids) < filter.random_values:
+                raise ValueError(
+                    "Error Filter: Required random_values is lower than filtered values"
+                )
+            else:
+                ids = random.sample(ids, filter.random_values)
+
+        if filter.pseudo_random_values:
+            if len(ids) < filter.pseudo_random_values:
+                raise ValueError(
+                    "Error Filter: Required pseudo_random_values is lower than filtered values"
+                )
+            else:
+                random.seed(len(ids))
+                ids = random.sample(ids, filter.pseudo_random_values)
+
+        return ids
 
     @property
     def num_annotations(self):

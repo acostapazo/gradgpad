@@ -1,12 +1,11 @@
 import pytest
 
+from gradgpad.charts import create_demographic_dataframe_comparision
 from gradgpad.reproducible_research import (
     quality_results_skin_tone,
     quality_linear_results_skin_tone,
 )
-from gradgpad.reproducible_research.demographic import (
-    create_demographic_dataframe_comparision,
-)
+
 from gradgpad.tools import group_dataframe, Metric
 
 
