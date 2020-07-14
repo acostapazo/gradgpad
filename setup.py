@@ -33,4 +33,5 @@ setup(
     packages=find_packages(exclude=("tests*",)),
     include_package_data=True,
     zip_safe=False,
+    entry_points={"console_scripts": ["gradgpad=gradgpad.cli.command_line:main"]},
 )

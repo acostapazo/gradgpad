@@ -8,7 +8,7 @@ def create_radar_chart_comparision(
     title: str, apcer_by_pai: ApcerDetail, output_filename: str
 ):
 
-    apcer_by_pai.print()
+    # apcer_by_pai.print()
     values = (title, apcer_by_pai.apcers.values())
 
     data = [apcer_by_pai.detail_values, values]

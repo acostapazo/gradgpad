@@ -82,6 +82,6 @@ def create_apcer_by_subprotocol(
 
             apcers[approach_name].append(apcer_subprotocol)
 
-            print(f"{subprotocol_name} -> {apcer_subprotocol}")
+            # print(f"{subprotocol_name} -> {apcer_subprotocol}")
 
     return ApcerDetail(detail_values, apcers)

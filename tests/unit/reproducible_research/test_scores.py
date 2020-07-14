@@ -5,35 +5,35 @@ from gradgpad.annotations.filter import Filter
 from gradgpad.annotations.person_attributes import Gender, Age, SkinTone
 
 
-@pytest.mark.unit
-def test_should_load_quality_rbf_scores():
-    from gradgpad.reproducible_research import quality_rbf_scores_grandtest_type_I
-
-    assert quality_rbf_scores_grandtest_type_I.length() == 12180
+from gradgpad.reproducible_research import quality_rbf_scores_grandtest_type_I
+from gradgpad.reproducible_research import quality_linear_scores_grandtest_type_I
 
 
 @pytest.mark.unit
-def test_should_load_quality_linear_scores():
-    from gradgpad.reproducible_research import quality_linear_scores_grandtest_type_I
-
-    assert quality_linear_scores_grandtest_type_I.length() == 12180
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_scores(scores):
+    assert scores.length() == 12180
 
 
 @pytest.mark.unit
-def test_should_load_quality_rbf_scores_filter_gender():
-    from gradgpad.reproducible_research import (
-        quality_rbf_scores_grandtest_type_I as scores,
-    )
-
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_scores_filter_gender(scores):
     assert len(scores.filtered_by(Filter(gender=Gender.MALE))) == 5433
     assert len(scores.filtered_by(Filter(gender=Gender.FEMALE))) == 1938
 
 
 @pytest.mark.unit
-def test_should_load_quality_rbf_scores_filter_age():
-    from gradgpad.reproducible_research import (
-        quality_rbf_scores_grandtest_type_I as scores,
-    )
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_scores_filter_age(scores):
 
     assert len(scores.filtered_by(Filter(age=Age.YOUNG))) == 2155
     assert len(scores.filtered_by(Filter(age=Age.ADULT))) == 5153
@@ -41,10 +41,11 @@ def test_should_load_quality_rbf_scores_filter_age():
 
 
 @pytest.mark.unit
-def test_should_load_quality_rbf_scores_filter_skin_tone():
-    from gradgpad.reproducible_research import (
-        quality_rbf_scores_grandtest_type_I as scores,
-    )
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_scores_filter_skin_tone(scores):
 
     assert len(scores.filtered_by(Filter(skin_tone=SkinTone.LIGHT_PINK))) == 256
     assert len(scores.filtered_by(Filter(skin_tone=SkinTone.MEDIUM_PINK_BROWN))) == 2121
@@ -57,10 +58,11 @@ def test_should_load_quality_rbf_scores_filter_skin_tone():
 
 
 @pytest.mark.unit
-def test_should_load_quality_rbf_scores_filter_dataset():
-    from gradgpad.reproducible_research import (
-        quality_rbf_scores_grandtest_type_I as scores,
-    )
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_quality_rbf_scores_filter_dataset(scores):
 
     assert len(scores.filtered_by(Filter(dataset=Dataset.CASIA_FASD))) == 360
     assert len(scores.filtered_by(Filter(dataset=Dataset.THREEDMAD))) == 73
@@ -78,10 +80,11 @@ def test_should_load_quality_rbf_scores_filter_dataset():
 
 
 @pytest.mark.unit
-def test_should_load_quality_rbf_scores_filter_dataset_and_gender():
-    from gradgpad.reproducible_research import (
-        quality_rbf_scores_grandtest_type_I as scores,
-    )
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_scores_filter_dataset_and_gender(scores):
 
     assert (
         len(scores.filtered_by(Filter(gender=Gender.MALE, dataset=Dataset.CASIA_FASD)))
@@ -95,39 +98,38 @@ def test_should_load_quality_rbf_scores_filter_dataset_and_gender():
     )
 
 
-# @pytest.mark.unit
-# def test_should_load_quality_rbf_scores_filter_protocols():
-#     from gradgpad.reproducible_research import (
-#         quality_rbf_scores_grandtest_type_I as scores,
-#     )
-#
-#     def get_smallest_length(x):
-#         return [
-#             k for k in x.keys() if len(x.get(k)) == min([len(n) for n in x.values()])
-#         ]
-#
-#     min_value = {}
-#     for dataset in Dataset.options():
-#         filters = {
-#             "male": Filter(gender=Gender.MALE, dataset=dataset),
-#             "female": Filter(gender=Gender.FEMALE, dataset=dataset),
-#         }
-#
-#         filtered_scores = {}
-#         for key, filter in filters.items():
-#             filtered_scores[key] = scores.filtered_by(filter)
-#
-#         smallest_key = get_smallest_length(filtered_scores)[0]
-#         min_value[dataset.value] = len(filtered_scores[smallest_key])
-#
-#     import pdb
-#
-#     pdb.set_trace()
-#
-#     assert len(scores.filtered_by()) == 300
-#     assert (
-#         len(
-#             scores.filtered_by(Filter(gender=Gender.FEMALE, dataset=Dataset.CASIA_FASD))
-#         )
-#         == 60
-#     )
+@pytest.mark.unit
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_scores_with_fair_gender_subset(scores):
+
+    fair_gender_subset = scores.get_fair_gender_subset()
+
+    for gender in Gender.options():
+        assert len(fair_gender_subset.get(gender.name)) == 1887
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_scores_with_fair_age_subset(scores):
+
+    fair_age_subset = scores.get_fair_age_subset()
+    for age in Age.options():
+        assert len(fair_age_subset.get(age.name)) == 63
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize(
+    "scores",
+    [(quality_rbf_scores_grandtest_type_I), (quality_linear_scores_grandtest_type_I)],
+)
+def test_should_load_scores_with_fair_skin_tone_subset(scores):
+
+    fair_skin_tone_subset = scores.get_fair_skin_tone_subset()
+    for skin_tone in SkinTone.options():
+        assert len(fair_skin_tone_subset.get(skin_tone.name)) == 113

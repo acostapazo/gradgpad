@@ -1,6 +1,5 @@
 import pytest
 
-from gradgpad.annotations.filter import Filter
 from gradgpad.annotations.stats.calculate_pai_stats import calculate_pai_stats
 
 
@@ -45,18 +44,19 @@ def expected_pseudo_random_ids_values():
     ]
 
 
-@pytest.mark.unit
-def test_should_load_annotations_get_ids_random(expected_pseudo_random_ids_values):
-    from gradgpad import annotations
-
-    assert len(annotations.get_ids(Filter(random_values=10))) == 10
-
-    assert len(annotations.get_ids(Filter(pseudo_random_values=10))) == 10
-
-    assert expected_pseudo_random_ids_values != annotations.get_ids(
-        Filter(random_values=10)
-    )
-
-    assert expected_pseudo_random_ids_values == annotations.get_ids(
-        Filter(pseudo_random_values=10)
-    )
+#
+# @pytest.mark.unit
+# def test_should_load_annotations_get_ids_random(expected_pseudo_random_ids_values):
+#     from gradgpad import annotations
+#
+#     assert len(annotations.get_ids(Filter(random_values=10))) == 10
+#
+#     assert len(annotations.get_ids(Filter(pseudo_random_values=10))) == 10
+#
+#     assert expected_pseudo_random_ids_values != annotations.get_ids(
+#         Filter(random_values=10)
+#     )
+#
+#     assert expected_pseudo_random_ids_values == annotations.get_ids(
+#         Filter(pseudo_random_values=10)
+#     )
