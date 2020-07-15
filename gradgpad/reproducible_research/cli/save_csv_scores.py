@@ -3,8 +3,8 @@ import os
 from typing import Dict
 
 from gradgpad.reproducible_research import (
-    quality_rbf_scores_grandtest_type_I,
-    quality_linear_scores_grandtest_type_I,
+    quality_rbf_scores_grandtest_type_I_test,
+    quality_linear_scores_grandtest_type_I_test,
 )
 
 
@@ -12,8 +12,8 @@ def save_csv_scores(output_path: str):
     print("Saving scores to csv...")
 
     approaches = {
-        "Quality RBF": quality_rbf_scores_grandtest_type_I,
-        "Quality Linear": quality_linear_scores_grandtest_type_I,
+        "Quality RBF": quality_rbf_scores_grandtest_type_I_test,
+        "Quality Linear": quality_linear_scores_grandtest_type_I_test,
     }
     for approach, scores in approaches.items():
         folder = approach.lower().replace(" ", "_")

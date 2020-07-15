@@ -1,5 +1,6 @@
 import os
 import random
+import numpy as np
 
 from typing import List, Dict, Callable
 
@@ -7,6 +8,7 @@ from gradgpad.annotations.annotation import Annotation
 from gradgpad.annotations.dataset import Dataset
 from gradgpad.annotations.filter import Filter
 from gradgpad.annotations.person_attributes import Gender, Age, SkinTone
+from gradgpad.annotations.spai import Spai
 from gradgpad.tools.open_result_json import open_result_json
 from gradgpad import annotations
 
@@ -17,6 +19,18 @@ class Scores:
     def __init__(self, filename):
         self.scores = open_result_json(filename)
 
+    def get_numpy_scores(self):
+        return np.asarray(list(self.scores.values()), dtype=np.float32)
+
+    def get_numpy_labels(self):
+        ids = self.scores.keys()
+        annotations_from_ids = annotations.get_annotations_from_ids(ids)
+        filtered_ids = self._get_filtered_ids(
+            annotations_from_ids, Filter(spai=Spai.GENUINE)
+        )
+        labels = [0 if id in filtered_ids else 1 for id in ids]
+        return np.asarray(labels, dtype=np.bool)
+
     def _get_smallest_length(self, x):
         return [
             k for k in x.keys() if len(x.get(k)) == min([len(n) for n in x.values()])
@@ -25,6 +39,7 @@ class Scores:
     def get_fair_gender_subset(self) -> Dict[str, Dict]:
         def gender_filter_provider(gender, dataset, pseudo_random_values=None):
             return Filter(
+                spai=Spai.GENUINE,
                 gender=gender,
                 dataset=dataset,
                 pseudo_random_values=pseudo_random_values,
@@ -35,7 +50,10 @@ class Scores:
     def get_fair_age_subset(self) -> Dict[str, Dict]:
         def age_filter_provider(age, dataset, pseudo_random_values=None):
             return Filter(
-                age=age, dataset=dataset, pseudo_random_values=pseudo_random_values
+                spai=Spai.GENUINE,
+                age=age,
+                dataset=dataset,
+                pseudo_random_values=pseudo_random_values,
             )
 
         return self.get_fair_subset(Age.options(), age_filter_provider)
@@ -43,6 +61,7 @@ class Scores:
     def get_fair_skin_tone_subset(self) -> Dict[str, Dict]:
         def skin_tone_filter_provider(skin_tone, dataset, pseudo_random_values=None):
             return Filter(
+                spai=Spai.GENUINE,
                 skin_tone=skin_tone,
                 dataset=dataset,
                 pseudo_random_values=pseudo_random_values,
@@ -97,6 +116,8 @@ class Scores:
     def _get_filtered_ids(self, annotations_from_ids: List[Annotation], filter: Filter):
         ids = []
         for annotation in annotations_from_ids:
+            if filter.spai and annotation.spai.get("type") != filter.spai.value:
+                continue
             if (
                 filter.gender
                 and annotation.attributes.person.gender != filter.gender.value
@@ -137,10 +158,22 @@ class Scores:
         return len(self.scores)
 
 
-quality_rbf_scores_grandtest_type_I = Scores(
+quality_rbf_scores_grandtest_type_I_test = Scores(
     f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_rbf/quality-rbf-Grandtest-Type-PAI-I-test.json"
 )
 
-quality_linear_scores_grandtest_type_I = Scores(
+quality_rbf_scores_grandtest_type_I_devel = Scores(
+    f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_rbf/quality-rbf-Grandtest-Type-PAI-I-devel.json"
+)
+
+quality_linear_scores_grandtest_type_I_test = Scores(
     f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_linear/quality-linear-Grandtest-Type-PAI-I-test.json"
+)
+
+quality_rbf_scores_grandtest_type_I_tested_all_test = Scores(
+    f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_rbf/quality-rbf-Grandtest-Train-Type-PAI-I-Test-All-test.json"
+)
+
+quality_linear_scores_grandtest_type_I_tested_all_test = Scores(
+    f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_linear/quality-linear-Grandtest-Train-Type-PAI-I-Test-All-test.json"
 )
