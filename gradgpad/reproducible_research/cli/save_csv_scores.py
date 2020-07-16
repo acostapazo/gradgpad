@@ -1,25 +1,33 @@
 import csv
 import os
-from typing import Dict
+from typing import Dict, Protocol
 
-from gradgpad.reproducible_research import (
-    quality_rbf_scores_grandtest_type_I_test,
-    quality_linear_scores_grandtest_type_I_test,
-)
+
+from gradgpad.reproducible_research.scores.approach import Approach
+from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
+from gradgpad.reproducible_research.scores.subset import Subset
 
 
 def save_csv_scores(output_path: str):
     print("Saving scores to csv...")
 
     approaches = {
-        "Quality RBF": quality_rbf_scores_grandtest_type_I_test,
-        "Quality Linear": quality_linear_scores_grandtest_type_I_test,
+        "Quality RBF": ScoresProvider.get(
+            approach=Approach.QUALITY_LINEAR,
+            protocol=Protocol.GRANDTEST,
+            subset=Subset.TEST,
+        ),
+        "Quality Linear": ScoresProvider.get(
+            approach=Approach.QUALITY_RBF,
+            protocol=Protocol.GRANDTEST,
+            subset=Subset.TEST,
+        ),
     }
     for approach, scores in approaches.items():
         folder = approach.lower().replace(" ", "_")
 
         demographic_scores = {
-            "gender": scores.get_fair_gender_subset(),
+            "sex": scores.get_fair_sex_subset(),
             "age": scores.get_fair_age_subset(),
             "skin_tone": scores.get_fair_skin_tone_subset(),
         }

@@ -77,10 +77,10 @@ class Annotations:
                     },
                     "attributes": {
                         "person": {
-                            "gender": self.correspondences.get("attributes", {})
+                            "sex": self.correspondences.get("attributes", {})
                             .get("person")
-                            .get("gender")
-                            .get(annotation.attributes.person.gender),
+                            .get("sex")
+                            .get(annotation.attributes.person.sex),
                             "skin_tone": self.correspondences.get("attributes", {})
                             .get("person")
                             .get("skin_tone")

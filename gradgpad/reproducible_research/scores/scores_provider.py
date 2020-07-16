@@ -66,5 +66,4 @@ class ScoresProvider:
         pai: CoarseGrainPai = None,
     ) -> Scores:
         filename = get_filename(approach, protocol, subset, dataset, device, pai)
-
         return Scores(filename)

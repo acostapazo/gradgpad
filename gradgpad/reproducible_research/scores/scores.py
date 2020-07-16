@@ -7,7 +7,7 @@ from typing import List, Dict, Callable
 from gradgpad.annotations.annotation import Annotation
 from gradgpad.annotations.dataset import Dataset
 from gradgpad.annotations.filter import Filter
-from gradgpad.annotations.person_attributes import Gender, Age, SkinTone
+from gradgpad.annotations.person_attributes import Sex, Age, SkinTone
 from gradgpad.annotations.spai import Spai
 from gradgpad.tools.open_result_json import open_result_json
 from gradgpad import annotations
@@ -36,16 +36,16 @@ class Scores:
             k for k in x.keys() if len(x.get(k)) == min([len(n) for n in x.values()])
         ]
 
-    def get_fair_gender_subset(self) -> Dict[str, Dict]:
-        def gender_filter_provider(gender, dataset, pseudo_random_values=None):
+    def get_fair_sex_subset(self) -> Dict[str, Dict]:
+        def sex_filter_provider(sex, dataset, pseudo_random_values=None):
             return Filter(
                 spai=Spai.GENUINE,
-                gender=gender,
+                sex=sex,
                 dataset=dataset,
                 pseudo_random_values=pseudo_random_values,
             )
 
-        return self.get_fair_subset(Gender.options(), gender_filter_provider)
+        return self.get_fair_subset(Sex.options(), sex_filter_provider)
 
     def get_fair_age_subset(self) -> Dict[str, Dict]:
         def age_filter_provider(age, dataset, pseudo_random_values=None):
@@ -118,10 +118,7 @@ class Scores:
         for annotation in annotations_from_ids:
             if filter.spai and annotation.spai.get("type") != filter.spai.value:
                 continue
-            if (
-                filter.gender
-                and annotation.attributes.person.gender != filter.gender.value
-            ):
+            if filter.sex and annotation.attributes.person.sex != filter.sex.value:
                 continue
             if filter.age and annotation.attributes.person.age != filter.age.value:
                 continue
@@ -156,24 +153,3 @@ class Scores:
 
     def length(self):
         return len(self.scores)
-
-
-quality_rbf_scores_grandtest_type_I_test = Scores(
-    f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_rbf/quality-rbf-Grandtest-Type-PAI-I-test.json"
-)
-
-quality_rbf_scores_grandtest_type_I_devel = Scores(
-    f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_rbf/quality-rbf-Grandtest-Type-PAI-I-devel.json"
-)
-
-quality_linear_scores_grandtest_type_I_test = Scores(
-    f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_linear/quality-linear-Grandtest-Type-PAI-I-test.json"
-)
-
-quality_rbf_scores_grandtest_type_I_tested_all_test = Scores(
-    f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_rbf/quality-rbf-Grandtest-Train-Type-PAI-I-Test-All-test.json"
-)
-
-quality_linear_scores_grandtest_type_I_tested_all_test = Scores(
-    f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/quality_linear/quality-linear-Grandtest-Train-Type-PAI-I-Test-All-test.json"
-)

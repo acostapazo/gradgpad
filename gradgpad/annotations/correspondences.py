@@ -32,7 +32,7 @@ ANNOTATION_CORRESPONDENCES = {
     },
     "attributes": {
         "person": {
-            "gender": {0: "male", 1: "female"},
+            "sex": {0: "male", 1: "female"},
             "skin_tone": {
                 1: "light pink",
                 2: "light yellow",

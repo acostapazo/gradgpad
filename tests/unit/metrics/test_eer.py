@@ -1,7 +1,10 @@
 import pytest
 import numpy as np
 from gradgpad.metrics.eer import eer
-from gradgpad.reproducible_research import quality_linear_scores_grandtest_type_I_test
+from gradgpad.reproducible_research.scores.approach import Approach
+from gradgpad.reproducible_research.scores.protocol import Protocol
+from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
+from gradgpad.reproducible_research.scores.subset import Subset
 
 scores = np.array([0.0, 0.2, 0.2, 0.5, 0.6])
 labels = np.array([1, 2, 2, 0, 0])
@@ -21,9 +24,10 @@ def test_should_compute_eer_correctly():
 
 @pytest.mark.unit
 def test_should_compute_eer_correctly_from_scores():
-
-    eer_value, th = eer(
-        quality_linear_scores_grandtest_type_I_test.get_numpy_scores(),
-        quality_linear_scores_grandtest_type_I_test.get_numpy_labels(),
+    scores = ScoresProvider.get(
+        approach=Approach.QUALITY_LINEAR,
+        protocol=Protocol.GRANDTEST,
+        subset=Subset.DEVEL,
     )
-    assert pytest.approx(expected_eer, 0.1) == 0.24
+    eer_value, th = eer(scores.get_numpy_scores(), scores.get_numpy_labels())
+    assert pytest.approx(eer_value, 0.1) == 0.24

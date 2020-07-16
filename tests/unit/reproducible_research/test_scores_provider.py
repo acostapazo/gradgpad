@@ -19,13 +19,32 @@ from gradgpad.reproducible_research.scores.subset import Subset
 @pytest.mark.parametrize(
     "approach,protocol,subset,expected_scores_length",
     [
-        (approach, Protocol.GRANDTEST, subset, 4580)
+        (approach, Protocol.GRANDTEST, subset, 12490 if subset == Subset.TEST else 4580)
         for approach in Approach.options()
         for subset in Subset.options()
         if approach != Approach.AUXILIARY  # pending
     ],
 )
-def test_should_success_get_scores_from_provider_grandtest_protocol(
+def test_should_success_get_scores_from_provider_grandtest_protocol_no_auxiliary(
+    approach, protocol, subset, expected_scores_length
+):
+
+    scores = ScoresProvider.get(approach, protocol, subset)
+
+    assert len(scores.scores) == expected_scores_length
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize(
+    "approach,protocol,subset,expected_scores_length",
+    [
+        (approach, Protocol.GRANDTEST, subset, 12533 if subset == Subset.TEST else 4585)
+        for approach in Approach.options()
+        for subset in Subset.options()
+        if approach == Approach.AUXILIARY  # pending
+    ],
+)
+def test_should_success_get_scores_from_provider_grandtest_protocol_auxiliary(
     approach, protocol, subset, expected_scores_length
 ):
 
@@ -43,7 +62,6 @@ def test_should_success_get_scores_from_provider_grandtest_protocol(
         for protocol in [Protocol.CROSS_DATASET, Protocol.LODO]
         for subset in Subset.options()
         for dataset in Dataset.options()
-        if approach != Approach.AUXILIARY  # pending
     ],
 )
 def test_should_success_get_scores_from_provider_cross_dataset_and_lodo_protocols(
@@ -63,7 +81,6 @@ def test_should_success_get_scores_from_provider_cross_dataset_and_lodo_protocol
         for approach in Approach.options()
         for subset in Subset.options()
         for device in Device.options()
-        if approach != Approach.AUXILIARY  # pending
     ],
 )
 def test_should_success_get_scores_from_provider_cross_device_protocol(
@@ -83,7 +100,6 @@ def test_should_success_get_scores_from_provider_cross_device_protocol(
         for approach in Approach.options()
         for subset in Subset.options()
         for pai in CoarseGrainPai.options()
-        if approach != Approach.AUXILIARY  # pending
     ],
 )
 def test_should_success_get_scores_from_provider_unseen_attack_protocol(
@@ -108,7 +124,6 @@ def test_should_success_get_scores_from_provider_unseen_attack_protocol(
             Protocol.LODO,
             Protocol.CROSS_DATASET,
         ]
-        if approach != Approach.AUXILIARY  # pending
     ],
 )
 def test_should_throw_exception_get_scores_from_provider_unseen_attack_protocol(

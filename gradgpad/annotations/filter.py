@@ -1,5 +1,5 @@
 from gradgpad.annotations.dataset import Dataset
-from gradgpad.annotations.person_attributes import Gender, Age, SkinTone
+from gradgpad.annotations.person_attributes import Sex, Age, SkinTone
 from gradgpad.annotations.spai import Spai
 
 
@@ -7,7 +7,7 @@ class Filter:
     def __init__(
         self,
         spai: Spai = None,
-        gender: Gender = None,
+        sex: Sex = None,
         age: Age = None,
         skin_tone: SkinTone = None,
         dataset: Dataset = None,
@@ -15,7 +15,7 @@ class Filter:
         pseudo_random_values: int = None,
     ):
         self.spai = spai
-        self.gender = gender
+        self.sex = sex
         self.age = age
         self.skin_tone = skin_tone
         self.dataset = dataset

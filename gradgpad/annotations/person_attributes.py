@@ -2,13 +2,13 @@ from enum import Enum
 from typing import List
 
 
-class Gender(Enum):
+class Sex(Enum):
     MALE = 0
     FEMALE = 1
 
     @staticmethod
     def options() -> List:
-        return [Gender.MALE, Gender.FEMALE]
+        return [Sex.MALE, Sex.FEMALE]
 
 
 class Age(Enum):
