@@ -17,36 +17,74 @@ REPRODUCIBLE_RESEARCH_SCORES_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class ResultsProvider:
     @staticmethod
+    def grandtest(approach: Approach) -> Dict[str, Dict]:
+        protocol = Protocol.GRANDTEST
+        return {
+            f"{protocol.value}": ResultsProvider.get(
+                approach=approach, protocol=protocol
+            )
+        }
+
+    @staticmethod
+    def cross_dataset(approach: Approach) -> Dict[str, Dict]:
+        results = {}
+        protocol = Protocol.CROSS_DATASET
+
+        for dataset in Dataset.options():
+            key = f"{protocol.value}_{dataset.value}"
+
+            results[key] = ResultsProvider.get(
+                approach=approach, protocol=protocol, dataset=dataset
+            )
+        return results
+
+    @staticmethod
+    def lodo(approach: Approach) -> Dict[str, Dict]:
+        results = {}
+        protocol = Protocol.LODO
+
+        for dataset in Dataset.options():
+            key = f"{protocol.value}_{dataset.value}"
+
+            results[key] = ResultsProvider.get(
+                approach=approach, protocol=protocol, dataset=dataset
+            )
+        return results
+
+    @staticmethod
+    def cross_device(approach: Approach) -> Dict[str, Dict]:
+        results = {}
+        protocol = Protocol.CROSS_DEVICE
+
+        for device in Device.options():
+            key = f"{protocol.value}_{device.value}"
+
+            results[key] = ResultsProvider.get(
+                approach=approach, protocol=protocol, device=device
+            )
+        return results
+
+    @staticmethod
+    def unseen_attack(approach: Approach) -> Dict[str, Dict]:
+        results = {}
+        protocol = Protocol.UNSEEN_ATTACK
+
+        for pai in CoarseGrainPai.options():
+            key = f"{protocol.value}_{pai.value}"
+
+            results[key] = ResultsProvider.get(
+                approach=approach, protocol=protocol, pai=pai
+            )
+        return results
+
+    @staticmethod
     def all(approach: Approach) -> Dict[str, Dict]:
         results = {}
-
-        for protocol in Protocol.options():
-
-            if protocol == Protocol.GRANDTEST:
-                key = protocol.value
-                results[key] = ResultsProvider.get(approach=approach, protocol=protocol)
-            elif protocol == Protocol.CROSS_DATASET or protocol == Protocol.LODO:
-                for dataset in Dataset.options():
-                    key = f"{protocol.value}_{dataset.value}"
-
-                    results[key] = ResultsProvider.get(
-                        approach=approach, protocol=protocol, dataset=dataset
-                    )
-            elif protocol == Protocol.CROSS_DEVICE:
-                for device in Device.options():
-                    key = f"{protocol.value}_{device.value}"
-
-                    results[key] = ResultsProvider.get(
-                        approach=approach, protocol=protocol, device=device
-                    )
-            elif protocol == Protocol.UNSEEN_ATTACK:
-                for pai in CoarseGrainPai.options():
-                    key = f"{protocol.value}_{pai.value}"
-
-                    results[key] = ResultsProvider.get(
-                        approach=approach, protocol=protocol, pai=pai
-                    )
-
+        results.update(ResultsProvider.grandtest(approach))
+        results.update(ResultsProvider.cross_dataset(approach))
+        results.update(ResultsProvider.lodo(approach))
+        results.update(ResultsProvider.cross_device(approach))
+        results.update(ResultsProvider.unseen_attack(approach))
         return results
 
     @staticmethod

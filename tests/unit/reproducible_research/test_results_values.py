@@ -1,5 +1,8 @@
 import pytest
 
+from gradgpad.reproducible_research.results.results_provider import ResultsProvider
+from gradgpad.reproducible_research.scores.approach import Approach
+
 
 def check_all_values(nested_dictionary):
     for key, value in nested_dictionary.items():
@@ -13,21 +16,8 @@ def check_all_values(nested_dictionary):
 
 
 @pytest.mark.unit
-def test_should_check_quality_results_are_ok():
-    from gradgpad.reproducible_research import quality_results
+@pytest.mark.parametrize("approach", Approach.options())
+def test_should_check_results_are_ok(approach: Approach):
 
-    check_all_values(quality_results)
-
-
-@pytest.mark.unit
-def test_should_check_quality_linear_results_are_ok():
-    from gradgpad.reproducible_research import quality_linear_results
-
-    check_all_values(quality_linear_results)
-
-
-@pytest.mark.unit
-def test_should_check_auxiliary_results_are_ok():
-    from gradgpad.reproducible_research import auxiliary_results
-
-    check_all_values(auxiliary_results)
+    results = ResultsProvider.all(approach)
+    check_all_values(results)
