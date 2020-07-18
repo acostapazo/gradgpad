@@ -22,35 +22,28 @@ def get_filename(
     pai: CoarseGrainPai = None,
 ):
 
-    filename = f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/{approach.value}/{approach.value}"
+    filename = f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/{approach.value}/{approach.value}_{protocol.value}"
 
-    if protocol == Protocol.LODO:
+    if protocol == Protocol.CROSS_DATASET or protocol == Protocol.LODO:
         if not dataset:
-            raise ValueError("LODO Protocol must be accompanied with a dataset value")
-        filename = f"{filename}_{dataset.value}_{protocol.value}"
-    else:
-        filename = f"{filename}_{protocol.value}"
+            raise ValueError(
+                f"{protocol.name} Protocol must be accompanied with a dataset value"
+            )
+        filename = f"{filename}_{dataset.value}"
 
-        if protocol == Protocol.CROSS_DATASET:
-            if not dataset:
-                raise ValueError(
-                    "CROSS-DATASET Protocol must be accompanied with a dataset value"
-                )
-            filename = f"{filename}_{dataset.value}"
+    if protocol == Protocol.CROSS_DEVICE:
+        if not device:
+            raise ValueError(
+                "CROSS-DEVICE Protocol must be accompanied with a device value"
+            )
+        filename = f"{filename}_{device.value}"
 
-        if protocol == Protocol.CROSS_DEVICE:
-            if not device:
-                raise ValueError(
-                    "CROSS-DEVICE Protocol must be accompanied with a device value"
-                )
-            filename = f"{filename}_{device.value}"
-
-        if protocol == Protocol.UNSEEN_ATTACK:
-            if not pai:
-                raise ValueError(
-                    "UNSEEN-ATTACK Protocol must be accompanied with a pai value"
-                )
-            filename = f"{filename}_{pai.value}"
+    if protocol == Protocol.UNSEEN_ATTACK:
+        if not pai:
+            raise ValueError(
+                "UNSEEN-ATTACK Protocol must be accompanied with a pai value"
+            )
+        filename = f"{filename}_{pai.value}"
 
     return f"{filename}_{subset.value}.json".replace("-", "_")
 

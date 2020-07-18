@@ -29,7 +29,15 @@ class Scores:
             annotations_from_ids, Filter(spai=Spai.GENUINE)
         )
         labels = [0 if id in filtered_ids else 1 for id in ids]
-        return np.asarray(labels, dtype=np.bool)
+        return np.asarray(labels, dtype=np.int)
+
+    def get_numpy_specific_pai_labels(self):
+        ids = self.scores.keys()
+        annotations_from_ids = annotations.get_annotations_from_ids(ids)
+        specific_pais_labels = [
+            annotation.spai.get("specific") for annotation in annotations_from_ids
+        ]
+        return np.asarray(specific_pais_labels, dtype=np.int)
 
     def _get_smallest_length(self, x):
         return [

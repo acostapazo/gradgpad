@@ -1,9 +1,10 @@
 import csv
 import os
-from typing import Dict, Protocol
+from typing import Dict
 
 
 from gradgpad.reproducible_research.scores.approach import Approach
+from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
 from gradgpad.reproducible_research.scores.subset import Subset
 
@@ -21,6 +22,9 @@ def save_csv_scores(output_path: str):
             approach=Approach.QUALITY_RBF,
             protocol=Protocol.GRANDTEST,
             subset=Subset.TEST,
+        ),
+        "Auxiliary": ScoresProvider.get(
+            approach=Approach.AUXILIARY, protocol=Protocol.GRANDTEST, subset=Subset.TEST
         ),
     }
     for approach, scores in approaches.items():

@@ -29,5 +29,6 @@ from gradgpad.tools.create_apcer_detail import (
     ],
 )
 def test_should_create_apcer_by_pai(working_point, approach_results_protocol):
+
     apcer_by_pai = create_apcer_by_pai(approach_results_protocol, working_point)
     assert isinstance(apcer_by_pai, ApcerDetail)

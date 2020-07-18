@@ -3,7 +3,7 @@ from typing import List
 
 
 class Device(Enum):
-    DIGITAL_CAMARA = "digital_camara"
+    DIGITAL_CAMARA = "digital_camera"
     MOBILE_TABLET = "mobile_tablet"
     WEBCAM = "webcam"
 

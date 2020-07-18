@@ -38,13 +38,12 @@ class ApcerDetail:
 
 
 def create_apcer_by_pai(
-    results_protocol, working_point: WorkingPoint, discard_pais: List[str] = None
+    results_protocol, working_point: WorkingPoint, filter_pais: List[str] = None
 ):
     detail_values = []
     apcers = {}
     for approach_name, result_protocol in results_protocol.items():
-
-        apcer_per_pai_fixing_bpcer = result_protocol["acer_info"]["specific"][
+        apcer_per_pai_fixing_bpcer = result_protocol["specific"][
             "apcer_per_pai_fixing_bpcer"
         ]
 
@@ -52,13 +51,12 @@ def create_apcer_by_pai(
         apcers[approach_name] = []
 
         for pai, apcers_values in sorted(apcer_per_pai_fixing_bpcer.items()):
-            if discard_pais and pai in discard_pais:
+            if filter_pais and pai not in filter_pais:
                 continue
             fancy_pai = pai.replace("_", " ").upper()
             detail_values.append(fancy_pai)
             apcer = apcers_values[working_point.value]
             apcers[approach_name].append(apcer)
-
     return ApcerDetail(detail_values, apcers)
 
 
