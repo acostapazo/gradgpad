@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from gradgpad.metrics.frr import frr
+from gradgpad.evaluation.metrics.frr import frr
 
 scores = np.array([0.0, 0.2, 0.2, 0.5, 0.6])
 labels = np.array([1, 2, 2, 0, 0])

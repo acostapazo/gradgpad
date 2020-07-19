@@ -5,7 +5,7 @@ import numpy as np
 # labels = np.array([1, 2, 2, 0, 0])
 # expected_apcer = 0.0
 # th_eer_dev = 0.15
-from gradgpad.metrics.apcer import apcer
+from gradgpad.evaluation.metrics.apcer import apcer
 
 
 @pytest.mark.unit

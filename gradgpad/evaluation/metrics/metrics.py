@@ -1,5 +1,9 @@
-from gradgpad.metrics.eer import eer
-from gradgpad.metrics.indepth_error_rates_analysis import indepth_error_rates_analysis
+from gradgpad.evaluation.metrics.eer import eer
+from gradgpad.evaluation.metrics.indepth_error_rates_analysis import (
+    indepth_error_rates_analysis,
+)
+from gradgpad.evaluation.metrics.hter import hter
+
 from gradgpad.reproducible_research import Scores, List
 from gradgpad.reproducible_research.scores.subset import Subset
 
@@ -56,6 +60,12 @@ class Metrics:
             self.devel_scores.get_numpy_scores(), self.devel_scores.get_numpy_labels()
         )
 
+        hter_value = hter(
+            self.test_scores.get_numpy_scores(),
+            self.test_scores.get_numpy_labels(),
+            eer_th,
+        )
+
         analysis = {
             "specific"
             if specific
@@ -69,5 +79,7 @@ class Metrics:
             )["eer"].to_dict(label_modificator="pai")
             for specific in [True, False]
         }
+
+        analysis["hter"] = hter_value * 100.0
 
         return analysis

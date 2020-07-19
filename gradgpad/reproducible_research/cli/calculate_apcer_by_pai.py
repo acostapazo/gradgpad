@@ -1,3 +1,5 @@
+import os
+
 from gradgpad.charts.create_radar_chart_comparision import (
     create_radar_chart_comparision,
 )
@@ -10,55 +12,19 @@ from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_pai
 def calculate_apcer_by_pai(output_path: str):
     print("Calculating APCER by PAI...")
 
-    # approaches = {
-    #     "Quality SVM RBF": {
-    #         subset.name: ScoresProvider.get(
-    #             approach=Approach.QUALITY_RBF,
-    #             protocol=Protocol.GRANDTEST,
-    #             subset=subset,
-    #         )
-    #         for subset in Subset.options()
-    #     },
-    #     "Quality SVM Linear": {
-    #         subset.name: ScoresProvider.get(
-    #             approach=Approach.QUALITY_LINEAR,
-    #             protocol=Protocol.GRANDTEST,
-    #             subset=subset,
-    #         )
-    #         for subset in Subset.options()
-    #     },
-    #     "Auxiliary": {
-    #         subset.name: ScoresProvider.get(
-    #             approach=Approach.AUXILIARY, protocol=Protocol.GRANDTEST, subset=subset
-    #         )
-    #         for subset in Subset.options()
-    #     },
-    # }
-    #
-    # results = {}
-    # for approach, scores_subsets in approaches.items():
-    #     metrics = Metrics(
-    #         devel_scores=scores_subsets.get(Subset.DEVEL.name),
-    #         test_scores=scores_subsets.get(Subset.TEST.name),
-    #     )
-    #
-    #     bpcer_fixing_working_points = [0.1, 0.15, 0.20]  # [0.05, 0.1, 0.15, 0.20, 0.30, 0.40]
-    #     apcer_fixing_working_points = [0.1, 0.15, 0.20]  # [0.05, 0.1, 0.15, 0.20, 0.30, 0.40]
-    #
-    #     analysis = metrics.get_indeepth_analysis(
-    #         bpcer_fixing_working_points, apcer_fixing_working_points
-    #     )
-    #
-    #     results[approach] = analysis
+    output_path_apcer_by_pais = f"{output_path}/radar/apcer_by_pais"
+    os.makedirs(output_path_apcer_by_pais, exist_ok=True)
 
     results = {
         "Quality SVM RBF": ResultsProvider.get(
-            Approach.QUALITY_RBF, Protocol.GRANDTEST
+            Approach.QUALITY_RBF, protocol=Protocol.GRANDTEST
         ),
         "Quality SVM LINEAR": ResultsProvider.get(
-            Approach.QUALITY_LINEAR, Protocol.GRANDTEST
+            Approach.QUALITY_LINEAR, protocol=Protocol.GRANDTEST
         ),
-        "Auxiliary": ResultsProvider.get(Approach.AUXILIARY, Protocol.GRANDTEST),
+        "Auxiliary": ResultsProvider.get(
+            Approach.AUXILIARY, protocol=Protocol.GRANDTEST
+        ),
     }
 
     selected_working_points = {
@@ -122,7 +88,7 @@ def calculate_apcer_by_pai(output_path: str):
         }
 
         for pais_type, filter_pais in pais_group.items():
-            filename = f"{output_path}/grandtest_trained_type_pai_I_{pais_type}_{working_point.value}_radar_chart.png"
+            filename = f"{output_path_apcer_by_pais}/grandtest_trained_type_pai_I_{pais_type}_{working_point.value}_radar_chart.png"
 
             apcer_detail = create_apcer_by_pai(results, working_point, filter_pais)
             create_radar_chart_comparision(title, apcer_detail, filename)

@@ -4,7 +4,7 @@ import os
 from gradgpad.annotations.coarse_grain_pai import CoarseGrainPai
 from gradgpad.annotations.dataset import Dataset
 from gradgpad.annotations.device import Device
-from gradgpad.metrics.metrics import Metrics
+from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.reproducible_research import Dict
 from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
@@ -96,7 +96,7 @@ class ResultsProvider:
         pai: CoarseGrainPai = None,
     ) -> Dict:
         scores_subsets = {
-            subset.name: ScoresProvider.get(
+            subset.value: ScoresProvider.get(
                 approach=approach,
                 protocol=protocol,
                 subset=subset,
@@ -108,8 +108,8 @@ class ResultsProvider:
         }
 
         metrics = Metrics(
-            devel_scores=scores_subsets.get(Subset.DEVEL.name),
-            test_scores=scores_subsets.get(Subset.TEST.name),
+            devel_scores=scores_subsets.get(Subset.DEVEL.value),
+            test_scores=scores_subsets.get(Subset.TEST.value),
         )
 
         bpcer_fixing_working_points = [

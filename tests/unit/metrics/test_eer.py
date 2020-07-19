@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from gradgpad.metrics.eer import eer
+from gradgpad.evaluation.metrics.eer import eer
 from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider

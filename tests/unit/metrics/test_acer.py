@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from gradgpad.metrics.acer import acer
+from gradgpad.evaluation.metrics.acer import acer
 
 
 @pytest.mark.unit

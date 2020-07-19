@@ -50,6 +50,49 @@ def get_filename(
 
 class ScoresProvider:
     @staticmethod
+    def all(approach: Approach):
+        scores = {}
+        for protocol in Protocol.options():
+            if protocol == Protocol.GRANDTEST:
+                key = protocol.value
+                scores[key] = {}
+                for subset in Subset.options():
+                    scores[key][subset.value] = ScoresProvider.get(
+                        approach=approach, protocol=protocol, subset=subset
+                    )
+            elif protocol == Protocol.CROSS_DATASET or protocol == Protocol.LODO:
+                for dataset in Dataset.options():
+                    key = f"{protocol.value}_{dataset.value}"
+                    scores[key] = {}
+                    for subset in Subset.options():
+                        scores[key][subset.value] = ScoresProvider.get(
+                            approach=approach,
+                            protocol=protocol,
+                            subset=subset,
+                            dataset=dataset,
+                        )
+            elif protocol == Protocol.CROSS_DEVICE:
+                for device in Device.options():
+                    key = f"{protocol.value}_{device.value}"
+                    scores[key] = {}
+                    for subset in Subset.options():
+                        scores[key][subset.value] = ScoresProvider.get(
+                            approach=approach,
+                            protocol=protocol,
+                            subset=subset,
+                            device=device,
+                        )
+            elif protocol == Protocol.UNSEEN_ATTACK:
+                for pai in CoarseGrainPai.options():
+                    key = f"{protocol.value}_{pai.value}"
+                    scores[key] = {}
+                    for subset in Subset.options():
+                        scores[key][subset.value] = ScoresProvider.get(
+                            approach=approach, protocol=protocol, subset=subset, pai=pai
+                        )
+        return scores
+
+    @staticmethod
     def get(
         approach: Approach,
         protocol: Protocol,

@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from gradgpad.metrics.apcer_fixing_bpcer import apcer_fixing_bpcer
+from gradgpad.evaluation.metrics.apcer_fixing_bpcer import apcer_fixing_bpcer
 
 
 @pytest.mark.unit

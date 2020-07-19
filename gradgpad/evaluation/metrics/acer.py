@@ -1,5 +1,5 @@
-from gradgpad.metrics.apcer import apcer
-from gradgpad.metrics.bpcer import bpcer
+from gradgpad.evaluation.metrics.apcer import apcer
+from gradgpad.evaluation.metrics.bpcer import bpcer
 
 
 def acer(scores, labels, th_eer_dev):

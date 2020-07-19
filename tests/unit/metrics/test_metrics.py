@@ -1,5 +1,5 @@
 import pytest
-from gradgpad.metrics.metrics import Metrics
+from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider

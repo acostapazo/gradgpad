@@ -5,9 +5,9 @@ from typing import Dict, Any
 
 from dataclasses import dataclass
 
-from gradgpad.metrics.apcer_fixing_bpcer import apcer_fixing_bpcer
-from gradgpad.metrics.bpcer import bpcer
-from gradgpad.metrics.bpcer_fixing_apcer import bpcer_fixing_apcer
+from gradgpad.evaluation.metrics.apcer_fixing_bpcer import apcer_fixing_bpcer
+from gradgpad.evaluation.metrics.bpcer import bpcer
+from gradgpad.evaluation.metrics.bpcer_fixing_apcer import bpcer_fixing_apcer
 
 
 @dataclass

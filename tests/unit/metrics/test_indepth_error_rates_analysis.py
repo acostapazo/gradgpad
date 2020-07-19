@@ -1,8 +1,10 @@
 import pytest
 import numpy as np
 
-from gradgpad.metrics.acer import acer
-from gradgpad.metrics.indepth_error_rates_analysis import indepth_error_rates_analysis
+from gradgpad.evaluation.metrics.acer import acer
+from gradgpad.evaluation.metrics.indepth_error_rates_analysis import (
+    indepth_error_rates_analysis,
+)
 
 
 @pytest.mark.unit
