@@ -51,6 +51,11 @@ class Metrics:
         eer_value, _ = eer(scores.get_numpy_scores(), scores.get_numpy_labels())
         return eer_value
 
+    def get_eer_th(self, subset: Subset):
+        scores = self.devel_scores if subset == Subset.DEVEL else self.test_scores
+        _, eer_th = eer(scores.get_numpy_scores(), scores.get_numpy_labels())
+        return eer_th
+
     def get_indeepth_analysis(
         self,
         bpcer_fixing_working_points: List[float],

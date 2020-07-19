@@ -74,7 +74,7 @@ def create_apcer_by_subprotocol(
             if filter_common:
                 subprotocol_name = subprotocol_name.replace(filter_common, "")
             detail_values.append(subprotocol_name)
-            apcer_subprotocol = result_subprotocol["acer_info"]["specific"][
+            apcer_subprotocol = result_subprotocol["specific"][
                 "relative_working_points"
             ]["apcer"][value_bpcer(working_point)]
 
