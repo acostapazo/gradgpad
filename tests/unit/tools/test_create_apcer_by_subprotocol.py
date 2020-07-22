@@ -1,34 +1,26 @@
 import pytest
 
-from gradgpad.reproducible_research import (
-    quality_results_cross_dataset,
-    quality_linear_results_cross_dataset,
-)
+from gradgpad.reproducible_research.results.results_provider import ResultsProvider
+from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.tools.create_apcer_detail import (
     WorkingPoint,
     ApcerDetail,
     create_apcer_by_subprotocol,
 )
 
+APPROACH_RESULTS = {
+    "Quality SVM RBF": ResultsProvider.all(Approach.QUALITY_RBF),
+    "Quality SVM LINEAR": ResultsProvider.all(Approach.QUALITY_LINEAR),
+    "Auxiliary": ResultsProvider.all(Approach.AUXILIARY),
+}
+
 
 @pytest.mark.unit
 @pytest.mark.parametrize(
     "working_point,approach_results",
     [
-        (
-            WorkingPoint.BPCER_5,
-            {
-                "Quality SVM RBF": quality_results_cross_dataset,
-                "Quality SVM LINEAR": quality_linear_results_cross_dataset,
-            },
-        ),
-        (
-            WorkingPoint.BPCER_10,
-            {
-                "Quality SVM RBF": quality_results_cross_dataset,
-                "Quality SVM LINEAR": quality_linear_results_cross_dataset,
-            },
-        ),
+        (WorkingPoint.BPCER_5, APPROACH_RESULTS),
+        (WorkingPoint.BPCER_10, APPROACH_RESULTS),
     ],
 )
 def test_should_create_apcer_by_subprotocol(working_point, approach_results):

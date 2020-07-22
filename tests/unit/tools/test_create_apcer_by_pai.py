@@ -1,6 +1,7 @@
 import pytest
 
-from gradgpad.reproducible_research import quality_results, quality_linear_results
+from gradgpad.reproducible_research.results.results_provider import ResultsProvider
+from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.tools.create_apcer_detail import (
     WorkingPoint,
     create_apcer_by_pai,
@@ -8,24 +9,21 @@ from gradgpad.tools.create_apcer_detail import (
 )
 
 
+APPROACH_RESULTS_GRANDTEST = {
+    "Quality SVM RBF": ResultsProvider.grandtest(Approach.QUALITY_RBF)["grandtest"],
+    "Quality SVM LINEAR": ResultsProvider.grandtest(Approach.QUALITY_LINEAR)[
+        "grandtest"
+    ],
+    "Auxiliary": ResultsProvider.grandtest(Approach.AUXILIARY)["grandtest"],
+}
+
+
 @pytest.mark.unit
 @pytest.mark.parametrize(
     "working_point,approach_results_protocol",
     [
-        (
-            WorkingPoint.BPCER_5,
-            {
-                "Quality SVM RBF": quality_results["Grandtest-Type-PAI-I"],
-                "Quality SVM LINEAR": quality_linear_results["Grandtest-Type-PAI-I"],
-            },
-        ),
-        (
-            WorkingPoint.BPCER_10,
-            {
-                "Quality SVM RBF": quality_results["Grandtest-Type-PAI-I"],
-                "Quality SVM LINEAR": quality_linear_results["Grandtest-Type-PAI-I"],
-            },
-        ),
+        (WorkingPoint.BPCER_5, APPROACH_RESULTS_GRANDTEST),
+        (WorkingPoint.BPCER_10, APPROACH_RESULTS_GRANDTEST),
     ],
 )
 def test_should_create_apcer_by_pai(working_point, approach_results_protocol):

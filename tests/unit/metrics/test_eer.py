@@ -30,4 +30,4 @@ def test_should_compute_eer_correctly_from_scores():
         subset=Subset.DEVEL,
     )
     eer_value, th = eer(scores.get_numpy_scores(), scores.get_numpy_labels())
-    assert pytest.approx(eer_value, 0.1) == 0.24
+    assert pytest.approx(eer_value, 0.01) == 0.269

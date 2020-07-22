@@ -1,340 +1,86 @@
 import pytest
 from pandas import DataFrame
 
+from gradgpad.annotations.person_attributes import SKIN_TONE_GROUP_POLICY
 from gradgpad.charts import (
     create_metric_bar_chart_comparision,
     create_demographic_dataframe_comparision,
+    Demographic,
 )
-from gradgpad.reproducible_research import (
-    quality_results_gender,
-    quality_linear_results_gender,
-    quality_results_age,
-    quality_linear_results_age,
-    quality_linear_results_skin_tone,
-    quality_results_skin_tone,
-    auxiliary_results_skin_tone,
-    auxiliary_results_age,
-    auxiliary_results_gender,
-)
+
+from gradgpad.reproducible_research.scores.approach import Approach
+from gradgpad.reproducible_research.scores.protocol import Protocol
+from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
 
 from gradgpad.tools import group_dataframe, Metric
 
 
+APPROACH_SCORES_SUBSET = {
+    "Quality SVM Linear": ScoresProvider.get_subsets(
+        approach=Approach.QUALITY_LINEAR, protocol=Protocol.GRANDTEST
+    ),
+    "Quality SVM RBF": ScoresProvider.get_subsets(
+        approach=Approach.QUALITY_RBF, protocol=Protocol.GRANDTEST
+    ),
+    "Auxiliary": ScoresProvider.get_subsets(
+        approach=Approach.AUXILIARY, protocol=Protocol.GRANDTEST
+    ),
+}
+
+
 @pytest.mark.unit
 @pytest.mark.parametrize(
-    "metric,approach_results,filename",
+    "metric, demographic, approach_subset_scores, policy, filename",
     [
         (
             Metric.BPCER,
-            {
-                "Quality SVM RBF": quality_results_gender,
-                "Quality SVM LINEAR": quality_linear_results_gender,
-                "Auxiliary": auxiliary_results_gender,
-            },
-            "tests/output/gender_bpcer_comparision_bar_chart.png",
+            Demographic.SEX,
+            APPROACH_SCORES_SUBSET,
+            None,
+            "tests/output/sex_bpcer_comparision_bar_chart.png",
         ),
         (
             Metric.BPCER,
-            {
-                "Quality SVM RBF": quality_results_age,
-                "Quality SVM LINEAR": quality_linear_results_age,
-                "Auxiliary": auxiliary_results_age,
-            },
+            Demographic.AGE,
+            APPROACH_SCORES_SUBSET,
+            None,
             "tests/output/age_bpcer_comparision_bar_chart.png",
         ),
         (
             Metric.BPCER,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
+            Demographic.SKIN_TONE,
+            APPROACH_SCORES_SUBSET,
+            None,
             "tests/output/skin_tone_bpcer_comparision_bar_chart.png",
         ),
         (
             Metric.BPCER,
-            {"Auxiliary": auxiliary_results_gender},
-            "tests/output/gender_bpcer_auxiliary_bar_chart.png",
-        ),
-        (
-            Metric.BPCER,
-            {"Auxiliary": auxiliary_results_age},
-            "tests/output/age_bpcer_auxiliary_bar_chart.png",
-        ),
-        (
-            Metric.BPCER,
-            {"Auxiliary": auxiliary_results_skin_tone},
-            "tests/output/skin_tone_bpcer_auxiliary_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_10_SPECIFIC,
+            Demographic.SKIN_TONE,
             {
-                "Quality SVM RBF": quality_results_gender,
-                "Quality SVM LINEAR": quality_linear_results_gender,
-                "Auxiliary": auxiliary_results_gender,
+                "Quality SVM Linear": ScoresProvider.get_subsets(
+                    approach=Approach.QUALITY_LINEAR, protocol=Protocol.GRANDTEST
+                ),
+                "Quality SVM RBF": ScoresProvider.get_subsets(
+                    approach=Approach.QUALITY_RBF, protocol=Protocol.GRANDTEST
+                ),
+                "Auxiliary": ScoresProvider.get_subsets(
+                    approach=Approach.AUXILIARY, protocol=Protocol.GRANDTEST
+                ),
             },
-            "tests/output/gender_bpcer_at_apcer_10_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_10_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_age,
-                "Quality SVM LINEAR": quality_linear_results_age,
-                "Auxiliary": auxiliary_results_age,
-            },
-            "tests/output/age_bpcer_at_apcer_10_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_10_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            "tests/output/skin_tone_bpcer_at_apcer_10_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_15_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_gender,
-                "Quality SVM LINEAR": quality_linear_results_gender,
-                "Auxiliary": auxiliary_results_gender,
-            },
-            "tests/output/gender_bpcer_at_apcer_15_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_15_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_age,
-                "Quality SVM LINEAR": quality_linear_results_age,
-                "Auxiliary": auxiliary_results_age,
-            },
-            "tests/output/age_bpcer_at_apcer_15_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_15_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            "tests/output/skin_tone_bpcer_at_apcer_15_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_40_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_gender,
-                "Quality SVM LINEAR": quality_linear_results_gender,
-                "Auxiliary": auxiliary_results_gender,
-            },
-            "tests/output/gender_bpcer_at_apcer_40_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_40_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_age,
-                "Quality SVM LINEAR": quality_linear_results_age,
-                "Auxiliary": auxiliary_results_age,
-            },
-            "tests/output/age_bpcer_at_apcer_40_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_40_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            "tests/output/skin_tone_bpcer_at_apcer_40_comparision_bar_chart.png",
-        ),
-        (
-            Metric.APCER_AGGREGATE,
-            {
-                "Quality SVM RBF": quality_results_gender,
-                "Quality SVM LINEAR": quality_linear_results_gender,
-                "Auxiliary": auxiliary_results_gender,
-            },
-            "tests/output/gender_apcer_aggregate_comparision_bar_chart.png",
-        ),
-        (
-            Metric.APCER_AGGREGATE,
-            {
-                "Quality SVM RBF": quality_results_age,
-                "Quality SVM LINEAR": quality_linear_results_age,
-                "Auxiliary": auxiliary_results_age,
-            },
-            "tests/output/age_apcer_aggregate_comparision_bar_chart.png",
-        ),
-        (
-            Metric.APCER_AGGREGATE,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            "tests/output/skin_tone_apcer_aggregate_comparision_bar_chart.png",
-        ),
-        (
-            Metric.APCER_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_gender,
-                "Quality SVM LINEAR": quality_linear_results_gender,
-                "Auxiliary": auxiliary_results_gender,
-            },
-            "tests/output/gender_apcer_specific_comparision_bar_chart.png",
-        ),
-        (
-            Metric.APCER_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_age,
-                "Quality SVM LINEAR": quality_linear_results_age,
-                "Auxiliary": auxiliary_results_age,
-            },
-            "tests/output/age_apcer_specific_comparision_bar_chart.png",
-        ),
-        (
-            Metric.APCER_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            "tests/output/skin_tone_apcer_specific_comparision_bar_chart.png",
-        ),
-    ],
-)
-def test_should_create_demographic_df_and_comparision_bar_chart(
-    metric, approach_results, filename
-):
-
-    df = create_demographic_dataframe_comparision(metric, approach_results)
-    assert isinstance(df, DataFrame)
-
-    create_metric_bar_chart_comparision(df, filename)
-
-
-@pytest.mark.unit
-@pytest.mark.parametrize(
-    "metric,approach_results,policy,filename",
-    [
-        (
-            Metric.BPCER,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            {
-                "Skin Tone - Yellow": [
-                    "Skin Tone - Light Yellow",
-                    "Skin Tone - Medium Yellow Brown",
-                ],
-                "Skin Tone - Pink": [
-                    "Skin Tone - Light Pink",
-                    "Skin Tone - Medium Pink Brown",
-                ],
-                "Skin Tone - Dark Brown": [
-                    "Skin Tone - Medium Dark Brown",
-                    "Skin Tone - Dark Brown",
-                ],
-            },
+            SKIN_TONE_GROUP_POLICY,
             "tests/output/skin_tone_bpcer_grouped_comparision_bar_chart.png",
         ),
-        (
-            Metric.BPCER,
-            {"Auxiliary": auxiliary_results_skin_tone},
-            {
-                "Skin Tone - Yellow": [
-                    "Skin Tone - Light Yellow",
-                    "Skin Tone - Medium Yellow Brown",
-                ],
-                "Skin Tone - Pink": [
-                    "Skin Tone - Light Pink",
-                    "Skin Tone - Medium Pink Brown",
-                ],
-                "Skin Tone - Dark Brown": [
-                    "Skin Tone - Medium Dark Brown",
-                    "Skin Tone - Dark Brown",
-                ],
-            },
-            "tests/output/skin_tone_bpcer_grouped_auxiliary_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_10_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            {
-                "Skin Tone - Yellow": [
-                    "Skin Tone - Light Yellow",
-                    "Skin Tone - Medium Yellow Brown",
-                ],
-                "Skin Tone - Pink": [
-                    "Skin Tone - Light Pink",
-                    "Skin Tone - Medium Pink Brown",
-                ],
-                "Skin Tone - Dark Brown": [
-                    "Skin Tone - Medium Dark Brown",
-                    "Skin Tone - Dark Brown",
-                ],
-            },
-            "tests/output/skin_tone_bpcer_at_apcer_10_grouped_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_15_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            {
-                "Skin Tone - Yellow": [
-                    "Skin Tone - Light Yellow",
-                    "Skin Tone - Medium Yellow Brown",
-                ],
-                "Skin Tone - Pink": [
-                    "Skin Tone - Light Pink",
-                    "Skin Tone - Medium Pink Brown",
-                ],
-                "Skin Tone - Dark Brown": [
-                    "Skin Tone - Medium Dark Brown",
-                    "Skin Tone - Dark Brown",
-                ],
-            },
-            "tests/output/skin_tone_bpcer_at_apcer_15_grouped_comparision_bar_chart.png",
-        ),
-        (
-            Metric.BPCER_AT_APCER_40_SPECIFIC,
-            {
-                "Quality SVM RBF": quality_results_skin_tone,
-                "Quality SVM LINEAR": quality_linear_results_skin_tone,
-                "Auxiliary": auxiliary_results_skin_tone,
-            },
-            {
-                "Skin Tone - Yellow": [
-                    "Skin Tone - Light Yellow",
-                    "Skin Tone - Medium Yellow Brown",
-                ],
-                "Skin Tone - Pink": [
-                    "Skin Tone - Light Pink",
-                    "Skin Tone - Medium Pink Brown",
-                ],
-                "Skin Tone - Dark Brown": [
-                    "Skin Tone - Medium Dark Brown",
-                    "Skin Tone - Dark Brown",
-                ],
-            },
-            "tests/output/skin_tone_bpcer_at_apcer_40_grouped_comparision_bar_chart.png",
-        ),
     ],
 )
-def test_should_create_grouped_demographic_df_and_comparision_bar_chart(
-    metric, approach_results, policy, filename
+def test_should_success_create_demographic_df_and_comparision_bar_chart(
+    metric, demographic, approach_subset_scores, policy, filename
 ):
+    df = create_demographic_dataframe_comparision(
+        metric, demographic, approach_subset_scores
+    )
+    assert isinstance(df, DataFrame)
 
-    df = create_demographic_dataframe_comparision(metric, approach_results)
-    df = group_dataframe(df, policy)
+    if policy:
+        df = group_dataframe(df, policy)
 
     create_metric_bar_chart_comparision(df, filename)

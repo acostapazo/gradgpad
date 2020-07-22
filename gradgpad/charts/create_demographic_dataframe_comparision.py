@@ -2,16 +2,50 @@ import pandas as pd
 
 from typing import Dict
 
-from gradgpad.tools import create_dataframe, metric_retriever_providers
+from gradgpad.annotations.demographic import Demographic
+from gradgpad.evaluation.metrics.metrics_demographics import MetricsDemographics
+from gradgpad.tools import Metric
 
 
-def create_demographic_dataframe_comparision(metric, approach_results: Dict[str, Dict]):
+def create_dataframe_form_subset_scores(
+    metric: Metric, demographic: Demographic, subset_scores
+):
+    data = {"Metric": [], "Error Rate (%)": [], "Protocol": []}
 
-    metric_retriever = metric_retriever_providers(metric)
+    metrics = MetricsDemographics.from_subset_scores(subset_scores)
+
+    if metric != Metric.BPCER:
+        raise ValueError("Only valid Metric.BPCER for now")
+
+    metric_name = metric.name
+
+    if demographic == Demographic.SEX:
+        bpcers = metrics.get_bpcer_sex()
+    elif demographic == Demographic.AGE:
+        bpcers = metrics.get_bpcer_age()
+    elif demographic == Demographic.SKIN_TONE:
+        bpcers = metrics.get_bpcer_skin_tone()
+    else:
+        raise ValueError(
+            f"Not available demographic value. Check available ones {Demographic.options()}"
+        )
+
+    for demographic, bpcer in bpcers.items():
+        data["Metric"].append(metric_name)
+        data["Error Rate (%)"].append(bpcer)
+        data["Protocol"].append(demographic)
+    df = pd.DataFrame(data, columns=data.keys())
+    return df
+
+
+def create_demographic_dataframe_comparision(
+    metric: Metric, demographic: Demographic, approach_subset_scores: Dict[str, Dict]
+):
 
     # Create dataframes from result dict
     approach_dfs = {
-        k: create_dataframe(metric_retriever, v) for k, v in approach_results.items()
+        k: create_dataframe_form_subset_scores(metric, demographic, v)
+        for k, v in approach_subset_scores.items()
     }
 
     # Add approach name to dataframes

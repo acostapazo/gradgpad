@@ -102,4 +102,11 @@ class ScoresProvider:
         pai: CoarseGrainPai = None,
     ) -> Scores:
         filename = get_filename(approach, protocol, subset, dataset, device, pai)
-        return Scores(filename)
+        return Scores.from_filename(filename)
+
+    @staticmethod
+    def get_subsets(approach: Approach, protocol: Protocol):
+        return {
+            subset.value: ScoresProvider.get(approach, protocol, subset)
+            for subset in Subset.options()
+        }

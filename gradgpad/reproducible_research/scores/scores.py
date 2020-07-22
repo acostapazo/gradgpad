@@ -16,8 +16,30 @@ REPRODUCIBLE_RESEARCH_SCORES_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Scores:
-    def __init__(self, filename):
-        self.scores = open_result_json(filename)
+    @staticmethod
+    def from_filename(filename: str):
+        return Scores(open_result_json(filename))
+
+    def __init__(self, scores: Dict = None):
+        self.scores = scores
+
+    def get_genuine(self):
+        ids = self.scores.keys()
+        annotations_from_ids = annotations.get_annotations_from_ids(ids)
+        filtered_ids = self._get_filtered_ids(
+            annotations_from_ids, Filter(spai=Spai.GENUINE)
+        )
+        scores = [score for id, score in self.scores.items() if id in filtered_ids]
+        return scores
+
+    def get_attacks(self):
+        ids = self.scores.keys()
+        annotations_from_ids = annotations.get_annotations_from_ids(ids)
+        filtered_ids = self._get_filtered_ids(
+            annotations_from_ids, Filter(spai=Spai.GENUINE)
+        )
+        scores = [score for id, score in self.scores.items() if id not in filtered_ids]
+        return scores
 
     def get_numpy_scores(self):
         return np.asarray(list(self.scores.values()), dtype=np.float32)

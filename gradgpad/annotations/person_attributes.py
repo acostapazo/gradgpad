@@ -39,3 +39,10 @@ class SkinTone(Enum):
             SkinTone.MEDIUM_DARK_BROWN,
             SkinTone.DARK_BROWN,
         ]
+
+
+SKIN_TONE_GROUP_POLICY = {
+    "Yellow": ["LIGHT_YELLOW", "MEDIUM_YELLOW_BROWN"],
+    "Pink": ["LIGHT_PINK", "MEDIUM_PINK_BROWN"],
+    "Dark Brown": ["MEDIUM_DARK_BROWN", "DARK_BROWN"],
+}

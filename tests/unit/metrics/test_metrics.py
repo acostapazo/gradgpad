@@ -27,8 +27,5 @@ from gradgpad.reproducible_research.scores.subset import Subset
 def test_should_calculate_eer_for_devel_and_test(devel_scores, test_scores):
 
     metrics = Metrics(devel_scores, test_scores)
-
-    assert pytest.approx(metrics.get_eer_devel(), 0.1) == 0.269
-    assert (
-        pytest.approx(metrics.get_eer_test(), 0.1) == 0.269
-    )  # TODO suspicious, same file for devel and test
+    assert pytest.approx(metrics.get_eer(Subset.DEVEL), 0.01) == 0.269
+    assert pytest.approx(metrics.get_eer(Subset.TEST), 0.01) == 0.246

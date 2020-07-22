@@ -8,12 +8,6 @@ from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
 from gradgpad.reproducible_research.scores.subset import Subset
 
-[
-    (approach, Protocol.GRANDTEST, subset, 4580)
-    for approach in Approach.options()
-    for subset in Subset.options()
-]
-
 
 @pytest.mark.unit
 @pytest.mark.parametrize(

@@ -5,7 +5,7 @@ from gradgpad.annotations.coarse_grain_pai import CoarseGrainPai
 from gradgpad.annotations.dataset import Dataset
 from gradgpad.annotations.device import Device
 from gradgpad.evaluation.metrics.metrics import Metrics
-from gradgpad.reproducible_research import Dict
+from gradgpad.reproducible_research import Dict, Scores
 from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
@@ -13,6 +13,27 @@ from gradgpad.reproducible_research.scores.subset import Subset
 
 
 REPRODUCIBLE_RESEARCH_SCORES_DIR = os.path.abspath(os.path.dirname(__file__))
+
+
+def get_analysis_from_metrics(metrics: Metrics) -> Dict:
+    bpcer_fixing_working_points = [
+        0.05,
+        0.1,
+        0.15,
+        0.20,
+    ]  # [0.05, 0.1, 0.15, 0.20, 0.30, 0.40]
+    apcer_fixing_working_points = [
+        0.05,
+        0.1,
+        0.15,
+        0.20,
+    ]  # [0.05, 0.1, 0.15, 0.20, 0.30, 0.40]
+
+    analysis = metrics.get_indeepth_analysis(
+        bpcer_fixing_working_points, apcer_fixing_working_points
+    )
+
+    return analysis
 
 
 class ResultsProvider:
@@ -111,20 +132,54 @@ class ResultsProvider:
             devel_scores=scores_subsets.get(Subset.DEVEL.value),
             test_scores=scores_subsets.get(Subset.TEST.value),
         )
+        return get_analysis_from_metrics(metrics)
 
-        bpcer_fixing_working_points = [
-            0.1,
-            0.15,
-            0.20,
-        ]  # [0.05, 0.1, 0.15, 0.20, 0.30, 0.40]
-        apcer_fixing_working_points = [
-            0.1,
-            0.15,
-            0.20,
-        ]  # [0.05, 0.1, 0.15, 0.20, 0.30, 0.40]
+    @staticmethod
+    def get_grandtest_sex(approach: Approach,) -> Dict:
+        scores_subsets = {}
+        for subset in Subset.options():
+            grandtest_sex_scores = ScoresProvider.get(
+                approach=approach, protocol=Protocol.GRANDTEST, subset=subset
+            ).get_fair_sex_subset()
+            scores_subsets[subset.value] = Scores(scores=grandtest_sex_scores)
 
-        analysis = metrics.get_indeepth_analysis(
-            bpcer_fixing_working_points, apcer_fixing_working_points
+        metrics = Metrics(
+            devel_scores=scores_subsets.get(Subset.DEVEL.value),
+            test_scores=scores_subsets.get(Subset.TEST.value),
+        )
+        return get_analysis_from_metrics(metrics)
+
+    @staticmethod
+    def get_grandtest_age(approach: Approach,) -> Dict:
+        scores_subsets = {}
+        for subset in Subset.options():
+            grandtest_age_scores = ScoresProvider.get(
+                approach=approach, protocol=Protocol.GRANDTEST, subset=subset
+            ).get_fair_age_subset()
+            scores_subsets[subset.value] = Scores(scores=grandtest_age_scores)
+
+        metrics = Metrics(
+            devel_scores=scores_subsets.get(Subset.DEVEL.value),
+            test_scores=scores_subsets.get(Subset.TEST.value),
         )
 
-        return analysis
+        return get_analysis_from_metrics(metrics)
+
+    @staticmethod
+    def get_grandtest_skin_tone(approach: Approach,) -> Dict:
+        import pdb
+
+        pdb.set_trace()
+        scores_subsets = {}
+        for subset in Subset.options():
+            grandtest_skin_tone_scores = ScoresProvider.get(
+                approach=approach, protocol=Protocol.GRANDTEST, subset=subset
+            ).get_fair_skin_tone_subset()
+            scores_subsets[subset.value] = Scores(scores=grandtest_skin_tone_scores)
+
+        metrics = Metrics(
+            devel_scores=scores_subsets.get(Subset.DEVEL.value),
+            test_scores=scores_subsets.get(Subset.TEST.value),
+        )
+
+        return get_analysis_from_metrics(metrics)

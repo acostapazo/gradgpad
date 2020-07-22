@@ -1,10 +1,11 @@
 import pytest
+from pandas import DataFrame
 
-from gradgpad.charts import create_demographic_dataframe_comparision
-from gradgpad.reproducible_research import (
-    quality_results_skin_tone,
-    quality_linear_results_skin_tone,
-)
+from gradgpad.annotations.person_attributes import SKIN_TONE_GROUP_POLICY
+from gradgpad.charts import create_demographic_dataframe_comparision, Demographic
+from gradgpad.reproducible_research.scores.approach import Approach
+from gradgpad.reproducible_research.scores.protocol import Protocol
+from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
 
 from gradgpad.tools import group_dataframe, Metric
 
@@ -12,22 +13,23 @@ from gradgpad.tools import group_dataframe, Metric
 @pytest.mark.unit
 def test_should_group_dataframe():
     metric = Metric.BPCER
-    approach_results = {
-        "Quality SVM RBF": quality_results_skin_tone,
-        "Quality SVM LINEAR": quality_linear_results_skin_tone,
-    }
-    df = create_demographic_dataframe_comparision(metric, approach_results)
-
-    policy = {
-        "Skin Tone - Yellow": [
-            "Skin Tone - Light Yellow",
-            "Skin Tone - Medium Yellow Brown",
-        ],
-        "Skin Tone - Pink": ["Skin Tone - Light Pink", "Skin Tone - Medium Pink Brown"],
-        "Skin Tone - Dark Brown": [
-            "Skin Tone - Medium Dark Brown",
-            "Skin Tone - Dark Brown",
-        ],
+    demographic = Demographic.SKIN_TONE
+    approach_scores_subset = {
+        "Quality SVM Linear": ScoresProvider.get_subsets(
+            approach=Approach.QUALITY_LINEAR, protocol=Protocol.GRANDTEST
+        ),
+        "Quality SVM RBF": ScoresProvider.get_subsets(
+            approach=Approach.QUALITY_RBF, protocol=Protocol.GRANDTEST
+        ),
+        "Auxiliary": ScoresProvider.get_subsets(
+            approach=Approach.AUXILIARY, protocol=Protocol.GRANDTEST
+        ),
     }
 
-    df = group_dataframe(df, policy)
+    df = create_demographic_dataframe_comparision(
+        metric, demographic, approach_scores_subset
+    )
+
+    df = group_dataframe(df, SKIN_TONE_GROUP_POLICY)
+
+    assert isinstance(df, DataFrame)
