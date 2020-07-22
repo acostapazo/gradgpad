@@ -1,4 +1,5 @@
 import os
+import warnings
 
 from gradgpad.reproducible_research.cli.calculate_apcer_generalization_protocols import (
     calculate_apcer_generalization_protocols,
@@ -18,11 +19,14 @@ from gradgpad.reproducible_research.cli.summary_table import summary_table
 
 def reproducible_research(output_path: str):
     os.makedirs(output_path, exist_ok=True)
-    summary_table(output_path)
-    calculate_hists_and_curves(output_path)
-    calculate_apcer_by_pai(output_path)
-    calculate_apcer_generalization_protocols(output_path)
-    calculate_demographic_bpcer_bar_chart(output_path)
-    save_csv_scores(output_path)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+
+        summary_table(output_path)
+        calculate_hists_and_curves(output_path)
+        calculate_apcer_by_pai(output_path)
+        calculate_apcer_generalization_protocols(output_path)
+        calculate_demographic_bpcer_bar_chart(output_path)
+        save_csv_scores(output_path)
 
     print(f"Reproducible Research Results: {output_path}")
