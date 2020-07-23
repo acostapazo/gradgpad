@@ -4,6 +4,7 @@ from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.evaluation.plots.det_curve import det_curve
 from gradgpad.evaluation.plots.histogram import save_histogram
 from gradgpad.reproducible_research.scores.approach import Approach
+from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
 from gradgpad.reproducible_research.scores.subset import Subset
 
@@ -29,7 +30,6 @@ def calculate_hists_and_curves(output_path: str):
             )
 
         for protocol_name, subset_scores in protocols_subset_scores.items():
-
             approach_name = approach.replace(" ", "_").lower()
             output_path_hists_and_curves = (
                 f"{output_path}/hists_and_curves/{approach_name}/{protocol_name}"
@@ -41,21 +41,70 @@ def calculate_hists_and_curves(output_path: str):
 
             for subset, scores in subset_scores.items():
 
-                output_det_filename = f"{output_path_hists_and_curves}/{subset}_det.png"
-                output_hist_filename = (
-                    f"{output_path_hists_and_curves}/{subset}_hist.png"
-                )
-
                 data = {
                     "scores": scores.get_numpy_scores(),
                     "labels": scores.get_numpy_labels(),
                 }
 
+                output_det_filename = f"{output_path_hists_and_curves}/{subset}_det.png"
                 det_curve(data, output_det_filename)
-                save_histogram(
-                    data,
-                    output_hist_filename,
-                    genuine_label=0,
-                    th=eer_th,
-                    th_legend="EER @ Devel",
-                )
+
+                for normalize_hist in [True, False]:
+                    if normalize_hist:
+                        output_hist_filename = (
+                            f"{output_path_hists_and_curves}/{subset}_hist_norm.png"
+                        )
+                    else:
+                        output_hist_filename = (
+                            f"{output_path_hists_and_curves}/{subset}_hist.png"
+                        )
+                    save_histogram(
+                        data,
+                        output_hist_filename,
+                        genuine_label=0,
+                        th=eer_th,
+                        th_legend="EER @ Devel",
+                        normalize_hist=normalize_hist,
+                    )
+
+                if protocol_name == Protocol.GRANDTEST.value:
+                    calculate_hists_and_curves_pai_types(
+                        output_path_hists_and_curves, subset, scores, eer_th
+                    )
+
+
+def calculate_hists_and_curves_pai_types(
+    output_path_hists_and_curves, subset, scores, eer_th
+):
+    output_det_filename = f"{output_path_hists_and_curves}/{subset}_det_detail.png"
+
+    data = {
+        "scores": scores.get_numpy_scores(),
+        "labels": scores.get_numpy_labels_by_type_pai(),
+    }
+
+    det_curve(
+        data,
+        output_det_filename,
+        subtypes=["PAI Type I", "PAI Type II", "PAI Type III", "All"],
+    )
+
+    for normalize_hist in [True, False]:
+        if normalize_hist:
+            output_hist_filename = (
+                f"{output_path_hists_and_curves}/{subset}_hist_norm_detail.png"
+            )
+        else:
+            output_hist_filename = (
+                f"{output_path_hists_and_curves}/{subset}_hist_detail.png"
+            )
+
+        save_histogram(
+            data,
+            output_hist_filename,
+            genuine_label=0,
+            th=eer_th,
+            th_legend="EER @ Devel",
+            normalize_hist=normalize_hist,
+            subtypes=["PAI Type I", "PAI Type II", "PAI Type III"],
+        )

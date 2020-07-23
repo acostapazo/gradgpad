@@ -1,4 +1,7 @@
+import copy
 import os
+from typing import List
+
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
@@ -26,6 +29,7 @@ def save_histogram(
     normalize_hist=False,
     y_lim=None,
     title="Histogram",
+    subtypes: List[str] = None,
 ):
     """
     This function saves a static histogram
@@ -59,7 +63,7 @@ def save_histogram(
             )
         )
 
-    scores = results_dict["scores"]
+    scores = copy.deepcopy(np.ravel(results_dict["scores"]))
 
     plt.figure()
     plt.xlabel("Score")
@@ -68,25 +72,14 @@ def save_histogram(
 
     if valid_labels(results_dict):
 
-        labels = results_dict["labels"].ravel()
+        labels = copy.deepcopy(np.ravel(results_dict["labels"]))
         assert len(scores) == len(labels)
 
+        # Genuines
         genuine = scores[labels == genuine_label]
-        impostors = scores[labels != genuine_label]
-
         hist_gen, edges_gen = np.histogram(genuine, bins=50)
-        hist_impos, edges_impos = np.histogram(impostors, bins=50)
-
         if normalize_hist:
             hist_gen = hist_gen / hist_gen.max()
-            hist_impos = hist_impos / hist_impos.max()
-
-        if y_lim:
-            axes = plt.gca()
-            axes.set_ylim([0, y_lim])
-
-        max_value = max(hist_gen.max(), hist_impos.max())
-
         plt.bar(
             (edges_gen[1:] + edges_gen[:-1]) * 0.5,
             hist_gen,
@@ -95,13 +88,12 @@ def save_histogram(
             alpha=0.5,
         )
 
-        plt.bar(
-            (edges_impos[1:] + edges_impos[:-1]) * 0.5,
-            hist_impos,
-            width=(edges_impos[1] - edges_impos[0]),
-            facecolor="r",
-            alpha=0.5,
-        )
+        # Impostors
+
+        impostors = scores[labels != genuine_label]
+        hist_impos, edges_impos = np.histogram(impostors, bins=50)
+        if normalize_hist:
+            hist_impos = hist_impos / hist_impos.max()
 
         red_patch = mpatches.Patch(
             color="red", label="Impostors ({})".format(len(impostors))
@@ -110,12 +102,53 @@ def save_histogram(
             color="green", label="Genuine ({})".format(len(genuine))
         )
 
+        if not subtypes:
+            plt.bar(
+                (edges_impos[1:] + edges_impos[:-1]) * 0.5,
+                hist_impos,
+                width=(edges_impos[1] - edges_impos[0]),
+                facecolor="r",
+                alpha=0.5,
+            )
+            legend = [green_patch, red_patch]
+        else:
+            colors = {1: "r", 2: "orange", 3: "magenta"}
+
+            legend = [green_patch]
+
+            for label in range(1, max(labels) + 1):
+                impostors_subtype = scores[labels == label]
+                hist_impos_subtype, edges_impos_subtype = np.histogram(
+                    impostors_subtype, bins=50
+                )
+                if normalize_hist:
+                    hist_impos_subtype = hist_impos_subtype / hist_impos_subtype.max()
+
+                plt.bar(
+                    (edges_impos[1:] + edges_impos[:-1]) * 0.5,
+                    hist_impos_subtype,
+                    width=(edges_impos_subtype[1] - edges_impos_subtype[0]),
+                    facecolor=colors[label],
+                    alpha=0.5,
+                )
+
+                impostor_subtype_patch = mpatches.Patch(
+                    color=colors[label],
+                    label=f"Impostors {subtypes[label-1]} ({len(impostors_subtype)})",
+                )
+                legend.append(impostor_subtype_patch)
+
+        if y_lim:
+            axes = plt.gca()
+            axes.set_ylim([0, y_lim])
+        max_value = max(hist_gen.max(), hist_impos.max())
+
         if th is not None:
             x, y = [th, th], [0, max_value]
             th_line, = plt.plot(x, y, "b--", label=th_legend)
-            plt.legend(handles=[red_patch, green_patch, th_line])
-        else:
-            plt.legend(handles=[red_patch, green_patch])
+            legend = legend + [th_line]
+
+        plt.legend(handles=legend)
 
     else:
         hist, edges = np.histogram(scores, bins=50)

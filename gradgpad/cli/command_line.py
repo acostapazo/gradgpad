@@ -35,6 +35,8 @@ def main():
 
         if args.zip_folder:
             last_folder = args.output_path.split("/")[-1]
-            zipf = zipfile.ZipFile(f"{last_folder}.zip", "w", zipfile.ZIP_DEFLATED)
+            zip_filename = f"{last_folder}.zip"
+            print(f"Zipping output folder -> {zip_filename}")
+            zipf = zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED)
             zipdir(args.output_path, zipf)
             zipf.close()

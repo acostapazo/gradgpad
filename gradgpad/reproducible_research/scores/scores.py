@@ -41,6 +41,17 @@ class Scores:
         scores = [score for id, score in self.scores.items() if id not in filtered_ids]
         return scores
 
+    def get_attacks_with_ids(self):
+        ids = self.scores.keys()
+        annotations_from_ids = annotations.get_annotations_from_ids(ids)
+        filtered_ids = self._get_filtered_ids(
+            annotations_from_ids, Filter(spai=Spai.GENUINE)
+        )
+        scores = {
+            id: score for id, score in self.scores.items() if id not in filtered_ids
+        }
+        return scores
+
     def get_numpy_scores(self):
         return np.asarray(list(self.scores.values()), dtype=np.float32)
 
@@ -51,6 +62,38 @@ class Scores:
             annotations_from_ids, Filter(spai=Spai.GENUINE)
         )
         labels = [0 if id in filtered_ids else 1 for id in ids]
+        return np.asarray(labels, dtype=np.int)
+
+    def get_numpy_labels_by_type_pai(self):
+        ids = self.scores.keys()
+        annotations_from_ids = annotations.get_annotations_from_ids(ids)
+        genuine_filtered_ids = self._get_filtered_ids(
+            annotations_from_ids, Filter(spai=Spai.GENUINE)
+        )
+        type_I_filtered_ids = self._get_filtered_ids(
+            annotations_from_ids, Filter(spai=Spai.PAI_TYPE_I)
+        )
+        type_II_filtered_ids = self._get_filtered_ids(
+            annotations_from_ids, Filter(spai=Spai.PAI_TYPE_II)
+        )
+        type_III_filtered_ids = self._get_filtered_ids(
+            annotations_from_ids, Filter(spai=Spai.PAI_TYPE_III)
+        )
+
+        labels = []
+        for id in ids:
+            if id in genuine_filtered_ids:
+                label = 0
+            elif id in type_I_filtered_ids:
+                label = 1
+            elif id in type_II_filtered_ids:
+                label = 2
+            elif id in type_III_filtered_ids:
+                label = 3
+            else:
+                continue
+            labels.append(label)
+
         return np.asarray(labels, dtype=np.int)
 
     def get_numpy_specific_pai_labels(self):

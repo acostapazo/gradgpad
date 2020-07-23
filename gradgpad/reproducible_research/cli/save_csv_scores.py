@@ -34,6 +34,7 @@ def save_csv_scores(output_path: str):
             "sex": scores.get_fair_sex_subset(),
             "age": scores.get_fair_age_subset(),
             "skin_tone": scores.get_fair_skin_tone_subset(),
+            "attacks": {"attacks": scores.get_attacks_with_ids()},
         }
 
         for demographic, fair_scores in demographic_scores.items():

@@ -1,3 +1,6 @@
+import copy
+from typing import List
+
 import matplotlib.pyplot as plt
 from sklearn import metrics
 import os
@@ -7,7 +10,13 @@ import numpy as np
 GENUINE_FLAG = 0
 
 
-def det_curve(results_dict, path_to_save, title="DET Curve", genuine_label=0):
+def det_curve(
+    results_dict,
+    path_to_save,
+    title="DET Curve",
+    genuine_label=0,
+    subtypes: List[str] = None,
+):
     """
     This function saves a static DET curve (FRR vs FAR)
 
@@ -26,15 +35,9 @@ def det_curve(results_dict, path_to_save, title="DET Curve", genuine_label=0):
     -------
 
     """
-    labels = np.ravel(results_dict["labels"])
-    scores = np.ravel(results_dict["scores"])
+    labels = copy.deepcopy(np.ravel(results_dict["labels"]))
+    scores = copy.deepcopy(np.ravel(results_dict["scores"]))
     assert len(scores) == len(labels)
-
-    labels[labels == genuine_label] = 0
-    labels[labels != genuine_label] = 1
-
-    inv_scores = -1.0 * scores
-    far, tpr, _ = metrics.roc_curve(labels, inv_scores, pos_label=0)
 
     plt.title(title)
     plt.ylim((0, 1))
@@ -42,8 +45,38 @@ def det_curve(results_dict, path_to_save, title="DET Curve", genuine_label=0):
     plt.xlabel("FAR")
     plt.ylabel("FRR")
     plt.grid(True)
-    plt.plot(far, 1 - tpr)
+
+    inv_scores = -1.0 * scores
+    labels[labels == genuine_label] = 0
+    if not subtypes:
+        labels[labels != genuine_label] = 1
+        far, tpr, _ = metrics.roc_curve(labels, inv_scores, pos_label=0)
+        plt.plot(far, 1 - tpr)
+    else:
+        genuine_scores = inv_scores[labels == genuine_label]
+        genuine_labels = labels[labels == genuine_label]
+
+        for label in range(1, max(labels) + 1):
+            type_pai_scores = inv_scores[labels == label]
+            type_pai_labels = labels[labels == label]
+
+            all_scores = np.concatenate((genuine_scores, type_pai_scores))
+            all_labels = np.concatenate((genuine_labels, type_pai_labels))
+
+            all_labels[all_labels == label] = 1
+
+            far, tpr, _ = metrics.roc_curve(all_labels, all_scores, pos_label=0)
+            plt.plot(far, 1 - tpr)
+
+        labels[labels != genuine_label] = 1
+        far, tpr, _ = metrics.roc_curve(labels, inv_scores, pos_label=0)
+        plt.plot(far, 1 - tpr, ls="--")
+
+    if subtypes:
+        plt.legend(subtypes)
+
     plt.savefig(path_to_save)
+    plt.close()
 
 
 def save_several_det_curves(dict_results, path_to_save):

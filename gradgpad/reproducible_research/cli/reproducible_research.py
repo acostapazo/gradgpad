@@ -1,4 +1,5 @@
 import os
+import time
 import warnings
 
 from gradgpad.reproducible_research.cli.calculate_apcer_generalization_protocols import (
@@ -18,6 +19,8 @@ from gradgpad.reproducible_research.cli.summary_table import summary_table
 
 
 def reproducible_research(output_path: str):
+    start = time.time()
+
     os.makedirs(output_path, exist_ok=True)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
@@ -30,3 +33,5 @@ def reproducible_research(output_path: str):
         save_csv_scores(output_path)
 
     print(f"Reproducible Research Results: {output_path}")
+    end = time.time()
+    print(f"Elapsed time: {end-start} s")

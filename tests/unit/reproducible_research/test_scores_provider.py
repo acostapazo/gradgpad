@@ -127,4 +127,6 @@ def test_should_throw_exception_get_scores_from_provider_unseen_attack_protocol(
 
         ScoresProvider.get(approach=approach, protocol=protocol, subset=subset)
 
-    assert protocol.name.replace("_", "-") in str(excinfo.value)
+    assert (protocol.name in str(excinfo.value)) or (
+        protocol.name.replace("_", "-") in str(excinfo.value)
+    )
