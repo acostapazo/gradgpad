@@ -15,5 +15,7 @@ steps:
     run:
       - black .
       - flake8 gradgpad
+  build:
+    run: pip install -e .
   test:
     run: pytest -v

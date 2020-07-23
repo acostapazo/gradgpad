@@ -67,7 +67,7 @@ jobs:
     - name: Test with pytest
       run: |
         pip install -e .
-        lume -test
+        lume -build -test
     - name: Check Installation (--no-binary)
       run: |
         pip install wheel
