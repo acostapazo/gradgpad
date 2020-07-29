@@ -125,7 +125,11 @@ def indepth_error_rates_analysis(
         )
 
         relative_working_points = get_relative_working_points(
-            scores, labels, bpcer_fixing_working_points, apcer_fixing_working_points
+            scores,
+            labels,
+            bpcer_fixing_working_points,
+            apcer_fixing_working_points,
+            meta_label_info,
         )
 
         indepth_error_rate_results[working_point] = InDepthErrorRatesResult(
@@ -142,8 +146,13 @@ def indepth_error_rates_analysis(
 
 
 def get_relative_working_points(
-    scores, labels, bpcer_fixing_working_points, apcer_fixing_working_points
+    scores,
+    labels,
+    bpcer_fixing_working_points,
+    apcer_fixing_working_points,
+    meta_label_info,
 ):
+
     relative_working_points = {}
     if bpcer_fixing_working_points:
         relative_working_points["bpcer"] = {}

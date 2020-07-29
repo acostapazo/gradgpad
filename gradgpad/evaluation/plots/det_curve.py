@@ -1,7 +1,8 @@
 import copy
-from typing import List
+from typing import Dict
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 from sklearn import metrics
 import os
 import random
@@ -15,7 +16,8 @@ def det_curve(
     path_to_save,
     title="DET Curve",
     genuine_label=0,
-    subtypes: List[str] = None,
+    subtypes: Dict[int, str] = None,
+    colors: Dict[int, str] = None,
 ):
     """
     This function saves a static DET curve (FRR vs FAR)
@@ -48,6 +50,8 @@ def det_curve(
 
     inv_scores = -1.0 * scores
     labels[labels == genuine_label] = 0
+    handles = []
+
     if not subtypes:
         labels[labels != genuine_label] = 1
         far, tpr, _ = metrics.roc_curve(labels, inv_scores, pos_label=0)
@@ -55,7 +59,6 @@ def det_curve(
     else:
         genuine_scores = inv_scores[labels == genuine_label]
         genuine_labels = labels[labels == genuine_label]
-
         for label in range(1, max(labels) + 1):
             type_pai_scores = inv_scores[labels == label]
             type_pai_labels = labels[labels == label]
@@ -66,14 +69,20 @@ def det_curve(
             all_labels[all_labels == label] = 1
 
             far, tpr, _ = metrics.roc_curve(all_labels, all_scores, pos_label=0)
-            plt.plot(far, 1 - tpr)
+
+            color = colors.get(label) if colors else None
+            subtype = subtypes.get(label)
+            plt.plot(far, 1 - tpr, color=color)
+            handles.append(mpatches.Patch(color=color, label=subtype))
 
         labels[labels != genuine_label] = 1
         far, tpr, _ = metrics.roc_curve(labels, inv_scores, pos_label=0)
-        plt.plot(far, 1 - tpr, ls="--")
 
-    if subtypes:
-        plt.legend(subtypes)
+        plt.plot(far, 1 - tpr, ls="--", color="b")
+        handles.append(mpatches.Patch(color="b", label="All"))
+
+    if handles:
+        plt.legend(handles=handles)
 
     plt.savefig(path_to_save)
     plt.close()

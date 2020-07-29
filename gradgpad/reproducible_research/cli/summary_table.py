@@ -19,39 +19,55 @@ def summary_table(output_path: str, protocol: Protocol = Protocol.GRANDTEST):
     data = {
         "Protocol": [],
         "HTER": [],
-        "BPCER": [],
-        "ACER 5 PAI": [],
-        "Worst PAI@ACER 5 PAI": [],
-        "ACER 15 PAI": [],
-        "Worst PAI@ACER 15 PAI": [],
+        "ACER (Coarse-grain)": [],
+        "APCER@BPCER=10% (Coarse-grain)": [],
+        "ACER (Fine-grain)": [],
+        "APCER@BPCER=10% (Fine-grain)": [],
+        # "Worst PAI@ACER 5 PAI": [],
+        # "Worst PAI@ACER 13 PAI": [],
     }
 
     for approach, approach_results in results.items():
 
         performance_info = approach_results[protocol.value]
         try:
-            hter = performance_info.get("hter")
+            hter_specific = performance_info.get("hter_specific")
+            hter_aggregate = performance_info.get("hter_aggregate")
+
+            assert hter_specific == hter_aggregate
 
             # Aggregate
             aggregate_acer_info = performance_info["aggregate"]
-            bpcer = aggregate_acer_info.get("bpcer")
+            # bpcer = aggregate_acer_info.get("bpcer")
             acer = aggregate_acer_info.get("acer")
-            wrost_apcer_pai = aggregate_acer_info.get("max_apcer_pai")
+            # wrost_apcer_pai = aggregate_acer_info.get("max_apcer_pai")
             # wacer = aggregate_acer_info.get("wacer")
+            apcer_bpcer10 = (
+                aggregate_acer_info.get("relative_working_points", {})
+                .get("apcer", {})
+                .get("bpcer_10")
+            )
 
             # Specific
             specific_acer_info = performance_info["specific"]
             sacer = specific_acer_info.get("acer")
-            wrost_specific_apcer_pai = specific_acer_info.get("max_apcer_pai")
+            # wrost_specific_apcer_pai = specific_acer_info.get("max_apcer_pai")
             # wsacer = specific_acer_info.get("wacer")
+            sapcer_bpcer10 = (
+                specific_acer_info.get("relative_working_points", {})
+                .get("apcer", {})
+                .get("bpcer_10")
+            )
 
             data["Protocol"].append(protocol.name)
-            data["HTER"].append(hter)
-            data["BPCER"].append(bpcer)
-            data["ACER 5 PAI"].append(acer)
-            data["Worst PAI@ACER 5 PAI"].append(wrost_apcer_pai)
-            data["ACER 15 PAI"].append(sacer)
-            data["Worst PAI@ACER 15 PAI"].append(wrost_specific_apcer_pai)
+            data["HTER"].append(hter_aggregate)
+            data["ACER (Coarse-grain)"].append(acer)
+            data["APCER@BPCER=10% (Coarse-grain)"].append(apcer_bpcer10)
+            data["ACER (Fine-grain)"].append(sacer)
+            data["APCER@BPCER=10% (Fine-grain)"].append(sapcer_bpcer10)
+
+            # data["Worst PAI@ACER 5 PAI"].append(wrost_apcer_pai)
+            # data["Worst PAI@ACER 13 PAI"].append(wrost_specific_apcer_pai)
         except Exception:
             pass
 

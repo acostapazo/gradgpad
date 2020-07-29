@@ -1,5 +1,6 @@
 import os
 
+from gradgpad.annotations.spai import SpaiColor
 from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.evaluation.plots.det_curve import det_curve
 from gradgpad.evaluation.plots.histogram import save_histogram
@@ -24,12 +25,16 @@ def calculate_hists_and_curves(output_path: str):
 
         protocol_metrics = {}
         for protocol_name, subset_scores in protocols_subset_scores.items():
+            if protocol_name != Protocol.GRANDTEST.value:
+                continue
             protocol_metrics[protocol_name] = Metrics(
                 devel_scores=subset_scores.get("devel"),
                 test_scores=subset_scores.get("test"),
             )
 
         for protocol_name, subset_scores in protocols_subset_scores.items():
+            if protocol_name != Protocol.GRANDTEST.value:
+                continue
             approach_name = approach.replace(" ", "_").lower()
             output_path_hists_and_curves = (
                 f"{output_path}/hists_and_curves/{approach_name}/{protocol_name}"
@@ -86,7 +91,13 @@ def calculate_hists_and_curves_pai_types(
     det_curve(
         data,
         output_det_filename,
-        subtypes=["PAI Type I", "PAI Type II", "PAI Type III", "All"],
+        subtypes={1: "PAI Type I", 2: "PAI Type II", 3: "PAI Type III", 0: "All"},
+        colors={
+            1: SpaiColor.PAI_TYPE_I.value,
+            2: SpaiColor.PAI_TYPE_II.value,
+            3: SpaiColor.PAI_TYPE_III.value,
+            0: "b",
+        },
     )
 
     for normalize_hist in [True, False]:

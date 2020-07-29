@@ -1,3 +1,4 @@
+import numpy as np
 from gradgpad.evaluation.metrics.eer import eer
 from gradgpad.evaluation.metrics.indepth_error_rates_analysis import (
     indepth_error_rates_analysis,
@@ -56,35 +57,62 @@ class Metrics:
         _, eer_th = eer(scores.get_numpy_scores(), scores.get_numpy_labels())
         return eer_th
 
+    def _transform_labels(self, labels, meta_label_info):
+        if "print" in meta_label_info.keys():
+            label_correspondences = {
+                "genuine": 0,
+                "print": 1,
+                "replay": 2,
+                "mask": 3,
+                "makeup": 4,
+                "partial": 5,
+            }
+            meta_labels = []
+            for label in labels:
+                if label == 0:
+                    meta_labels.append("genuine")
+                for meta_label, set_labels in meta_label_info.items():
+                    if label in set_labels:
+                        meta_labels.append(meta_label)
+
+            labels = [
+                label_correspondences.get(meta_label) for meta_label in meta_labels
+            ]
+            labels = np.array(labels)
+        return labels
+
     def get_indeepth_analysis(
         self,
         bpcer_fixing_working_points: List[float],
         apcer_fixing_working_points: List[float],
     ):
-        _, eer_th = eer(
-            self.devel_scores.get_numpy_scores(), self.devel_scores.get_numpy_labels()
-        )
+        analysis = {}
 
-        hter_value = hter(
-            self.test_scores.get_numpy_scores(),
-            self.test_scores.get_numpy_labels(),
-            eer_th,
-        )
+        scores = self.test_scores.get_numpy_scores()
+        labels = self.test_scores.get_numpy_specific_pai_labels()
 
-        analysis = {
-            "specific"
-            if specific
-            else "aggregate": indepth_error_rates_analysis(
-                self.test_scores.get_numpy_scores(),
-                self.test_scores.get_numpy_specific_pai_labels(),
+        for name in ["specific", "aggregate"]:
+
+            if name == "aggregate":
+                labels = self._transform_labels(
+                    labels, meta_label_info_provider(specific=False)
+                )
+
+            _, eer_th = eer(scores, labels)
+
+            hter_value = hter(scores, labels, eer_th)
+
+            specific = True if name == "specific" else False
+
+            analysis[name] = indepth_error_rates_analysis(
+                scores,
+                labels,
                 {"eer": eer_th},
                 meta_label_info_provider(specific),
                 bpcer_fixing_working_points,
                 apcer_fixing_working_points,
             )["eer"].to_dict(label_modificator="pai")
-            for specific in [True, False]
-        }
 
-        analysis["hter"] = hter_value * 100.0
+            analysis[f"hter_{name}"] = hter_value * 100.0
 
         return analysis
