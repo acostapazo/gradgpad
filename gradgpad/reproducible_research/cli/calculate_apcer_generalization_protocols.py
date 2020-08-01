@@ -1,7 +1,9 @@
 import os
-
 from gradgpad.charts.create_radar_chart_comparision import (
     create_radar_chart_comparision,
+)
+from gradgpad.reproducible_research.cli.calculate_generalization_metrics import (
+    calculate_generalization_metrics,
 )
 from gradgpad.reproducible_research.results.results_provider import ResultsProvider
 from gradgpad.reproducible_research.scores.approach import Approach
@@ -73,6 +75,7 @@ def calculate_apcer_generalization_protocols(output_path: str):
             }
             approach_results_protocols[protocol.value][approach] = approach_results
 
+    apcer_details_by_working_point = {}
     for protocol_name, approach_results in approach_results_protocols.items():
 
         selected_working_points = {
@@ -93,6 +96,19 @@ def calculate_apcer_generalization_protocols(output_path: str):
                 approach_results, working_point, f"{protocol_name}_"
             )
 
+            if working_point.value not in apcer_details_by_working_point:
+                apcer_details_by_working_point[working_point.value] = {
+                    protocol_name: apcer_detail
+                }
+            else:
+                apcer_details_by_working_point[working_point.value][
+                    protocol_name
+                ] = apcer_detail
+
             create_radar_chart_comparision(
                 title, apcer_detail, filename, CORRESPONDENCES.get(protocol_name), 20
             )
+
+    calculate_generalization_metrics(
+        apcer_details_by_working_point, output_path_generalization
+    )

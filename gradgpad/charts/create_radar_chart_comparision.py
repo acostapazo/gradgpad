@@ -13,7 +13,7 @@ def create_radar_chart_comparision(
     correspondences: Dict = None,
     fontsize_vertices=25,
 ):
-    apcer_by_pai.print()
+    # apcer_by_pai.print()
     values = (title, apcer_by_pai.apcers.values())
 
     data = [apcer_by_pai.detail_values, values]
