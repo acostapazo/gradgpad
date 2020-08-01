@@ -21,9 +21,9 @@ def calculate_demographic_bpcer_bar_chart(output_path: str):
 
     metric = Metric.BPCER
     approach_scores_subset = {
-        "Quality SVM Linear": ScoresProvider.get_subsets(
-            approach=Approach.QUALITY_LINEAR, protocol=Protocol.GRANDTEST
-        ),
+        # "Quality SVM Linear": ScoresProvider.get_subsets(
+        #     approach=Approach.QUALITY_LINEAR, protocol=Protocol.GRANDTEST
+        # ),
         "Quality SVM RBF": ScoresProvider.get_subsets(
             approach=Approach.QUALITY_RBF, protocol=Protocol.GRANDTEST
         ),

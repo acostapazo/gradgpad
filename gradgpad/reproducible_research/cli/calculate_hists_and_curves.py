@@ -18,7 +18,7 @@ def calculate_hists_and_curves(output_path: str):
 
     approach_protocols_subset_scores = {
         "Quality SVM RBF": ScoresProvider.all(Approach.QUALITY_RBF),
-        "Quality SVM LINEAR": ScoresProvider.all(Approach.QUALITY_LINEAR),
+        # "Quality SVM LINEAR": ScoresProvider.all(Approach.QUALITY_LINEAR),
         "Auxiliary": ScoresProvider.all(Approach.AUXILIARY),
     }
     for approach, protocols_subset_scores in approach_protocols_subset_scores.items():

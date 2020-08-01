@@ -17,16 +17,25 @@ REPRODUCIBLE_RESEARCH_SCORES_DIR = os.path.abspath(os.path.dirname(__file__))
 
 def get_analysis_from_metrics(metrics: Metrics) -> Dict:
     bpcer_fixing_working_points = [
+        0.01,
         0.05,
         0.1,
         0.15,
         0.20,
+        0.25,
+        0.30,
+        0.35,
+        0.40,
+        0.45,
+        0.5,
     ]  # [0.05, 0.1, 0.15, 0.20, 0.30, 0.40]
     apcer_fixing_working_points = [
         0.05,
         0.1,
         0.15,
         0.20,
+        0.25,
+        0.30,
     ]  # [0.05, 0.1, 0.15, 0.20, 0.30, 0.40]
 
     analysis = metrics.get_indeepth_analysis(
@@ -135,7 +144,7 @@ class ResultsProvider:
         return get_analysis_from_metrics(metrics)
 
     @staticmethod
-    def get_grandtest_sex(approach: Approach,) -> Dict:
+    def get_grandtest_sex(approach: Approach) -> Dict:
         scores_subsets = {}
         for subset in Subset.options():
             grandtest_sex_scores = ScoresProvider.get(
@@ -150,7 +159,7 @@ class ResultsProvider:
         return get_analysis_from_metrics(metrics)
 
     @staticmethod
-    def get_grandtest_age(approach: Approach,) -> Dict:
+    def get_grandtest_age(approach: Approach) -> Dict:
         scores_subsets = {}
         for subset in Subset.options():
             grandtest_age_scores = ScoresProvider.get(
@@ -166,7 +175,7 @@ class ResultsProvider:
         return get_analysis_from_metrics(metrics)
 
     @staticmethod
-    def get_grandtest_skin_tone(approach: Approach,) -> Dict:
+    def get_grandtest_skin_tone(approach: Approach) -> Dict:
         import pdb
 
         pdb.set_trace()

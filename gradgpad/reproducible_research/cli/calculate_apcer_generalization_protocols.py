@@ -9,14 +9,55 @@ from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_subprotocol
 
 
+DATASET_CORRESPONDENCES = {
+    "casia-fasd": "CASIA-FASD",
+    "uvad": "UVAD",
+    "threedmad": "3DMAD",
+    "siw-m": "SiW-M",
+    "siw": "SiW",
+    "rose-youtu": "Rose-Youtu",
+    "replay-mobile": "Replay-Mobile",
+    "replay-attack": "Replay-Attack",
+    "oulu-npu": "Oulu-NPU",
+    "msu-mfsd": "MSU-MFSD",
+    "hkbuV2": "$HKBU_{v2}$",
+    "hkbu": "$HKBU_{v1}$",
+    "csmad": "CSMAD",
+}
+CROSS_DEVICE_CORRESPONDENCES = {
+    "digital_camera": "Digital Camera",
+    "mobile_tablet": "Mobile | Tablet",
+    "webcam": "Webcam",
+}
+
+UNSEEN_ATTACK_CORRESPONDENCES = {
+    "makeup": "Makeup",
+    "partial": "Partial",
+    "print": "Print",
+    "replay": "Replay",
+    "mask": "Mask",
+}
+CORRESPONDENCES = {
+    "lodo": DATASET_CORRESPONDENCES,
+    "cross_dataset": DATASET_CORRESPONDENCES,
+    "cross_device": CROSS_DEVICE_CORRESPONDENCES,
+    "unseen_attack": UNSEEN_ATTACK_CORRESPONDENCES,
+}
+
+
 def calculate_apcer_generalization_protocols(output_path: str):
     print("Calculating APCER for Generalization Protocols...")
 
     output_path_generalization = f"{output_path}/radar/generalization"
 
+    # approach_results_all = {
+    #     "Quality SVM RBF": ResultsProvider.all(Approach.QUALITY_RBF),
+    #     "Quality SVM LINEAR": ResultsProvider.all(Approach.QUALITY_LINEAR),
+    #     "Auxiliary": ResultsProvider.all(Approach.AUXILIARY),
+    # }
+
     approach_results_all = {
-        "Quality SVM RBF": ResultsProvider.all(Approach.QUALITY_RBF),
-        "Quality SVM LINEAR": ResultsProvider.all(Approach.QUALITY_LINEAR),
+        "Quality": ResultsProvider.all(Approach.QUALITY_RBF),
         "Auxiliary": ResultsProvider.all(Approach.AUXILIARY),
     }
 
@@ -51,4 +92,7 @@ def calculate_apcer_generalization_protocols(output_path: str):
             apcer_detail = create_apcer_by_subprotocol(
                 approach_results, working_point, f"{protocol_name}_"
             )
-            create_radar_chart_comparision(title, apcer_detail, filename)
+
+            create_radar_chart_comparision(
+                title, apcer_detail, filename, CORRESPONDENCES.get(protocol_name), 20
+            )

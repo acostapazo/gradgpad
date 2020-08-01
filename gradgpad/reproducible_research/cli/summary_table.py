@@ -12,7 +12,7 @@ def summary_table(output_path: str, protocol: Protocol = Protocol.GRANDTEST):
 
     results = {
         "Quality SVM RBF": ResultsProvider.grandtest(Approach.QUALITY_RBF),
-        "Quality SVM LINEAR": ResultsProvider.grandtest(Approach.QUALITY_LINEAR),
+        # "Quality SVM LINEAR": ResultsProvider.grandtest(Approach.QUALITY_LINEAR),
         "Auxiliary": ResultsProvider.grandtest(Approach.AUXILIARY),
     }
 

@@ -1,6 +1,15 @@
 import numpy as np
 
 
+VALUE_NOT_VALID_WORKING_POINT = 1.0
+THRESHOLD_NOT_VALID_WORKING_POINT = -1.0
+NOT_VALID_WORKING_POINT = (
+    VALUE_NOT_VALID_WORKING_POINT,
+    VALUE_NOT_VALID_WORKING_POINT,
+    THRESHOLD_NOT_VALID_WORKING_POINT,
+)
+
+
 def get_target_value_fixing_working_point(
     fixed_working_point, targeted_values, fixing_values, thresholds, interpolated=False
 ):
@@ -10,6 +19,9 @@ def get_target_value_fixing_working_point(
         fixing_values = np.array(fixing_values)
     if not isinstance(thresholds, np.ndarray):
         thresholds = np.array(thresholds)
+
+    if (targeted_values == fixing_values).all():
+        return NOT_VALID_WORKING_POINT
 
     lower_near_idx = np.abs(targeted_values - fixed_working_point).argmin()
 
@@ -64,6 +76,9 @@ def get_target_value_fixing_working_point(
         y1 = fixing_values[upper_near_idx]
         t0 = thresholds[lower_near_idx]
         t1 = thresholds[upper_near_idx]
+
+        if t0 == t1 == 1.0:
+            return NOT_VALID_WORKING_POINT
 
         if x1 - x0 == 0.0:
             m = 0

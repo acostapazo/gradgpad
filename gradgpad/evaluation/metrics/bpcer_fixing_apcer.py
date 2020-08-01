@@ -1,10 +1,4 @@
-import numpy as np
-
-from gradgpad.evaluation.metrics.apcer import apcer
-from gradgpad.evaluation.metrics.bpcer import bpcer
-from gradgpad.evaluation.metrics.get_target_value_fixing_working_point import (
-    get_target_value_fixing_working_point,
-)
+from gradgpad.evaluation.metrics.frr import frr
 
 
 def bpcer_fixing_apcer(scores, labels, apcer_working_point):
@@ -25,20 +19,7 @@ def bpcer_fixing_apcer(scores, labels, apcer_working_point):
     -------
 
     """
-    possible_apcers = []
-    possible_bpcers = []
-    thresholds = []
-    for th in np.linspace(scores.min(), scores.max(), 100):
-        possible_apcers.append(apcer(scores, labels, th))
-        possible_bpcers.append(bpcer(scores, labels, th))
-        thresholds.append(th)
 
-    apcer_value, bpcer_value, threshold_value = get_target_value_fixing_working_point(
-        apcer_working_point,
-        possible_apcers,
-        possible_bpcers,
-        thresholds,
-        interpolated=True,
-    )
+    bpcer_value, _ = frr(scores, labels, apcer_working_point)
 
-    return bpcer_value
+    return float(bpcer_value)

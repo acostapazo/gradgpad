@@ -64,6 +64,33 @@ class Scores:
         labels = [0 if id in filtered_ids else 1 for id in ids]
         return np.asarray(labels, dtype=np.int)
 
+    def get_numpy_scores_and_labels_filtered_by_labels(self, pai_labels=None):
+        if not pai_labels:
+            return self.get_numpy_scores(), self.get_numpy_labels()
+
+        ids = self.scores.keys()
+        annotations_from_ids = annotations.get_annotations_from_ids(ids)
+        # filtered_ids = self._get_filtered_ids(
+        #     annotations_from_ids, Filter(spai=Spai.GENUINE)
+        # )
+        scores = []
+        labels = []
+        for id in ids:
+            annotation = [
+                annotation for annotation in annotations_from_ids if annotation.id == id
+            ][0]
+            if annotation.spai.get("specific") == 0:
+                scores.append(self.scores[id])
+                labels.append(0)
+            elif annotation.spai.get("specific") in pai_labels:
+                scores.append(self.scores[id])
+                labels.append(1)
+
+        return (
+            np.asarray(list(scores), dtype=np.float32),
+            np.asarray(labels, dtype=np.int),
+        )
+
     def get_numpy_labels_by_type_pai(self):
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)

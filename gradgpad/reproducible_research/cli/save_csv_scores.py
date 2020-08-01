@@ -18,11 +18,11 @@ def save_csv_scores(output_path: str):
             protocol=Protocol.GRANDTEST,
             subset=Subset.TEST,
         ),
-        "Quality Linear": ScoresProvider.get(
-            approach=Approach.QUALITY_RBF,
-            protocol=Protocol.GRANDTEST,
-            subset=Subset.TEST,
-        ),
+        # "Quality Linear": ScoresProvider.get(
+        #     approach=Approach.QUALITY_RBF,
+        #     protocol=Protocol.GRANDTEST,
+        #     subset=Subset.TEST,
+        # ),
         "Auxiliary": ScoresProvider.get(
             approach=Approach.AUXILIARY, protocol=Protocol.GRANDTEST, subset=Subset.TEST
         ),

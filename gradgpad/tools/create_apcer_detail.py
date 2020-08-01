@@ -5,22 +5,32 @@ from dataclasses import dataclass
 
 
 class WorkingPoint(Enum):
+    BPCER_1 = "apcer_fixing_bpcer1"
     BPCER_5 = "apcer_fixing_bpcer5"
     BPCER_10 = "apcer_fixing_bpcer10"
     BPCER_15 = "apcer_fixing_bpcer15"
     BPCER_20 = "apcer_fixing_bpcer20"
+    BPCER_25 = "apcer_fixing_bpcer25"
     BPCER_30 = "apcer_fixing_bpcer30"
+    BPCER_35 = "apcer_fixing_bpcer35"
     BPCER_40 = "apcer_fixing_bpcer40"
+    BPCER_45 = "apcer_fixing_bpcer45"
+    BPCER_50 = "apcer_fixing_bpcer50"
 
 
 def value_bpcer(working_point: WorkingPoint) -> str:
     correspondences = {
+        WorkingPoint.BPCER_1: "bpcer_1",
         WorkingPoint.BPCER_5: "bpcer_5",
         WorkingPoint.BPCER_10: "bpcer_10",
         WorkingPoint.BPCER_15: "bpcer_15",
         WorkingPoint.BPCER_20: "bpcer_20",
+        WorkingPoint.BPCER_25: "bpcer_25",
         WorkingPoint.BPCER_30: "bpcer_30",
+        WorkingPoint.BPCER_35: "bpcer_35",
         WorkingPoint.BPCER_40: "bpcer_40",
+        WorkingPoint.BPCER_45: "bpcer_45",
+        WorkingPoint.BPCER_50: "bpcer_50",
     }
     return correspondences.get(working_point)
 

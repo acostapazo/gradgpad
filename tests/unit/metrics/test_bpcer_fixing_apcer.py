@@ -11,7 +11,7 @@ from gradgpad.evaluation.metrics.bpcer_fixing_apcer import bpcer_fixing_apcer
         (
             np.array([0.1, 0.11, 0.6, 0.25, 0.0, 0.1, 0.2]),
             np.array([1, 1, 2, 2, 0, 0, 0]),
-            0.66,
+            1.0,  # 0.66,
             0.1,
         ),
         (

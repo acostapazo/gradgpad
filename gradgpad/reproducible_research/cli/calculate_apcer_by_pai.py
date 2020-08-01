@@ -1,5 +1,7 @@
 import os
 
+from PIL import Image
+
 from gradgpad.charts.create_radar_chart_comparision import (
     create_radar_chart_comparision,
 )
@@ -9,18 +11,48 @@ from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_pai
 
 
+PAI_CORRESPONDENCES = {
+    "MAKEUP COSMETIC": "Makeup\n" + r"$\bf{Cosmetic}$",
+    "MAKEUP IMPERSONATION": "Makeup\n" + r"$\bf{Impersonation}$",
+    "MAKEUP OBFUSCATION": "Makeup\n" + r"$\bf{Obfuscation}$",
+    "MASK PAPER": "Mask\n" + r"$\bf{Paper}$",
+    "MASK RIGID": "Mask\n" + r"$\bf{Rigid}$",
+    "MASK SILICONE": "Mask\n" + r"$\bf{Silicone}$",
+    "PARTIAL FUNNY EYES": "Partial\n" + r"$\bf{Funny Eyes}$",
+    "PARTIAL LOWER HALF": "Partial\n" + r"$\bf{Lower Half}$",
+    "PARTIAL UPPER HALF": "Partial\n" + r"$\bf{Upper Half}$",
+    "PARTIAL PAPER GLASSES": "Partial\n" + r"$\bf{Paper Glasses}$",
+    "PARTIAL PERIOCULAR": "Partial\n" + r"$\bf{Paper Glasses}$",
+    "PRINT LOW QUALITY": "Print\n" + r"$\bf{Low Quality}$",
+    "PRINT MEDIUM QUALITY": "Print\n" + r"$\bf{Medium Quality}$",
+    "PRINT HIGH QUALITY": "Print\n" + r"$\bf{High Quality}$",
+    "REPLAY LOW QUALITY": "Replay\n" + r"$\bf{Low Quality}$",
+    "REPLAY MEDIUM QUALITY": "Replay\n" + r"$\bf{Medium Quality}$",
+    "REPLAY HIGH QUALITY": "Replay\n" + r"$\bf{High Quality}$",
+}
+
+
 def calculate_apcer_by_pai(output_path: str):
     print("Calculating APCER by PAI...")
 
     output_path_apcer_by_pais = f"{output_path}/radar/apcer_by_pais"
     os.makedirs(output_path_apcer_by_pais, exist_ok=True)
 
+    # results_with_two_qualities = {
+    #     "Quality SVM RBF": ResultsProvider.get(
+    #         Approach.QUALITY_RBF, protocol=Protocol.GRANDTEST
+    #     ),
+    #      "Quality SVM LINEAR": ResultsProvider.get(
+    #          Approach.QUALITY_LINEAR, protocol=Protocol.GRANDTEST
+    #      ),
+    #     "Auxiliary": ResultsProvider.get(
+    #         Approach.AUXILIARY, protocol=Protocol.GRANDTEST
+    #     ),
+    # }
+
     results = {
-        "Quality SVM RBF": ResultsProvider.get(
+        "Quality": ResultsProvider.get(
             Approach.QUALITY_RBF, protocol=Protocol.GRANDTEST
-        ),
-        "Quality SVM LINEAR": ResultsProvider.get(
-            Approach.QUALITY_LINEAR, protocol=Protocol.GRANDTEST
         ),
         "Auxiliary": ResultsProvider.get(
             Approach.AUXILIARY, protocol=Protocol.GRANDTEST
@@ -28,10 +60,21 @@ def calculate_apcer_by_pai(output_path: str):
     }
 
     selected_working_points = {
+        "APCER @ BPCER 1 %": WorkingPoint.BPCER_1,
+        "APCER @ BPCER 5 %": WorkingPoint.BPCER_5,
         "APCER @ BPCER 10 %": WorkingPoint.BPCER_10,
         "APCER @ BPCER 15 %": WorkingPoint.BPCER_15,
         "APCER @ BPCER 20 %": WorkingPoint.BPCER_20,
+        "APCER @ BPCER 25 %": WorkingPoint.BPCER_25,
+        "APCER @ BPCER 30 %": WorkingPoint.BPCER_30,
+        "APCER @ BPCER 35 %": WorkingPoint.BPCER_35,
+        "APCER @ BPCER 40 %": WorkingPoint.BPCER_40,
+        "APCER @ BPCER 45 %": WorkingPoint.BPCER_45,
+        "APCER @ BPCER 50 %": WorkingPoint.BPCER_50,
     }
+
+    filenames_pais_types = {}
+
     for title, working_point in selected_working_points.items():
         pais_group = {
             "test_all": [
@@ -65,6 +108,21 @@ def calculate_apcer_by_pai(output_path: str):
                 "mask_silicone",
                 "makeup_impersonation",
             ],
+            "test_type_I_and_II": [
+                "print_low_quality",
+                "print_medium_quality",
+                "print_high_quality",
+                "replay_low_quality",
+                "replay_medium_quality",
+                "replay_high_quality",
+                "mask_paper",
+                "mask_rigid",
+                "mask_silicone",
+                "makeup_impersonation",
+                "partial_lower_half",
+                "partial_periocular",
+                "partial_upper_half",
+            ],
             "test_type_II": [
                 "partial_lower_half",
                 "partial_periocular",
@@ -90,5 +148,27 @@ def calculate_apcer_by_pai(output_path: str):
         for pais_type, filter_pais in pais_group.items():
             filename = f"{output_path_apcer_by_pais}/grandtest_trained_type_pai_I_{pais_type}_{working_point.value}_radar_chart.png"
 
+            if pais_type not in filenames_pais_types:
+                filenames_pais_types[pais_type] = [filename]
+            else:
+                filenames_pais_types[pais_type].append(filename)
+
             apcer_detail = create_apcer_by_pai(results, working_point, filter_pais)
-            create_radar_chart_comparision(title, apcer_detail, filename)
+            create_radar_chart_comparision(
+                title, apcer_detail, filename, PAI_CORRESPONDENCES, 20
+            )
+
+    if filenames_pais_types:
+        output_path_apcer_by_pais_gifs = f"{output_path_apcer_by_pais}/gifs/"
+        os.makedirs(output_path_apcer_by_pais_gifs, exist_ok=True)
+
+        for pais_type, filenames in filenames_pais_types.items():
+            img, *imgs = [Image.open(f) for f in filenames]
+            filename_gif = f"{output_path_apcer_by_pais_gifs}/grandtest_trained_type_pai_I_{pais_type}.gif"
+            img.save(
+                fp=filename_gif,
+                format="GIF",
+                append_images=imgs,
+                save_all=True,
+                duration=1500,
+            )

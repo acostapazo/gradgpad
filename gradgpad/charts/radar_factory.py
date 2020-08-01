@@ -51,9 +51,9 @@ def radar_factory(num_vars, frame="circle"):
                 y = np.concatenate((y, [y[0]]))
                 line.set_data(x, y)
 
-        def set_varlabels(self, labels, fontsize=14):
+        def set_varlabels(self, labels, fontsize=18):
             self.set_thetagrids(
-                np.degrees(theta), labels, fontsize=fontsize, fontweight="bold"
+                np.degrees(theta), labels, fontsize=fontsize  # , fontweight="bold"
             )
             # self.set_thetagrids(np.degrees(theta), labels, cmap=ListedColormap(colors))
 

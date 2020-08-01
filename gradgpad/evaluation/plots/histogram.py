@@ -96,10 +96,10 @@ def save_histogram(
             hist_impos = hist_impos / hist_impos.max()
 
         red_patch = mpatches.Patch(
-            color="red", label="Impostors ({})".format(len(impostors))
+            color="red", label="Impostors ({})".format(len(impostors)), alpha=0.5
         )
         green_patch = mpatches.Patch(
-            color="green", label="Genuine ({})".format(len(genuine))
+            color="green", label="Genuine ({})".format(len(genuine)), alpha=0.5
         )
 
         if not subtypes:
