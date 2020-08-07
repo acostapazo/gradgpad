@@ -8,6 +8,9 @@ from gradgpad.reproducible_research.cli.calculate_apcer_generalization_protocols
 from gradgpad.reproducible_research.cli.calculate_demographic_bpcer_bar_chart import (
     calculate_demographic_bpcer_bar_chart,
 )
+from gradgpad.reproducible_research.cli.calculate_demographic_percentile import (
+    calculate_demographic_percentile,
+)
 from gradgpad.reproducible_research.cli.calculate_hists_and_curves import (
     calculate_hists_and_curves,
 )
@@ -25,6 +28,7 @@ def reproducible_research(output_path: str):
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
 
+        calculate_demographic_percentile(output_path)
         summary_table(output_path)
         calculate_hists_and_curves(output_path)
         calculate_apcer_by_pai(output_path)

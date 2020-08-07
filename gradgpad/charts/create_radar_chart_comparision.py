@@ -11,8 +11,9 @@ def create_radar_chart_comparision(
     apcer_by_pai: ApcerDetail,
     output_filename: str,
     correspondences: Dict = None,
-    fontsize_vertices=25,
+    fontsize_vertices=30,
 ):
+
     # apcer_by_pai.print()
     values = (title, apcer_by_pai.apcers.values())
 
@@ -33,18 +34,30 @@ def create_radar_chart_comparision(
 
     for d in case_data:
         # line = ax.plot(theta, d)
-        ax.fill(theta, d, alpha=0.25)
+        ax.fill(theta, d, alpha=0.23)
 
     ax.set_rgrids(
-        [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        angle=260,
+        [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110],
+        labels=[
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100",
+            "Out of\nRange",
+        ],
+        angle=261,
         fontsize=12,
         fontweight="bold",
-        color="g",
+        color="b",
     )
 
     ax.set_title(title, ha="center", fontsize=22, fontweight="bold")
-
     # varlabels = [string.capwords(spoke_label) for spoke_label in spoke_labels]
     varlabels = spoke_labels
     if correspondences:
@@ -52,7 +65,6 @@ def create_radar_chart_comparision(
             correspondences[label] if label in correspondences else label
             for label in varlabels
         ]
-
     ax.set_varlabels(varlabels, fontsize=fontsize_vertices)
     ax.legend(
         apcer_by_pai.apcers.keys(),
@@ -63,6 +75,26 @@ def create_radar_chart_comparision(
         # borderaxespad=0.0,
         fontsize=18,
     )
+
+    rlabels = ax.get_ymajorticklabels()
+    for label in rlabels:
+        text = label.get_text()
+        if text == "Out of Range":
+            label.set_color("red")
+
+    ticks = [tick for tick in plt.gca().get_xticklabels()]
+    for tick in ticks:
+        text = tick.get_text()
+        if "Makeup" in text:
+            tick.set_color("peru")
+        elif "Partial" in text:
+            tick.set_color("orange")
+        elif "Print" in text:
+            tick.set_color("olivedrab")
+        elif "Replay" in text:
+            tick.set_color("seagreen")
+        else:
+            tick.set_color("green")
 
     # plt.show()
     plt.tight_layout()

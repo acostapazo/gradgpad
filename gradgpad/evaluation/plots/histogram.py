@@ -30,6 +30,7 @@ def save_histogram(
     y_lim=None,
     title="Histogram",
     subtypes: List[str] = None,
+    only_show=False,
 ):
     """
     This function saves a static histogram
@@ -174,5 +175,8 @@ def save_histogram(
         else:
             plt.legend(handles=[patch])
 
-    plt.savefig(filename_result_histogram)
-    plt.close("all")
+    if only_show:
+        plt.show()
+    else:
+        plt.savefig(filename_result_histogram)
+        plt.close("all")

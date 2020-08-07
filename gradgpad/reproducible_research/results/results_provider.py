@@ -74,6 +74,10 @@ class ResultsProvider:
         protocol = Protocol.LODO
 
         for dataset in Dataset.options():
+
+            if dataset.value != "hkbu":
+                continue
+
             key = f"{protocol.value}_{dataset.value}"
 
             results[key] = ResultsProvider.get(
@@ -110,11 +114,11 @@ class ResultsProvider:
     @staticmethod
     def all(approach: Approach) -> Dict[str, Dict]:
         results = {}
-        results.update(ResultsProvider.grandtest(approach))
-        results.update(ResultsProvider.cross_dataset(approach))
+        # results.update(ResultsProvider.grandtest(approach))
+        # results.update(ResultsProvider.cross_dataset(approach))
         results.update(ResultsProvider.lodo(approach))
-        results.update(ResultsProvider.cross_device(approach))
-        results.update(ResultsProvider.unseen_attack(approach))
+        # results.update(ResultsProvider.cross_device(approach))
+        # results.update(ResultsProvider.unseen_attack(approach))
         return results
 
     @staticmethod
@@ -136,7 +140,6 @@ class ResultsProvider:
             )
             for subset in Subset.options()
         }
-
         metrics = Metrics(
             devel_scores=scores_subsets.get(Subset.DEVEL.value),
             test_scores=scores_subsets.get(Subset.TEST.value),

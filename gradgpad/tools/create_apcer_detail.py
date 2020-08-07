@@ -46,6 +46,26 @@ class ApcerDetail:
             for i, apcer in enumerate(apcers):
                 print(f" | {self.detail_values[i]}: {apcer}")
 
+    def sort_by_detail_values(self, target_order: List[str]):
+        sorted_detail_values = []
+        sorted_apcers = {}
+
+        for target_value in target_order:
+            try:
+                index = self.detail_values.index(target_value)
+                sorted_detail_values.append(target_value)
+                for key in self.apcers.keys():
+                    value_apcer = self.apcers[key][index]
+                    if key not in sorted_apcers:
+                        sorted_apcers[key] = [value_apcer]
+                    else:
+                        sorted_apcers[key].append(value_apcer)
+            except ValueError:
+                continue
+
+        self.detail_values = sorted_detail_values
+        self.apcers = sorted_apcers
+
 
 def create_apcer_by_pai(
     results_protocol, working_point: WorkingPoint, filter_pais: List[str] = None
@@ -81,6 +101,10 @@ def create_apcer_by_subprotocol(
         apcers[approach_name] = []
 
         for subprotocol_name, result_subprotocol in sorted(result_protocols.items()):
+
+            if subprotocol_name != "hkbu":
+                continue
+
             if filter_common:
                 subprotocol_name = subprotocol_name.replace(filter_common, "")
             detail_values.append(subprotocol_name)

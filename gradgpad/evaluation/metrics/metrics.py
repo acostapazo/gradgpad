@@ -88,25 +88,32 @@ class Metrics:
     ):
         analysis = {}
 
-        scores = self.test_scores.get_numpy_scores()
-        labels = self.test_scores.get_numpy_specific_pai_labels()
+        scores_devel = self.devel_scores.get_numpy_scores()
+        labels_devel = self.devel_scores.get_numpy_specific_pai_labels()
+
+        scores_test = self.test_scores.get_numpy_scores()
+        labels_test = self.test_scores.get_numpy_specific_pai_labels()
 
         for name in ["specific", "aggregate"]:
 
             if name == "aggregate":
-                labels = self._transform_labels(
-                    labels, meta_label_info_provider(specific=False)
+                labels_devel = self._transform_labels(
+                    labels_devel, meta_label_info_provider(specific=False)
+                )
+                labels_test = self._transform_labels(
+                    labels_test, meta_label_info_provider(specific=False)
                 )
 
-            _, eer_th = eer(scores, labels)
+            _, eer_th = eer(scores_devel, labels_devel)
+            _, eer_th_test = eer(scores_test, labels_test)
 
-            hter_value = hter(scores, labels, eer_th)
+            hter_value = hter(scores_test, labels_test, eer_th)
 
             specific = True if name == "specific" else False
 
             analysis[name] = indepth_error_rates_analysis(
-                scores,
-                labels,
+                scores_test,
+                labels_test,
                 {"eer": eer_th},
                 meta_label_info_provider(specific),
                 bpcer_fixing_working_points,

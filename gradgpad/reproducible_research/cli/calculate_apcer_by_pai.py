@@ -11,7 +11,7 @@ from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_pai
 
 
-PAI_CORRESPONDENCES = {
+REGULAR_AND_BOLD_PAI_CORRESPONDENCES = {
     "MAKEUP COSMETIC": "Makeup\n" + r"$\bf{Cosmetic}$",
     "MAKEUP IMPERSONATION": "Makeup\n" + r"$\bf{Impersonation}$",
     "MAKEUP OBFUSCATION": "Makeup\n" + r"$\bf{Obfuscation}$",
@@ -22,7 +22,7 @@ PAI_CORRESPONDENCES = {
     "PARTIAL LOWER HALF": "Partial\n" + r"$\bf{Lower Half}$",
     "PARTIAL UPPER HALF": "Partial\n" + r"$\bf{Upper Half}$",
     "PARTIAL PAPER GLASSES": "Partial\n" + r"$\bf{Paper Glasses}$",
-    "PARTIAL PERIOCULAR": "Partial\n" + r"$\bf{Paper Glasses}$",
+    "PARTIAL PERIOCULAR": "Partial\n" + r"$\bf{Periocular}$",
     "PRINT LOW QUALITY": "Print\n" + r"$\bf{Low Quality}$",
     "PRINT MEDIUM QUALITY": "Print\n" + r"$\bf{Medium Quality}$",
     "PRINT HIGH QUALITY": "Print\n" + r"$\bf{High Quality}$",
@@ -30,6 +30,45 @@ PAI_CORRESPONDENCES = {
     "REPLAY MEDIUM QUALITY": "Replay\n" + r"$\bf{Medium Quality}$",
     "REPLAY HIGH QUALITY": "Replay\n" + r"$\bf{High Quality}$",
 }
+
+BOLD_PAI_CORRESPONDENCES = {
+    "MAKEUP COSMETIC": r"$\bf{Makeup}$" + "\n" + r"$\bf{Cosmetic}$",
+    "MAKEUP IMPERSONATION": r"$\bf{Makeup}$" + "\n" + r"$\bf{Impersonation}$",
+    "MAKEUP OBFUSCATION": r"$\bf{Makeup}$" + "\n" + r"$\bf{Obfuscation}$",
+    "MASK PAPER": r"$\bf{Mask}$" + "\n" + r"$\bf{Paper}$",
+    "MASK RIGID": r"$\bf{Mask}$" + "\n" + r"$\bf{Rigid}$",
+    "MASK SILICONE": r"$\bf{Mask}$" + "\n" + r"$\bf{Silicone}$",
+    "PARTIAL FUNNY EYES": r"$\bf{Partial}$" + "\n" + r"$\bf{Funny Eyes}$",
+    "PARTIAL LOWER HALF": r"$\bf{Partial}$" + "\n" + r"$\bf{Lower Half}$",
+    "PARTIAL UPPER HALF": r"$\bf{Partial}$" + "\n" + r"$\bf{Upper Half}$",
+    "PARTIAL PAPER GLASSES": r"$\bf{Partial}$" + "\n" + r"$\bf{Paper Glasses}$",
+    "PARTIAL PERIOCULAR": r"$\bf{Partial}$" + "\n" + r"$\bf{Periocular}$",
+    "PRINT LOW QUALITY": r"$\bf{Print}$" + "\n" + r"$\bf{Low Quality}$",
+    "PRINT MEDIUM QUALITY": r"$\bf{Print}$" + "\n" + r"$\bf{Medium Quality}$",
+    "PRINT HIGH QUALITY": r"$\bf{Print}$" + "\n" + r"$\bf{High Quality}$",
+    "REPLAY LOW QUALITY": r"$\bf{Replay}$" + "\n" + r"$\bf{Low Quality}$",
+    "REPLAY MEDIUM QUALITY": r"$\bf{Replay}$" + "\n" + r"$\bf{Medium Quality}$",
+    "REPLAY HIGH QUALITY": r"$\bf{Replay}$" + "\n" + r"$\bf{High Quality}$",
+}
+
+PAI_REPRESENTATION_ORDER = [
+    "MASK PAPER",
+    "MASK RIGID",
+    "MASK SILICONE",
+    "PRINT HIGH QUALITY",
+    "PRINT LOW QUALITY",
+    "PRINT MEDIUM QUALITY",
+    "REPLAY HIGH QUALITY",
+    "REPLAY LOW QUALITY",
+    "REPLAY MEDIUM QUALITY",
+    "PARTIAL LOWER HALF",
+    "PARTIAL PAPER GLASSES",
+    "PARTIAL PERIOCULAR",
+    "PARTIAL UPPER HALF",
+    "MAKEUP COSMETIC",
+    "MAKEUP IMPERSONATION",
+    "MAKEUP OBFUSCATION",
+]
 
 
 def calculate_apcer_by_pai(output_path: str):
@@ -154,8 +193,10 @@ def calculate_apcer_by_pai(output_path: str):
                 filenames_pais_types[pais_type].append(filename)
 
             apcer_detail = create_apcer_by_pai(results, working_point, filter_pais)
+
+            apcer_detail.sort_by_detail_values(PAI_REPRESENTATION_ORDER)
             create_radar_chart_comparision(
-                title, apcer_detail, filename, PAI_CORRESPONDENCES, 20
+                title, apcer_detail, filename, BOLD_PAI_CORRESPONDENCES, 20
             )
 
     if filenames_pais_types:

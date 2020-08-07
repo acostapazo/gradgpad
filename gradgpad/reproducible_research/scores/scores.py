@@ -169,6 +169,25 @@ class Scores:
 
         return self.get_fair_subset(SkinTone.options(), skin_tone_filter_provider)
 
+    def get_fair_grouped_skin_tone_subset(self) -> Dict[str, Dict]:
+        fair_skin_tone_subset = self.get_fair_skin_tone_subset()
+
+        grouped_fair_skin_tone_subset = {
+            "YELLOW": {
+                **fair_skin_tone_subset["LIGHT_YELLOW"],
+                **fair_skin_tone_subset["MEDIUM_YELLOW_BROWN"],
+            },
+            "PINK": {
+                **fair_skin_tone_subset["LIGHT_PINK"],
+                **fair_skin_tone_subset["MEDIUM_PINK_BROWN"],
+            },
+            "BROWN": {
+                **fair_skin_tone_subset["MEDIUM_DARK_BROWN"],
+                **fair_skin_tone_subset["DARK_BROWN"],
+            },
+        }
+        return grouped_fair_skin_tone_subset
+
     def get_fair_subset(
         self, demographic_options: List, filter_provider: Callable
     ) -> Dict[str, Dict]:

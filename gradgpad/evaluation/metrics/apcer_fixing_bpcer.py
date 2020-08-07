@@ -19,6 +19,12 @@ def apcer_fixing_bpcer(scores, labels, bpcer_working_point):
     -------
 
     """
-    apcer_value, _ = far(scores, labels, bpcer_working_point)
+
+    apcer_value, th_apcer = far(scores, labels, bpcer_working_point)
+
+    # Ad-hoc out-of-range detector
+    # There is not chance to fix a working point from a given bpcer_working_point)
+    if (apcer_value < 0.01) and (th_apcer > 0.99):
+        apcer_value = 1.1
 
     return float(apcer_value)
