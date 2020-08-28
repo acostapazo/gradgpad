@@ -3,19 +3,6 @@ import numpy as np
 from gradgpad.evaluation.metrics.far import far
 
 
-def check_apcer(apcer_value, th_apcer, scores, labels):
-    # Ad-hoc out-of-range detector
-    # There is not chance to fix a working point from a given bpcer_working_point)
-    if (apcer_value < 0.01) and (th_apcer > 0.95):
-        apcer_value = 1.1
-
-    # If threshold is lower than min impostor score will not be possible to fix a working point from a given bpcer_working_point
-    if len(scores[labels == 1]) > 1 and th_apcer < min(scores[labels == 1]):
-        apcer_value = 1.1
-
-    return apcer_value
-
-
 def apcer_fixing_bpcer(scores, labels, bpcer_working_point):
     """
     Computes the Attack Presentation Classification Error Rate.
@@ -36,7 +23,6 @@ def apcer_fixing_bpcer(scores, labels, bpcer_working_point):
     """
     if len(np.unique(labels)) < 3:
         apcer_value, th_apcer = far(scores, labels, bpcer_working_point)
-        apcer_value = check_apcer(apcer_value, th_apcer, scores, labels)
     else:
         apcer_values = []
         for label in np.unique(labels):
@@ -55,10 +41,6 @@ def apcer_fixing_bpcer(scores, labels, bpcer_working_point):
             apcer_value, th_apcer = far(
                 filtered_scores, filtered_labels, bpcer_working_point
             )
-            apcer_value = check_apcer(
-                apcer_value, th_apcer, filtered_scores, filtered_labels
-            )
-
             if apcer_value > 1.0:  # out of range:
                 continue
 

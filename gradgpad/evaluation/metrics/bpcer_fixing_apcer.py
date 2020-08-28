@@ -21,5 +21,4 @@ def bpcer_fixing_apcer(scores, labels, apcer_working_point):
     """
 
     bpcer_value, _ = frr(scores, labels, apcer_working_point)
-    bpcer_value
     return float(bpcer_value)
