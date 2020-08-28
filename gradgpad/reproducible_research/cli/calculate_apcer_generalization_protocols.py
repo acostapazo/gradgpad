@@ -33,11 +33,11 @@ CROSS_DEVICE_CORRESPONDENCES = {
 }
 
 UNSEEN_ATTACK_CORRESPONDENCES = {
+    "mask": "Mask",
     "makeup": "Makeup",
     "partial": "Partial",
-    "print": "Print",
     "replay": "Replay",
-    "mask": "Mask",
+    "print": "Print",
 }
 CORRESPONDENCES = {
     "lodo": DATASET_CORRESPONDENCES,
@@ -69,6 +69,7 @@ def calculate_apcer_generalization_protocols(output_path: str):
     ]
     for protocol in generalization_protocols:
         approach_results_protocols[protocol.value] = {}
+
         for approach, results in approach_results_all.items():
             approach_results = {
                 key: value for key, value in results.items() if protocol.value in key
@@ -105,9 +106,19 @@ def calculate_apcer_generalization_protocols(output_path: str):
                     protocol_name
                 ] = apcer_detail
 
-            create_radar_chart_comparision(
-                title, apcer_detail, filename, CORRESPONDENCES.get(protocol_name), 20
-            )
+            try:
+                create_radar_chart_comparision(
+                    title,
+                    apcer_detail,
+                    filename,
+                    CORRESPONDENCES.get(protocol_name),
+                    20,
+                )
+            except ZeroDivisionError as exec:
+                print(exec)
+                print(f"Error on create_apcer_by_subprotocol: {title}")
+                print(f"apcer_detail: {apcer_detail}")
+                print(f"CORRESPONDENCE: {CORRESPONDENCES.get(protocol_name)}")
 
     calculate_generalization_metrics(
         apcer_details_by_working_point, output_path_generalization

@@ -1,4 +1,19 @@
+import numpy as np
+
 from gradgpad.evaluation.metrics.far import far
+
+
+def check_apcer(apcer_value, th_apcer, scores, labels):
+    # Ad-hoc out-of-range detector
+    # There is not chance to fix a working point from a given bpcer_working_point)
+    if (apcer_value < 0.01) and (th_apcer > 0.95):
+        apcer_value = 1.1
+
+    # If threshold is lower than min impostor score will not be possible to fix a working point from a given bpcer_working_point
+    if len(scores[labels == 1]) > 1 and th_apcer < min(scores[labels == 1]):
+        apcer_value = 1.1
+
+    return apcer_value
 
 
 def apcer_fixing_bpcer(scores, labels, bpcer_working_point):
@@ -19,12 +34,62 @@ def apcer_fixing_bpcer(scores, labels, bpcer_working_point):
     -------
 
     """
+    if len(np.unique(labels)) < 3:
+        apcer_value, th_apcer = far(scores, labels, bpcer_working_point)
+        apcer_value = check_apcer(apcer_value, th_apcer, scores, labels)
+    else:
+        apcer_values = []
+        for label in np.unique(labels):
+            if label == 0:
+                continue
 
-    apcer_value, th_apcer = far(scores, labels, bpcer_working_point)
+            genuine_scores = scores[labels == 0]
+            impostor_scores = scores[labels == label]
 
-    # Ad-hoc out-of-range detector
-    # There is not chance to fix a working point from a given bpcer_working_point)
-    if (apcer_value < 0.01) and (th_apcer > 0.99):
-        apcer_value = 1.1
+            genuine_labels = labels[labels == 0]
+            impostor_labels = labels[labels == label]
+
+            filtered_scores = np.concatenate((genuine_scores, impostor_scores))
+            filtered_labels = np.concatenate((genuine_labels, impostor_labels))
+
+            apcer_value, th_apcer = far(
+                filtered_scores, filtered_labels, bpcer_working_point
+            )
+            apcer_value = check_apcer(
+                apcer_value, th_apcer, filtered_scores, filtered_labels
+            )
+
+            if apcer_value > 1.0:  # out of range:
+                continue
+
+            apcer_values.append(apcer_value)
+        apcer_value = max(apcer_values)
+
+    # TODO REVIEW
+    # data = {
+    #     "scores": scores,
+    #     "labels": labels,
+    # }
+    # if apcer_value < 0.08:
+    #     # print(f"{apcer_value} ({th_apcer})")
+    #     # print(min(scores[labels==1]))
+    #
+    #     import time
+    #     timestr = time.strftime("%Y%m%d-%H%M%S")
+    #
+    #     output_det_filename = f"deleteme/{timestr}_det.png"
+    #     from gradgpad.evaluation.plots.det_curve import det_curve
+    #     det_curve(data, output_det_filename)
+    #
+    #     output_hist_filename = f"deleteme/{timestr}_hist.png"
+    #     from gradgpad.evaluation.plots.histogram import save_histogram
+    #     save_histogram(
+    #                         data,
+    #                         output_hist_filename,
+    #                         genuine_label=0,
+    #                         th=th_apcer,
+    #                         th_legend="Th APCER",
+    #                         normalize_hist=True,
+    #                     )
 
     return float(apcer_value)

@@ -41,6 +41,6 @@ def eer(scores, labels):
     ths = np.clip(ths, scores.min(), scores.max())
 
     eer = brentq(lambda x: 1.0 - x - interp1d(fars, tprs)(x), 0.0, 1.0)
-    eer_th = interp1d(fars, ths)(eer)
+    eer_th = interp1d(fars, ths, kind="slinear")(eer)
 
     return eer, eer_th

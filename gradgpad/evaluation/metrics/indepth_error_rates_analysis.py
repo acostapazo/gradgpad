@@ -155,18 +155,18 @@ def get_relative_working_points(
 
     relative_working_points = {}
     if bpcer_fixing_working_points:
-        relative_working_points["bpcer"] = {}
+        relative_working_points["apcer"] = {}
         for bpcer_wp in bpcer_fixing_working_points:
-            key = f"apcer_{round(bpcer_wp * 100.0)}"
-            relative_working_points["bpcer"][key] = 100.0 * apcer_fixing_bpcer(
+            key = f"bpcer_{round(bpcer_wp * 100.0)}"
+            relative_working_points["apcer"][key] = 100.0 * apcer_fixing_bpcer(
                 scores, labels, bpcer_wp
             )
 
     if apcer_fixing_working_points:
-        relative_working_points["apcer"] = {}
+        relative_working_points["bpcer"] = {}
         for apcer_wp in apcer_fixing_working_points:
-            key = f"bpcer_{round(apcer_wp * 100.0)}"
-            relative_working_points["apcer"][key] = 100.0 * bpcer_fixing_apcer(
+            key = f"apcer_{round(apcer_wp * 100.0)}"
+            relative_working_points["bpcer"][key] = 100.0 * bpcer_fixing_apcer(
                 scores, labels, apcer_wp
             )
     return relative_working_points

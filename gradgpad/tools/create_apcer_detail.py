@@ -102,9 +102,6 @@ def create_apcer_by_subprotocol(
 
         for subprotocol_name, result_subprotocol in sorted(result_protocols.items()):
 
-            if subprotocol_name != "hkbu":
-                continue
-
             if filter_common:
                 subprotocol_name = subprotocol_name.replace(filter_common, "")
             detail_values.append(subprotocol_name)

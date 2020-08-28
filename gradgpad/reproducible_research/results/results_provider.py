@@ -74,10 +74,6 @@ class ResultsProvider:
         protocol = Protocol.LODO
 
         for dataset in Dataset.options():
-
-            if dataset.value != "hkbu":
-                continue
-
             key = f"{protocol.value}_{dataset.value}"
 
             results[key] = ResultsProvider.get(
@@ -114,11 +110,11 @@ class ResultsProvider:
     @staticmethod
     def all(approach: Approach) -> Dict[str, Dict]:
         results = {}
-        # results.update(ResultsProvider.grandtest(approach))
-        # results.update(ResultsProvider.cross_dataset(approach))
+        results.update(ResultsProvider.grandtest(approach))
+        results.update(ResultsProvider.cross_dataset(approach))
         results.update(ResultsProvider.lodo(approach))
-        # results.update(ResultsProvider.cross_device(approach))
-        # results.update(ResultsProvider.unseen_attack(approach))
+        results.update(ResultsProvider.cross_device(approach))
+        results.update(ResultsProvider.unseen_attack(approach))
         return results
 
     @staticmethod
@@ -179,9 +175,6 @@ class ResultsProvider:
 
     @staticmethod
     def get_grandtest_skin_tone(approach: Approach) -> Dict:
-        import pdb
-
-        pdb.set_trace()
         scores_subsets = {}
         for subset in Subset.options():
             grandtest_skin_tone_scores = ScoresProvider.get(
