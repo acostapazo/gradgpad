@@ -145,6 +145,17 @@ def indepth_error_rates_analysis(
     return indepth_error_rate_results
 
 
+def group_labels(labels, meta_label_info):
+    grouped_labels = np.copy(labels)
+    for i, values in enumerate(meta_label_info.values()):
+        for value in values:
+            grouped_labels[grouped_labels == value] = 100 + i + 1
+
+    grouped_labels = grouped_labels - 100
+    grouped_labels[grouped_labels == -100] = 0
+    return grouped_labels
+
+
 def get_relative_working_points(
     scores,
     labels,
@@ -153,13 +164,15 @@ def get_relative_working_points(
     meta_label_info,
 ):
 
+    grouped_labels = group_labels(labels, meta_label_info)
+
     relative_working_points = {}
     if bpcer_fixing_working_points:
         relative_working_points["apcer"] = {}
         for bpcer_wp in bpcer_fixing_working_points:
             key = f"bpcer_{round(bpcer_wp * 100.0)}"
             relative_working_points["apcer"][key] = 100.0 * apcer_fixing_bpcer(
-                scores, labels, bpcer_wp
+                scores, grouped_labels, bpcer_wp
             )
 
     if apcer_fixing_working_points:
@@ -167,7 +180,7 @@ def get_relative_working_points(
         for apcer_wp in apcer_fixing_working_points:
             key = f"apcer_{round(apcer_wp * 100.0)}"
             relative_working_points["bpcer"][key] = 100.0 * bpcer_fixing_apcer(
-                scores, labels, apcer_wp
+                scores, grouped_labels, apcer_wp
             )
     return relative_working_points
 

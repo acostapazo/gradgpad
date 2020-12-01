@@ -172,20 +172,25 @@ class Scores:
     def get_fair_grouped_skin_tone_subset(self) -> Dict[str, Dict]:
         fair_skin_tone_subset = self.get_fair_skin_tone_subset()
 
-        grouped_fair_skin_tone_subset = {
-            "YELLOW": {
-                **fair_skin_tone_subset["LIGHT_YELLOW"],
-                **fair_skin_tone_subset["MEDIUM_YELLOW_BROWN"],
-            },
-            "PINK": {
-                **fair_skin_tone_subset["LIGHT_PINK"],
-                **fair_skin_tone_subset["MEDIUM_PINK_BROWN"],
-            },
-            "BROWN": {
-                **fair_skin_tone_subset["MEDIUM_DARK_BROWN"],
-                **fair_skin_tone_subset["DARK_BROWN"],
-            },
-        }
+        yellow = {}
+        if "LIGHT_YELLOW" in fair_skin_tone_subset.keys():
+            yellow = {**yellow, **fair_skin_tone_subset["LIGHT_YELLOW"]}
+        if "MEDIUM_YELLOW_BROWN" in fair_skin_tone_subset.keys():
+            yellow = {**yellow, **fair_skin_tone_subset["MEDIUM_YELLOW_BROWN"]}
+
+        pink = {}
+        if "LIGHT_PINK" in fair_skin_tone_subset.keys():
+            pink = {**pink, **fair_skin_tone_subset["LIGHT_PINK"]}
+        if "MEDIUM_PINK_BROWN" in fair_skin_tone_subset.keys():
+            pink = {**pink, **fair_skin_tone_subset["MEDIUM_PINK_BROWN"]}
+
+        dark = {}
+        if "MEDIUM_DARK_BROWN" in fair_skin_tone_subset.keys():
+            dark = {**dark, **fair_skin_tone_subset["MEDIUM_DARK_BROWN"]}
+        if "DARK_BROWN" in fair_skin_tone_subset.keys():
+            dark = {**dark, **fair_skin_tone_subset["DARK_BROWN"]}
+
+        grouped_fair_skin_tone_subset = {"YELLOW": yellow, "PINK": pink, "BROWN": dark}
         return grouped_fair_skin_tone_subset
 
     def get_fair_subset(

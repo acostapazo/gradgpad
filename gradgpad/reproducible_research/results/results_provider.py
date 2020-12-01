@@ -82,6 +82,19 @@ class ResultsProvider:
         return results
 
     @staticmethod
+    def intradataset(approach: Approach) -> Dict[str, Dict]:
+        results = {}
+        protocol = Protocol.INTRADATASET
+
+        for dataset in Dataset.options():
+            key = f"{protocol.value}_{dataset.value}"
+
+            results[key] = ResultsProvider.get(
+                approach=approach, protocol=protocol, dataset=dataset
+            )
+        return results
+
+    @staticmethod
     def cross_device(approach: Approach) -> Dict[str, Dict]:
         results = {}
         protocol = Protocol.CROSS_DEVICE
@@ -115,6 +128,7 @@ class ResultsProvider:
         results.update(ResultsProvider.lodo(approach))
         results.update(ResultsProvider.cross_device(approach))
         results.update(ResultsProvider.unseen_attack(approach))
+        # results.update(ResultsProvider.intradataset(approach))
         return results
 
     @staticmethod

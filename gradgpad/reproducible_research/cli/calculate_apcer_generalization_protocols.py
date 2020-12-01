@@ -42,6 +42,7 @@ UNSEEN_ATTACK_CORRESPONDENCES = {
 CORRESPONDENCES = {
     "lodo": DATASET_CORRESPONDENCES,
     "cross_dataset": DATASET_CORRESPONDENCES,
+    "intradataset": DATASET_CORRESPONDENCES,
     "cross_device": CROSS_DEVICE_CORRESPONDENCES,
     "unseen_attack": UNSEEN_ATTACK_CORRESPONDENCES,
 }
@@ -64,9 +65,8 @@ def calculate_apcer_generalization_protocols(output_path: str):
     }
 
     approach_results_protocols = {}
-    generalization_protocols = [
-        protocol for protocol in Protocol.options() if protocol != Protocol.GRANDTEST
-    ]
+    generalization_protocols = Protocol.generalization_options()
+
     for protocol in generalization_protocols:
         approach_results_protocols[protocol.value] = {}
 
@@ -78,7 +78,6 @@ def calculate_apcer_generalization_protocols(output_path: str):
 
     apcer_details_by_working_point = {}
     for protocol_name, approach_results in approach_results_protocols.items():
-
         selected_working_points = {
             "APCER @ BPCER 10 %": WorkingPoint.BPCER_10,
             "APCER @ BPCER 15 %": WorkingPoint.BPCER_15,
@@ -86,39 +85,39 @@ def calculate_apcer_generalization_protocols(output_path: str):
         }
         for title, working_point in selected_working_points.items():
 
-            output_path_generalization_approach = (
-                f"{output_path_generalization}/{protocol_name}"
-            )
-            os.makedirs(output_path_generalization_approach, exist_ok=True)
-
-            filename = f"{output_path_generalization_approach}/{protocol_name}_{working_point.value}_radar_chart.png"
-
-            apcer_detail = create_apcer_by_subprotocol(
-                approach_results, working_point, f"{protocol_name}_"
-            )
-
-            if working_point.value not in apcer_details_by_working_point:
-                apcer_details_by_working_point[working_point.value] = {
-                    protocol_name: apcer_detail
-                }
-            else:
-                apcer_details_by_working_point[working_point.value][
-                    protocol_name
-                ] = apcer_detail
-
-            try:
-                create_radar_chart_comparision(
-                    title,
-                    apcer_detail,
-                    filename,
-                    CORRESPONDENCES.get(protocol_name),
-                    20,
+            for type_apcer in ["specific", "aggregate"]:
+                output_path_generalization_approach = (
+                    f"{output_path_generalization}/{type_apcer}/{protocol_name}"
                 )
-            except ZeroDivisionError as exec:
-                print(exec)
-                print(f"Error on create_apcer_by_subprotocol: {title}")
-                print(f"apcer_detail: {apcer_detail}")
-                print(f"CORRESPONDENCE: {CORRESPONDENCES.get(protocol_name)}")
+                os.makedirs(output_path_generalization_approach, exist_ok=True)
+
+                filename = f"{output_path_generalization_approach}/{protocol_name}_{working_point.value}_radar_chart.png"
+
+                apcer_detail = create_apcer_by_subprotocol(
+                    approach_results, working_point, f"{protocol_name}_", type_apcer
+                )
+                if working_point.value not in apcer_details_by_working_point:
+                    apcer_details_by_working_point[working_point.value] = {
+                        protocol_name: apcer_detail
+                    }
+                else:
+                    apcer_details_by_working_point[working_point.value][
+                        protocol_name
+                    ] = apcer_detail
+
+                try:
+                    create_radar_chart_comparision(
+                        title,
+                        apcer_detail,
+                        filename,
+                        CORRESPONDENCES.get(protocol_name),
+                        20,
+                    )
+                except ZeroDivisionError as exec:
+                    print(exec)
+                    print(f"Error on create_apcer_by_subprotocol: {protocol_name}")
+                    print(f"apcer_detail: {apcer_detail}")
+                    print(f"CORRESPONDENCE: {CORRESPONDENCES.get(protocol_name)}")
 
     calculate_generalization_metrics(
         apcer_details_by_working_point, output_path_generalization

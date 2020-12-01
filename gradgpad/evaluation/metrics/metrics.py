@@ -1,5 +1,6 @@
 import numpy as np
 from gradgpad.evaluation.metrics.eer import eer
+from gradgpad.evaluation.metrics.frr import frr
 from gradgpad.evaluation.metrics.indepth_error_rates_analysis import (
     indepth_error_rates_analysis,
 )
@@ -56,6 +57,16 @@ class Metrics:
         scores = self.devel_scores if subset == Subset.DEVEL else self.test_scores
         _, eer_th = eer(scores.get_numpy_scores(), scores.get_numpy_labels())
         return eer_th
+
+    def get_frr_th(self, subset: Subset, far_op: float):
+        scores = self.devel_scores if subset == Subset.DEVEL else self.test_scores
+        _, frr_th = frr(scores.get_numpy_scores(), scores.get_numpy_labels(), far_op)
+        return frr_th
+
+    def get_far_th(self, subset: Subset, frr_op: float):
+        scores = self.devel_scores if subset == Subset.DEVEL else self.test_scores
+        _, far_th = frr(scores.get_numpy_scores(), scores.get_numpy_labels(), frr_op)
+        return far_th
 
     def _transform_labels(self, labels, meta_label_info):
         if "print" in meta_label_info.keys():

@@ -49,7 +49,8 @@ def create_radar_chart_comparision(
             "80",
             "90",
             "100",
-            "Out of\nRange",
+            ""
+            # "Out of\nRange",
         ],
         angle=261,
         fontsize=12,
@@ -69,7 +70,7 @@ def create_radar_chart_comparision(
     ax.legend(
         apcer_by_pai.apcers.keys(),
         # bbox_to_anchor=(1.05, 1),
-        # loc="lower left",
+        loc="upper right",
         # ncol=2,
         # mode="expand",
         # borderaxespad=0.0,

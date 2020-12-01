@@ -91,7 +91,10 @@ def create_apcer_by_pai(
 
 
 def create_apcer_by_subprotocol(
-    results, working_point: WorkingPoint, filter_common: str = None
+    results,
+    working_point: WorkingPoint,
+    filter_common: str = None,
+    type_apcer="specific",
 ):
     detail_values = []
     apcers = {}
@@ -105,7 +108,7 @@ def create_apcer_by_subprotocol(
             if filter_common:
                 subprotocol_name = subprotocol_name.replace(filter_common, "")
             detail_values.append(subprotocol_name)
-            apcer_subprotocol = result_subprotocol["specific"][
+            apcer_subprotocol = result_subprotocol[type_apcer][
                 "relative_working_points"
             ]["apcer"][value_bpcer(working_point)]
 

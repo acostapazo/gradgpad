@@ -24,7 +24,11 @@ def get_filename(
 
     filename = f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/{approach.value}/{approach.value}_{protocol.value}"
 
-    if protocol == Protocol.CROSS_DATASET or protocol == Protocol.LODO:
+    if (
+        protocol == Protocol.CROSS_DATASET
+        or protocol == Protocol.LODO
+        or protocol == Protocol.INTRADATASET
+    ):
         if not dataset:
             raise ValueError(
                 f"{protocol.name} Protocol must be accompanied with a dataset value"
