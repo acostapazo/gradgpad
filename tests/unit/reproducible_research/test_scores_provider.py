@@ -33,7 +33,7 @@ def test_should_success_get_scores_from_provider_grandtest_protocol_no_auxiliary
 @pytest.mark.parametrize(
     "approach,protocol,subset,expected_scores_length",
     [
-        (approach, Protocol.GRANDTEST, subset, 12533 if subset == Subset.TEST else 4585)
+        (approach, Protocol.GRANDTEST, subset, 12490 if subset == Subset.TEST else 4580)
         for approach in Approach.options_excluding(
             [Approach.AUXILIARY, Approach.CONTINUAL_LEARNING_AUXILIARY]
         )

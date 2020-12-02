@@ -47,10 +47,12 @@ def expected_protocols():
 
 @pytest.mark.unit
 @pytest.mark.parametrize(
-    "approach", Approach.options_excluding([Approach.CONTINUAL_LEARNING_AUXILIARY])
+    "approach",
+    Approach.options_excluding(
+        [Approach.QUALITY_RBF_BALANCED, Approach.CONTINUAL_LEARNING_AUXILIARY]
+    ),
 )
 def test_should_success_provide_results(approach: Approach, expected_protocols):
-
     results = ResultsProvider.all(approach)
     assert len(results.keys()) == 35
     assert sorted(results.keys()) == sorted(expected_protocols)

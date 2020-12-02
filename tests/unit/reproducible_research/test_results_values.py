@@ -16,7 +16,12 @@ def check_all_values(nested_dictionary):
 
 
 @pytest.mark.unit
-@pytest.mark.parametrize("approach", Approach.options())
+@pytest.mark.parametrize(
+    "approach",
+    Approach.options_excluding(
+        [Approach.QUALITY_RBF_BALANCED, Approach.CONTINUAL_LEARNING_AUXILIARY]
+    ),
+)
 def test_should_check_results_are_ok(approach: Approach):
 
     results = ResultsProvider.all(approach)
