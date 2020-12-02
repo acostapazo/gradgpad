@@ -46,7 +46,9 @@ def expected_protocols():
 
 
 @pytest.mark.unit
-@pytest.mark.parametrize("approach", Approach.options())
+@pytest.mark.parametrize(
+    "approach", Approach.options_excluding([Approach.CONTINUAL_LEARNING_AUXILIARY])
+)
 def test_should_success_provide_results(approach: Approach, expected_protocols):
 
     results = ResultsProvider.all(approach)

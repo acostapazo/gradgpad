@@ -12,8 +12,9 @@ scores_approaches_test = [
     ScoresProvider.get(
         approach=approach, protocol=Protocol.GRANDTEST, subset=Subset.TEST
     )
-    for approach in Approach.options()
-    if approach != Approach.AUXILIARY
+    for approach in Approach.options_excluding(
+        [Approach.AUXILIARY, Approach.CONTINUAL_LEARNING_AUXILIARY]
+    )
 ]
 
 

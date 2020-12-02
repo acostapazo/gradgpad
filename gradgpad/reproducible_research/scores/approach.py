@@ -18,3 +18,10 @@ class Approach(Enum):
             Approach.AUXILIARY,
             Approach.CONTINUAL_LEARNING_AUXILIARY,
         ]
+
+    @staticmethod
+    def options_excluding(exclude_approaches: List) -> List:
+        approaches = Approach.options()
+        return [
+            approach for approach in approaches if approach not in exclude_approaches
+        ]

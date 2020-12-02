@@ -14,9 +14,10 @@ from gradgpad.reproducible_research.scores.subset import Subset
     "approach,protocol,subset,expected_scores_length",
     [
         (approach, Protocol.GRANDTEST, subset, 12490 if subset == Subset.TEST else 4580)
-        for approach in Approach.options()
+        for approach in Approach.options_excluding(
+            [Approach.AUXILIARY, Approach.CONTINUAL_LEARNING_AUXILIARY]
+        )
         for subset in Subset.options()
-        if approach != Approach.AUXILIARY  # pending
     ],
 )
 def test_should_success_get_scores_from_provider_grandtest_protocol_no_auxiliary(
@@ -33,9 +34,10 @@ def test_should_success_get_scores_from_provider_grandtest_protocol_no_auxiliary
     "approach,protocol,subset,expected_scores_length",
     [
         (approach, Protocol.GRANDTEST, subset, 12533 if subset == Subset.TEST else 4585)
-        for approach in Approach.options()
+        for approach in Approach.options_excluding(
+            [Approach.AUXILIARY, Approach.CONTINUAL_LEARNING_AUXILIARY]
+        )
         for subset in Subset.options()
-        if approach == Approach.AUXILIARY  # pending
     ],
 )
 def test_should_success_get_scores_from_provider_grandtest_protocol_auxiliary(

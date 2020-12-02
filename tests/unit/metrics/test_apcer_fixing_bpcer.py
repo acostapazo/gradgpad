@@ -8,7 +8,7 @@ from gradgpad.reproducible_research import Scores
 
 @pytest.mark.unit
 @pytest.mark.parametrize(
-    "scores, labels, expected_apcer, apcer_working_point",
+    "scores,labels,expected_apcer,apcer_working_point",
     [
         (
             np.array([0.1, 0.11, 0.6, 0.25, 0.0, 0.1, 0.2]),
