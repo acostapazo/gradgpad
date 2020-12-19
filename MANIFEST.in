@@ -1,3 +1,4 @@
 include gradgpad/VERSION
 include requirements/requirements.txt
 include LICENSE
+recursive-include gradgpad *.json
