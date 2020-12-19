@@ -4,7 +4,6 @@ from typing import List
 
 from gradgpad.annotations.annotation import Annotation
 from gradgpad.annotations.correspondences import ANNOTATION_CORRESPONDENCES
-from gradgpad.annotations.filter import Filter
 
 
 class Annotations:
@@ -44,7 +43,7 @@ class Annotations:
             "correspondences": self.correspondences,
         }
 
-    def get_annotations_from_ids(self, ids: List[str], filter: Filter = Filter()):
+    def get_annotations_from_ids(self, ids: List[str]):
         return [annotation for annotation in self.annotations if annotation.id in ids]
 
     @property
@@ -58,9 +57,17 @@ class Annotations:
     def print(self):
         print(json.dumps(self.to_dict(), indent=4, sort_keys=True))
 
-    def print_semantic_annotations(self):
+    def print_semantic(self, annotation_index: int = None):
         semantic_annotations = []
-        for annotation in self.annotations:
+        selected_annotations = self.annotations
+        if annotation_index is not None:
+            if annotation_index >= len(selected_annotations):
+                raise IndexError(
+                    f"annotation_index exceed the total number of annotations (max index {len(selected_annotations)})"
+                )
+            selected_annotations = [selected_annotations[annotation_index]]
+
+        for annotation in selected_annotations:
             semantic_annotations.append(
                 {
                     "id": annotation.id,

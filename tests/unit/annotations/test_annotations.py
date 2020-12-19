@@ -1,6 +1,6 @@
 import pytest
 
-from gradgpad.annotations.stats.calculate_pai_stats import calculate_pai_stats
+from gradgpad import calculate_pai_stats
 
 
 @pytest.mark.unit
@@ -13,7 +13,9 @@ def test_should_load_annotations():
 @pytest.mark.unit
 def test_should_calculate_pai_stats():
     from gradgpad import annotations
+    import pdb
 
+    pdb.set_trace()
     pai_stats = calculate_pai_stats(annotations)
 
     assert list(pai_stats.keys()) == [

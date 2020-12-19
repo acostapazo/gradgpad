@@ -1,3 +1,4 @@
+import json
 from typing import Dict, Any
 
 from gradgpad.annotations.attributes.attributes import Attributes
@@ -51,3 +52,6 @@ class Annotation:
             "spai": self.spai,
             "attributes": self.attributes.to_dict(),
         }
+
+    def __repr__(self):
+        return f"Annotation: {json.dumps(self.to_dict(), indent=4, sort_keys=True)}"
