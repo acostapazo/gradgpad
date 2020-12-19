@@ -13,7 +13,7 @@ class Dataset(Enum):
     REPLAY_ATTACK = "replay-attack"
     OULU_NPU = "oulu-npu"
     MSU_MFSD = "msu-mfsd"
-    HKBU_V2 = "hkbuV2"
+    HKBU_V2 = "hkbuv2"
     HKBU = "hkbu"
     CSMAD = "csmad"
 

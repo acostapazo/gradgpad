@@ -1,6 +1,3 @@
-import os
-
-
 from gradgpad.annotations.coarse_grain_pai import CoarseGrainPai
 from gradgpad.annotations.dataset import Dataset
 from gradgpad.annotations.device import Device
@@ -10,9 +7,6 @@ from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
 from gradgpad.reproducible_research.scores.subset import Subset
-
-
-REPRODUCIBLE_RESEARCH_SCORES_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 def get_analysis_from_metrics(metrics: Metrics) -> Dict:

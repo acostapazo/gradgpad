@@ -1,4 +1,3 @@
-import os
 import random
 import numpy as np
 
@@ -11,8 +10,6 @@ from gradgpad.annotations.person_attributes import Sex, Age, SkinTone
 from gradgpad.annotations.spai import Spai
 from gradgpad.tools.open_result_json import open_result_json
 from gradgpad import annotations
-
-REPRODUCIBLE_RESEARCH_SCORES_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Scores:

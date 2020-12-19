@@ -21,7 +21,6 @@ def get_filename(
     device: Device = None,
     pai: CoarseGrainPai = None,
 ):
-
     filename = f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/{approach.value}/{approach.value}_{protocol.value}"
 
     if (
