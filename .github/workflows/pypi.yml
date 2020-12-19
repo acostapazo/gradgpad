@@ -33,9 +33,13 @@ jobs:
     - name: Git - Commit VERSION File
       run: |
         git config --global user.email "acosta@alicebiometrics.com"
-        git config --global user.name "acostapazo"
+        git config --global user.name "ALiCE Biometrics"
         git commit -m "Update version to ${RELEASE_VERSION}"
     - name: Push changes
       uses: alice-biometrics/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+        github_token: ${{ secrets.GIT_ACCESS_TOKEN }}
+    - name: Check pip installation
+      run: |
+        pip install petisco==${RELEASE_VERSION} || true
+        pip install petisco==${RELEASE_VERSION}
