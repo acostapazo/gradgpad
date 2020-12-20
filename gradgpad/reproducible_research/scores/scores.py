@@ -7,7 +7,7 @@ from gradgpad.annotations.annotation import Annotation
 from gradgpad.annotations.dataset import Dataset
 from gradgpad.annotations.filter import Filter
 from gradgpad.annotations.person_attributes import Sex, Age, SkinTone
-from gradgpad.annotations.spai import Spai
+from gradgpad.annotations.scenario import Scenario
 from gradgpad.tools.open_result_json import open_result_json
 from gradgpad import annotations
 
@@ -24,7 +24,7 @@ class Scores:
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)
         filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(spai=Spai.GENUINE)
+            annotations_from_ids, Filter(scenario=Scenario.GENUINE)
         )
         scores = [score for id, score in self.scores.items() if id in filtered_ids]
         return scores
@@ -33,7 +33,7 @@ class Scores:
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)
         filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(spai=Spai.GENUINE)
+            annotations_from_ids, Filter(scenario=Scenario.GENUINE)
         )
         scores = [score for id, score in self.scores.items() if id not in filtered_ids]
         return scores
@@ -42,7 +42,7 @@ class Scores:
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)
         filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(spai=Spai.GENUINE)
+            annotations_from_ids, Filter(scenario=Scenario.GENUINE)
         )
         scores = {
             id: score for id, score in self.scores.items() if id not in filtered_ids
@@ -56,7 +56,7 @@ class Scores:
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)
         filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(spai=Spai.GENUINE)
+            annotations_from_ids, Filter(scenario=Scenario.GENUINE)
         )
         labels = [0 if id in filtered_ids else 1 for id in ids]
         return np.asarray(labels, dtype=np.int)
@@ -76,10 +76,10 @@ class Scores:
             annotation = [
                 annotation for annotation in annotations_from_ids if annotation.id == id
             ][0]
-            if annotation.spai.get("specific") == 0:
+            if annotation.scenario.get("specific") == 0:
                 scores.append(self.scores[id])
                 labels.append(0)
-            elif annotation.spai.get("specific") in pai_labels:
+            elif annotation.scenario.get("specific") in pai_labels:
                 scores.append(self.scores[id])
                 labels.append(1)
 
@@ -92,16 +92,16 @@ class Scores:
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)
         genuine_filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(spai=Spai.GENUINE)
+            annotations_from_ids, Filter(scenario=Scenario.GENUINE)
         )
         type_I_filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(spai=Spai.PAI_TYPE_I)
+            annotations_from_ids, Filter(scenario=Scenario.PAS_TYPE_I)
         )
         type_II_filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(spai=Spai.PAI_TYPE_II)
+            annotations_from_ids, Filter(scenario=Scenario.PAS_TYPE_II)
         )
         type_III_filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(spai=Spai.PAI_TYPE_III)
+            annotations_from_ids, Filter(scenario=Scenario.PAS_TYPE_III)
         )
 
         labels = []
@@ -136,7 +136,7 @@ class Scores:
     def get_fair_sex_subset(self) -> Dict[str, Dict]:
         def sex_filter_provider(sex, dataset, pseudo_random_values=None):
             return Filter(
-                spai=Spai.GENUINE,
+                scenario=Scenario.GENUINE,
                 sex=sex,
                 dataset=dataset,
                 pseudo_random_values=pseudo_random_values,
@@ -147,7 +147,7 @@ class Scores:
     def get_fair_age_subset(self) -> Dict[str, Dict]:
         def age_filter_provider(age, dataset, pseudo_random_values=None):
             return Filter(
-                spai=Spai.GENUINE,
+                scenario=Scenario.GENUINE,
                 age=age,
                 dataset=dataset,
                 pseudo_random_values=pseudo_random_values,
@@ -158,7 +158,7 @@ class Scores:
     def get_fair_skin_tone_subset(self) -> Dict[str, Dict]:
         def skin_tone_filter_provider(skin_tone, dataset, pseudo_random_values=None):
             return Filter(
-                spai=Spai.GENUINE,
+                scenario=Scenario.GENUINE,
                 skin_tone=skin_tone,
                 dataset=dataset,
                 pseudo_random_values=pseudo_random_values,
@@ -237,7 +237,7 @@ class Scores:
     def _get_filtered_ids(self, annotations_from_ids: List[Annotation], filter: Filter):
         ids = []
         for annotation in annotations_from_ids:
-            if filter.spai and annotation.spai.get("type") != filter.spai.value:
+            if filter.scenario and annotation.spai.get("type") != filter.scenario.value:
                 continue
             if filter.sex and annotation.attributes.person.sex != filter.sex.value:
                 continue

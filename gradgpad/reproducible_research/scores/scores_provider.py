@@ -1,5 +1,5 @@
 import os
-
+import sys
 
 from gradgpad.annotations.coarse_grain_pai import CoarseGrainPai
 from gradgpad.annotations.dataset import Dataset
@@ -11,6 +11,7 @@ from gradgpad.reproducible_research.scores.subset import Subset
 
 
 REPRODUCIBLE_RESEARCH_SCORES_DIR = os.path.abspath(os.path.dirname(__file__))
+sys.path.insert(0, REPRODUCIBLE_RESEARCH_SCORES_DIR)
 
 
 def get_filename(
@@ -21,7 +22,8 @@ def get_filename(
     device: Device = None,
     pai: CoarseGrainPai = None,
 ):
-    filename = f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/{approach.value}/{approach.value}_{protocol.value}"
+    base_path = f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/{approach.value}"
+    filename = f"{approach.value}_{protocol.value}"
 
     if (
         protocol == Protocol.CROSS_DATASET
@@ -48,7 +50,9 @@ def get_filename(
             )
         filename = f"{filename}_{pai.value}"
 
-    return f"{filename}_{subset.value}.json".replace("-", "_")
+    filename = f"{filename}_{subset.value}.json".replace("-", "_")
+
+    return f"{base_path}/{filename}"
 
 
 class ScoresProvider:

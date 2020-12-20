@@ -1,6 +1,6 @@
 import os
 
-from gradgpad.annotations.spai import SpaiColor
+from gradgpad.annotations.scenario import ScenarioColor
 from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.evaluation.plots.det_curve import det_curve
 from gradgpad.evaluation.plots.histogram import save_histogram
@@ -93,9 +93,9 @@ def calculate_hists_and_curves_pai_types(
         output_det_filename,
         subtypes={1: "PAI Type I", 2: "PAI Type II", 3: "PAI Type III", 0: "All"},
         colors={
-            1: SpaiColor.PAI_TYPE_I.value,
-            2: SpaiColor.PAI_TYPE_II.value,
-            3: SpaiColor.PAI_TYPE_III.value,
+            1: ScenarioColor.PAI_TYPE_I.value,
+            2: ScenarioColor.PAI_TYPE_II.value,
+            3: ScenarioColor.PAI_TYPE_III.value,
             0: "b",
         },
     )
