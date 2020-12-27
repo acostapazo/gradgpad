@@ -10,8 +10,8 @@ from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
 from gradgpad.reproducible_research.scores.subset import Subset
 
 
-def calculate_hists_and_curves(output_path: str):
-    print("Calculating Hists and Curves...")
+def calculate_hists_and_curves(output_path: str, only_grandtest: bool = False):
+    print("> Protocols | Calculating Hists and Curves...")
 
     output_path_hists_and_curves = f"{output_path}/hists_and_curves"
     os.makedirs(output_path_hists_and_curves, exist_ok=True)
@@ -25,7 +25,7 @@ def calculate_hists_and_curves(output_path: str):
 
         protocol_metrics = {}
         for protocol_name, subset_scores in protocols_subset_scores.items():
-            if protocol_name != Protocol.GRANDTEST.value:
+            if only_grandtest and protocol_name != Protocol.GRANDTEST.value:
                 continue
             protocol_metrics[protocol_name] = Metrics(
                 devel_scores=subset_scores.get("devel"),
@@ -33,7 +33,7 @@ def calculate_hists_and_curves(output_path: str):
             )
 
         for protocol_name, subset_scores in protocols_subset_scores.items():
-            if protocol_name != Protocol.GRANDTEST.value:
+            if only_grandtest and protocol_name != Protocol.GRANDTEST.value:
                 continue
             approach_name = approach.replace(" ", "_").lower()
             output_path_hists_and_curves = (
@@ -93,9 +93,9 @@ def calculate_hists_and_curves_pai_types(
         output_det_filename,
         subtypes={1: "PAI Type I", 2: "PAI Type II", 3: "PAI Type III", 0: "All"},
         colors={
-            1: ScenarioColor.PAI_TYPE_I.value,
-            2: ScenarioColor.PAI_TYPE_II.value,
-            3: ScenarioColor.PAI_TYPE_III.value,
+            1: ScenarioColor.PAS_TYPE_I.value,
+            2: ScenarioColor.PAS_TYPE_II.value,
+            3: ScenarioColor.PAS_TYPE_III.value,
             0: "b",
         },
     )

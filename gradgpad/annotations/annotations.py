@@ -97,15 +97,15 @@ class Annotations:
                             .get("age")
                             .get(annotation.attributes.person.age),
                         },
-                        "spai": {
+                        "conditions": {
                             "lighting": self.correspondences.get("attributes", {})
-                            .get("spai")
+                            .get("conditions")
                             .get("lighting")
-                            .get(annotation.attributes.spai.lighting),
+                            .get(annotation.attributes.conditions.lighting),
                             "capture_device": self.correspondences.get("attributes", {})
-                            .get("spai")
+                            .get("conditions")
                             .get("capture_device")
-                            .get(annotation.attributes.spai.capture_device),
+                            .get(annotation.attributes.conditions.capture_device),
                         },
                     },
                 }

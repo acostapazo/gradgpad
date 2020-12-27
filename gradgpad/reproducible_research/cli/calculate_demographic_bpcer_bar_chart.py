@@ -14,7 +14,7 @@ from gradgpad.tools import group_dataframe
 
 
 def calculate_demographic_bpcer_bar_chart(output_path: str):
-    print("Calculating Demographic BPCER Bar Charts...")
+    print("> Demographic | Calculating BPCER Bar Charts...")
 
     output_path_demographic_bar_charts = f"{output_path}/demographic/bar_charts"
     os.makedirs(output_path_demographic_bar_charts, exist_ok=True)

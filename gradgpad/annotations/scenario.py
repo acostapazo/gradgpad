@@ -19,11 +19,11 @@ class Scenario(Enum):
 
 
 def get_norm_color(r, g, b):
-    return (r / 255, g / 255, b / 255)
+    return r / 255, g / 255, b / 255
 
 
 class ScenarioColor(Enum):
     GENUINE = "b"
-    PAI_TYPE_I = get_norm_color(163, 254, 159)
-    PAI_TYPE_II = get_norm_color(210, 171, 130)
-    PAI_TYPE_III = get_norm_color(225, 156, 251)
+    PAS_TYPE_I = get_norm_color(163, 254, 159)
+    PAS_TYPE_II = get_norm_color(210, 171, 130)
+    PAS_TYPE_III = get_norm_color(225, 156, 251)

@@ -43,7 +43,7 @@ ANNOTATION_CORRESPONDENCES = {
             },
             "age": {0: "young", 1: "adult", 2: "senior"},
         },
-        "scenario": {
+        "conditions": {
             "lighting": {0: "controlled", 1: "adverse", 2: "no_info"},
             "capture_device": {
                 -1: "no_info",

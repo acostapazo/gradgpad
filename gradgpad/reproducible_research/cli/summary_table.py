@@ -8,7 +8,7 @@ from gradgpad.reproducible_research.scores.protocol import Protocol
 
 
 def summary_table(output_path: str, protocol: Protocol = Protocol.GRANDTEST):
-    print("Calculating Grandtest Summary Table...")
+    print("> Grandtest Protocol | Calculating a Summary Table...")
 
     results = {
         "Quality SVM RBF": ResultsProvider.grandtest(Approach.QUALITY_RBF),
@@ -82,7 +82,7 @@ def summary_table(output_path: str, protocol: Protocol = Protocol.GRANDTEST):
         index=False,
     )
     md = df.to_markdown()
-    print(md)
+    # print(md)
 
     with open(
         f"{output_path_summary_tables}/{protocol.value}_summary_table.md", "w"

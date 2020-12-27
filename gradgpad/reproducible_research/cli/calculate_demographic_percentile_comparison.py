@@ -5,8 +5,8 @@ import matplotlib.ticker as mtick
 import matplotlib.pyplot as plt
 
 from gradgpad.evaluation.metrics.metrics import Metrics
-from gradgpad.reproducible_research.cli.calculate_demographic_metric import (
-    calculate_demographic_metric,
+from gradgpad.reproducible_research.cli.calculate_demographic_bias_metric import (
+    calculate_demographic_bias_metric,
 )
 from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
@@ -36,7 +36,7 @@ def calculate_demographic_percentile_comparison(
     title_left: str,
     title_right: str,
 ):
-    print("Calculating Demographic Percentile Graphs...")
+    print("> Demographic | Calculating Percentile Comparison Graphs...")
 
     output_path_percentiles = f"{output_path}/demographic/percentiles/comparison_{protocol_left.value}_and_{protocol_right.value}"
     os.makedirs(output_path_percentiles, exist_ok=True)
@@ -122,11 +122,13 @@ def calculate_demographic_percentile_comparison(
                     higher_frr_th_test,
                 )
 
-    calculate_demographic_metric(
+    calculate_demographic_bias_metric(
         demographic_percentiles,
         approaches.keys(),
+        output_path_percentiles,
         calculate_age=False,
         calculate_skin_tone=False,
+        verbose_text="> Demographic | Calculating Demographic Bias Metric (DBM) for comparison...",
     )
 
     for demographic, approaches_percentiles in demographic_percentiles.items():

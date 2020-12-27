@@ -49,7 +49,9 @@ CORRESPONDENCES = {
 
 
 def calculate_apcer_generalization_protocols(output_path: str):
-    print("Calculating APCER for Generalization Protocols...")
+    print(
+        "> Novel Visualizations | Calculating PAD-radar (APCER by Generalization Protocols)..."
+    )
 
     output_path_generalization = f"{output_path}/radar/generalization"
 

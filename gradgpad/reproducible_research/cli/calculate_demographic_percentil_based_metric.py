@@ -5,8 +5,8 @@ import matplotlib.ticker as mtick
 import matplotlib.pyplot as plt
 
 from gradgpad.evaluation.metrics.metrics import Metrics
-from gradgpad.reproducible_research.cli.calculate_demographic_metric import (
-    calculate_demographic_metric,
+from gradgpad.reproducible_research.cli.calculate_demographic_bias_metric import (
+    calculate_demographic_bias_metric,
 )
 from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
@@ -31,7 +31,7 @@ MARKERS = {"ATTACKS": "v"}
 def calculate_demographic_percentile_based_metric(
     output_path: str, protocol: Protocol = Protocol.GRANDTEST
 ):
-    print("Calculating Demographic Percentile Graphs...")
+    print("> Demographic | Calculating Percentile Graphs...")
 
     output_path_percentiles = (
         f"{output_path}/demographic/percentiles_with_metric/{protocol.value}"
@@ -129,7 +129,9 @@ def calculate_demographic_percentile_based_metric(
                     higher_frr_th_test,
                 )
 
-    calculate_demographic_metric(demographic_percentiles, approaches.keys())
+    calculate_demographic_bias_metric(
+        demographic_percentiles, approaches.keys(), output_path_percentiles
+    )
 
     for demographic, approaches_percentiles in demographic_percentiles.items():
         fig, axlist = plt.subplots(1, 2)  # sharex=True, sharey=True

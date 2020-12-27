@@ -72,7 +72,7 @@ PAI_REPRESENTATION_ORDER = [
 
 
 def calculate_lifelong_learning_apcer_generalization_protocols(output_path: str):
-    print("Calculating Lifelong Learning APCER by PAI...")
+    print("> Lifelong Learning | Calculating PAD-radar (APCER by PAI)...")
 
     output_path_apcer_by_pais = f"{output_path}/radar/lifelong_learning_apcer_by_pais"
     os.makedirs(output_path_apcer_by_pais, exist_ok=True)

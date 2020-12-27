@@ -72,7 +72,7 @@ PAI_REPRESENTATION_ORDER = [
 
 
 def calculate_apcer_by_pai(output_path: str):
-    print("Calculating APCER by PAI...")
+    print("> Novel Visualizations | Calculating PAD-radar (APCER by PAI)...")
 
     output_path_apcer_by_pais = f"{output_path}/radar/apcer_by_pais"
     os.makedirs(output_path_apcer_by_pais, exist_ok=True)
