@@ -6,7 +6,7 @@ from gradgpad.charts.radar_factory import radar_factory
 from gradgpad.tools.create_apcer_detail import ApcerDetail
 
 
-def create_radar_chart_comparision(
+def create_radar_chart_comparison(
     title: str,
     apcer_by_pai: ApcerDetail,
     output_filename: str,
