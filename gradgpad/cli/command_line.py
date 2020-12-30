@@ -1,4 +1,5 @@
 import argparse
+import sys
 import zipfile
 import os
 
@@ -48,8 +49,30 @@ def main():
         dest="score_filename_test",
         help="Score filename Tests",
     )
+    parser.add_argument(
+        "--show-path",
+        "-sp",
+        dest="show_path",
+        action="store_true",
+        help="Show Package Path",
+    )
+    parser.add_argument(
+        "--show-scores-path",
+        "-ssp",
+        dest="show_scores_path",
+        action="store_true",
+        help="Show Scores Path",
+    )
 
     args = parser.parse_args()
+
+    if args.show_path:
+        sys.stdout.write(os.getenv("GRADGPAD_PATH"))
+        sys.exit(0)
+
+    if args.show_scores_path:
+        sys.stdout.write(os.getenv("GRADGPAD_SCORES_PATH"))
+        sys.exit(0)
 
     if args.reproducible_research:
         reproducible_research(args.output_path)

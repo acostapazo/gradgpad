@@ -2,9 +2,7 @@ import os
 
 from PIL import Image
 
-from gradgpad.charts.create_radar_chart_comparision import (
-    create_radar_chart_comparision,
-)
+from gradgpad.charts.create_radar_chart_comparison import create_radar_chart_comparison
 from gradgpad.reproducible_research.results.results_provider import ResultsProvider
 from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
@@ -195,7 +193,7 @@ def calculate_apcer_by_pai(output_path: str):
             apcer_detail = create_apcer_by_pai(results, working_point, filter_pais)
 
             apcer_detail.sort_by_detail_values(PAI_REPRESENTATION_ORDER)
-            create_radar_chart_comparision(
+            create_radar_chart_comparison(
                 title, apcer_detail, filename, BOLD_PAI_CORRESPONDENCES, 20
             )
 

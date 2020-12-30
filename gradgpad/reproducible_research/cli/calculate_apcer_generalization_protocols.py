@@ -1,7 +1,5 @@
 import os
-from gradgpad.charts.create_radar_chart_comparision import (
-    create_radar_chart_comparision,
-)
+from gradgpad.charts.create_radar_chart_comparison import create_radar_chart_comparison
 from gradgpad.reproducible_research.cli.calculate_generalization_metrics import (
     calculate_generalization_metrics,
 )
@@ -108,7 +106,7 @@ def calculate_apcer_generalization_protocols(output_path: str):
                     ] = apcer_detail
 
                 try:
-                    create_radar_chart_comparision(
+                    create_radar_chart_comparison(
                         title,
                         apcer_detail,
                         filename,
