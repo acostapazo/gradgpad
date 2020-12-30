@@ -1,2 +1,2 @@
-from .results import *  # noqa
-from .scores import *  # noqa
+from gradgpad.foundations.results import *  # noqa
+from gradgpad.foundations.scores import *  # noqa

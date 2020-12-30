@@ -2,9 +2,9 @@ import os
 
 import pandas as pd
 
-from gradgpad.reproducible_research.results.results_provider import ResultsProvider
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
+from gradgpad.foundations.results import ResultsProvider
+from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.protocol import Protocol
 
 
 def summary_table(output_path: str, protocol: Protocol = Protocol.GRANDTEST):

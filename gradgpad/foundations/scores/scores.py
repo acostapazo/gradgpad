@@ -3,11 +3,11 @@ import numpy as np
 
 from typing import List, Dict, Callable
 
-from gradgpad.annotations.annotation import Annotation
-from gradgpad.annotations.dataset import Dataset
-from gradgpad.annotations.filter import Filter
-from gradgpad.annotations.person_attributes import Sex, Age, SkinTone
-from gradgpad.annotations.scenario import Scenario
+from gradgpad.foundations.annotations.annotation import Annotation
+from gradgpad.foundations.annotations.dataset import Dataset
+from gradgpad.foundations.annotations.filter import Filter
+from gradgpad.foundations.annotations.person_attributes import Sex, Age, SkinTone
+from gradgpad.foundations.annotations.scenario import Scenario
 from gradgpad.tools.open_result_json import open_result_json
 from gradgpad import annotations
 

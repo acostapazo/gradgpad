@@ -3,9 +3,9 @@ from gradgpad.charts.create_radar_chart_comparison import create_radar_chart_com
 from gradgpad.reproducible_research.cli.calculate_generalization_metrics import (
     calculate_generalization_metrics,
 )
-from gradgpad.reproducible_research.results.results_provider import ResultsProvider
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
+from gradgpad.foundations.results import ResultsProvider
+from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_subprotocol
 
 

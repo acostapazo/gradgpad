@@ -1,13 +1,13 @@
 import os
 
-from gradgpad.annotations.scenario import ScenarioColor
+from gradgpad.foundations.annotations.scenario import ScenarioColor
 from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.evaluation.plots.det_curve import det_curve
 from gradgpad.evaluation.plots.histogram import save_histogram
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
-from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
-from gradgpad.reproducible_research.scores.subset import Subset
+from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.foundations.scores import ScoresProvider
+from gradgpad.foundations.scores import Subset
 
 
 def calculate_hists_and_curves(output_path: str, only_grandtest: bool = False):

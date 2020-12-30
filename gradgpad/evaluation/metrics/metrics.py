@@ -7,7 +7,7 @@ from gradgpad.evaluation.metrics.indepth_error_rates_analysis import (
 from gradgpad.evaluation.metrics.hter import hter
 
 from gradgpad.reproducible_research import Scores, List
-from gradgpad.reproducible_research.scores.subset import Subset
+from gradgpad.foundations.scores.subset import Subset
 
 
 def meta_label_info_provider(specific: bool = True):

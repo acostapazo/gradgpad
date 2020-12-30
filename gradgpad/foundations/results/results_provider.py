@@ -1,12 +1,12 @@
-from gradgpad.annotations.coarse_grain_pai import CoarseGrainPai
-from gradgpad.annotations.dataset import Dataset
-from gradgpad.annotations.device import Device
+from gradgpad.foundations.annotations.coarse_grain_pai import CoarseGrainPai
+from gradgpad.foundations.annotations.dataset import Dataset
+from gradgpad.foundations.annotations.device import Device
 from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.reproducible_research import Dict, Scores
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
-from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
-from gradgpad.reproducible_research.scores.subset import Subset
+from gradgpad.foundations.scores.approach import Approach
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.foundations.scores.scores_provider import ScoresProvider
+from gradgpad.foundations.scores.subset import Subset
 
 
 def get_analysis_from_metrics(metrics: Metrics) -> Dict:

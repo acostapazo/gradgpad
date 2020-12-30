@@ -1,5 +1,5 @@
-from gradgpad.annotations.annotations import Annotations
-from gradgpad.annotations.correspondences import ANNOTATION_CORRESPONDENCES
+from gradgpad.foundations.annotations.annotations import Annotations
+from gradgpad.foundations.annotations.correspondences import ANNOTATION_CORRESPONDENCES
 
 
 def calculate_pai_stats(annotations: Annotations):

@@ -3,10 +3,10 @@ import os
 from typing import Dict
 
 
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
-from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
-from gradgpad.reproducible_research.scores.subset import Subset
+from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.foundations.scores import ScoresProvider
+from gradgpad.foundations.scores import Subset
 
 
 def save_csv_scores(output_path: str):

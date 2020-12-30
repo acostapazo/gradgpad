@@ -24,7 +24,7 @@ from gradgpad.reproducible_research.cli.calculate_apcer_by_pai import (
     calculate_apcer_by_pai,
 )
 from gradgpad.reproducible_research.cli.summary_table import summary_table
-from gradgpad.reproducible_research.scores.protocol import Protocol
+from gradgpad.foundations.scores.protocol import Protocol
 
 
 def reproducible_research(output_path: str):

@@ -1,6 +1,6 @@
-from gradgpad.annotations.dataset import Dataset
-from gradgpad.annotations.person_attributes import Sex, Age, SkinTone
-from gradgpad.annotations.scenario import Scenario
+from gradgpad.foundations.annotations.dataset import Dataset
+from gradgpad.foundations.annotations.person_attributes import Sex, Age, SkinTone
+from gradgpad.foundations.annotations.scenario import Scenario
 
 
 class Filter:

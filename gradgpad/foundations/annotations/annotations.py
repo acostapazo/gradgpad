@@ -1,9 +1,9 @@
 import json
-import os
 from typing import List
 
-from gradgpad.annotations.annotation import Annotation
-from gradgpad.annotations.correspondences import ANNOTATION_CORRESPONDENCES
+from gradgpad.foundations.annotations.annotation import Annotation
+from gradgpad.foundations.annotations.correspondences import ANNOTATION_CORRESPONDENCES
+from gradgpad.public_api import GRADGPAD_PATH
 
 
 class Annotations:
@@ -115,5 +115,4 @@ class Annotations:
         )
 
 
-ANNOTATIONS_DIR = f"{os.path.abspath(os.path.dirname(__file__))}/../data"
-annotations = Annotations.load(f"{ANNOTATIONS_DIR}/gradgpad_annotations.json")
+annotations = Annotations.load(f"{GRADGPAD_PATH}/data/gradgpad_annotations.json")
