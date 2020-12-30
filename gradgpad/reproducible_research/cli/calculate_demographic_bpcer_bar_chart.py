@@ -1,16 +1,16 @@
 import os
 
+from gradgpad import Demographic
 from gradgpad.foundations.annotations.person_attributes import SKIN_TONE_GROUP_POLICY
-from gradgpad.evaluation.charts import (
-    create_demographic_dataframe_comparision,
-    Metric,
-    Demographic,
-    create_metric_bar_chart_comparision,
-)
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
+from gradgpad.foundations.metrics.metric_retrievers import Metric
 from gradgpad.tools import group_dataframe
+from gradgpad.tools.evaluation.charts import create_metric_bar_chart_comparision
+from gradgpad.tools.evaluation.charts.create_demographic_dataframe_comparision import (
+    create_demographic_dataframe_comparision,
+)
 
 
 def calculate_demographic_bpcer_bar_chart(output_path: str):

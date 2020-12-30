@@ -2,14 +2,14 @@ import os
 
 from PIL import Image
 
-from gradgpad.evaluation.charts.create_radar_chart_comparison import (
-    create_radar_chart_comparison,
-)
+
 from gradgpad.foundations.results.results_provider import ResultsProvider
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_pai
-
+from gradgpad.tools.evaluation.charts.create_radar_chart_comparison import (
+    create_radar_chart_comparison,
+)
 
 REGULAR_AND_BOLD_PAI_CORRESPONDENCES = {
     "MAKEUP COSMETIC": "Makeup\n" + r"$\bf{Cosmetic}$",

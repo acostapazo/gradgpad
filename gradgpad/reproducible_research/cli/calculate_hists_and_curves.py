@@ -1,13 +1,13 @@
 import os
 
 from gradgpad.foundations.annotations.scenario import ScenarioColor
-from gradgpad.evaluation.metrics.metrics import Metrics
-from gradgpad.evaluation.plots.det_curve import det_curve
-from gradgpad.evaluation.plots.histogram import save_histogram
+from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.foundations.scores.subset import Subset
+from gradgpad.tools.evaluation.plots.det_curve import det_curve
+from gradgpad.tools.evaluation.plots.histogram import save_histogram
 
 
 def calculate_hists_and_curves(output_path: str, only_grandtest: bool = False):

@@ -1,7 +1,6 @@
 import pytest
 
-from gradgpad.foundations.results.results_provider import ResultsProvider
-from gradgpad.foundations.scores.approach import Approach
+from gradgpad import ResultsProvider, Approach
 from gradgpad.tools.create_apcer_detail import (
     WorkingPoint,
     create_apcer_by_pai,

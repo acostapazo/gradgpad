@@ -34,5 +34,5 @@ def group_dataframe(df: pd.DataFrame, policy: Dict):
             data_grouped[""].append(key)
             data_grouped["Approach"].append(approach)
 
-    grouped_df = pd.DataFrame(data_grouped, columns=data_grouped.keys())
+    grouped_df = pd.DataFrame(data_grouped, columns=list(data_grouped.keys()))
     return grouped_df

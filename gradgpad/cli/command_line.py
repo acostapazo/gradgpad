@@ -3,7 +3,7 @@ import sys
 import zipfile
 import os
 
-from gradgpad.evaluation.metrics.metrics import Metrics
+from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.reproducible_research.cli.reproducible_research import (
     reproducible_research,
 )
@@ -94,7 +94,7 @@ def main():
 
         try:
             from gradgpad.reproducible_research import Scores
-            from gradgpad.evaluation.plots.histogram import save_histogram
+            from gradgpad.tools.evaluation import save_histogram
 
             scores_devel = Scores.from_filename(args.score_filename_devel)
             scores_test = Scores.from_filename(args.score_filename_test)

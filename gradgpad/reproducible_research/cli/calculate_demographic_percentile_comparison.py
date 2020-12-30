@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.ticker as mtick
 import matplotlib.pyplot as plt
 
-from gradgpad.evaluation.metrics.metrics import Metrics
+from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.reproducible_research.cli.calculate_demographic_bias_metric import (
     calculate_demographic_bias_metric,
 )

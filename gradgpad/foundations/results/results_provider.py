@@ -1,7 +1,7 @@
 from gradgpad.foundations.annotations.coarse_grain_pai import CoarseGrainPai
 from gradgpad.foundations.annotations.dataset import Dataset
 from gradgpad.foundations.annotations.device import Device
-from gradgpad.evaluation.metrics.metrics import Metrics
+from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.reproducible_research import Dict, Scores
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol

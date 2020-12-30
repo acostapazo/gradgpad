@@ -10,5 +10,5 @@ def create_dataframe(metric_retriever, results):
         data["Metric"].append(metric)
         data["Error Rate (%)"].append(value)
         data["Protocol"].append(protocol_name)
-    df = pd.DataFrame(data, columns=data.keys())
+    df = pd.DataFrame(data, columns=list(data.keys()))
     return df
