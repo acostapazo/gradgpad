@@ -7,7 +7,7 @@ from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.reproducible_research.cli.reproducible_research import (
     reproducible_research,
 )
-from gradgpad.foundations.scores import Subset
+from gradgpad.foundations.scores.subset import Subset
 
 
 def zipdir(path, ziph):

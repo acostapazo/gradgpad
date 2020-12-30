@@ -2,7 +2,9 @@ import os
 
 from PIL import Image
 
-from gradgpad.evaluation.charts import create_radar_chart_comparison
+from gradgpad.evaluation.charts.create_radar_chart_comparison import (
+    create_radar_chart_comparison,
+)
 from gradgpad.foundations.results.results_provider import ResultsProvider
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol

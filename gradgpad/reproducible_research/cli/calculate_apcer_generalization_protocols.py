@@ -1,5 +1,7 @@
 import os
-from gradgpad.evaluation.charts import create_radar_chart_comparison
+from gradgpad.evaluation.charts.create_radar_chart_comparison import (
+    create_radar_chart_comparison,
+)
 from gradgpad.reproducible_research.cli.calculate_generalization_metrics import (
     calculate_generalization_metrics,
 )
