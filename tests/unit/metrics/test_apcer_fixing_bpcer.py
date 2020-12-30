@@ -48,7 +48,7 @@ def test_should_compute_apcer_fixing_bpcer_correctly(
     "filename, expected_apcer, bpcer_working_point",
     [
         (
-            "gradgpad/reproducible_research/scores/quality_rbf/quality_rbf_cross_dataset_csmad_test.json",
+            "gradgpad/data/scores/quality_rbf/quality_rbf_cross_dataset_csmad_test.json",
             1.0,  # 0.875,
             0.15,
         )

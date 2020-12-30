@@ -115,5 +115,5 @@ class Annotations:
         )
 
 
-ANNOTATIONS_DIR = os.path.abspath(os.path.dirname(__file__))
+ANNOTATIONS_DIR = f"{os.path.abspath(os.path.dirname(__file__))}/../data"
 annotations = Annotations.load(f"{ANNOTATIONS_DIR}/gradgpad_annotations.json")

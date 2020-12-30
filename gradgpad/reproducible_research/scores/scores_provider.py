@@ -1,6 +1,6 @@
-import os
 import sys
 
+from gradgpad.public_api import GRADGPAD_SCORES_PATH
 from gradgpad.annotations.coarse_grain_pai import CoarseGrainPai
 from gradgpad.annotations.dataset import Dataset
 from gradgpad.annotations.device import Device
@@ -9,9 +9,7 @@ from gradgpad.reproducible_research.scores.approach import Approach
 from gradgpad.reproducible_research.scores.protocol import Protocol
 from gradgpad.reproducible_research.scores.subset import Subset
 
-
-REPRODUCIBLE_RESEARCH_SCORES_DIR = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(0, REPRODUCIBLE_RESEARCH_SCORES_DIR)
+sys.path.insert(0, GRADGPAD_SCORES_PATH)
 
 
 def get_filename(
@@ -22,7 +20,7 @@ def get_filename(
     device: Device = None,
     pai: CoarseGrainPai = None,
 ):
-    base_path = f"{REPRODUCIBLE_RESEARCH_SCORES_DIR}/{approach.value}"
+    base_path = f"{GRADGPAD_SCORES_PATH}/{approach.value}"
     filename = f"{approach.value}_{protocol.value}"
 
     if (
