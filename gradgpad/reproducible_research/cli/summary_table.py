@@ -2,8 +2,8 @@ import os
 
 import pandas as pd
 
-from gradgpad.foundations.results import ResultsProvider
-from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.results.results_provider import ResultsProvider
+from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 
 

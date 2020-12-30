@@ -2,7 +2,7 @@ from typing import Dict
 
 import matplotlib.pyplot as plt
 
-from gradgpad.charts.radar_factory import radar_factory
+from gradgpad.evaluation.charts.radar_factory import radar_factory
 from gradgpad.tools.create_apcer_detail import ApcerDetail
 
 

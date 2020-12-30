@@ -5,10 +5,10 @@ import matplotlib.ticker as mtick
 import matplotlib.pyplot as plt
 
 from gradgpad.evaluation.metrics.metrics import Metrics
-from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
-from gradgpad.foundations.scores import ScoresProvider
-from gradgpad.foundations.scores import Subset
+from gradgpad.foundations.scores.scores_provider import ScoresProvider
+from gradgpad.foundations.scores.subset import Subset
 
 
 COLORS = {

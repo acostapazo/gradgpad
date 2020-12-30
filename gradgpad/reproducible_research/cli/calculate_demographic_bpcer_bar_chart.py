@@ -1,15 +1,15 @@
 import os
 
 from gradgpad.foundations.annotations.person_attributes import SKIN_TONE_GROUP_POLICY
-from gradgpad.charts import (
+from gradgpad.evaluation.charts import (
     create_demographic_dataframe_comparision,
     Metric,
     Demographic,
     create_metric_bar_chart_comparision,
 )
-from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
-from gradgpad.foundations.scores import ScoresProvider
+from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.tools import group_dataframe
 
 

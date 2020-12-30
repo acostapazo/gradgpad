@@ -1,8 +1,8 @@
 import pytest
 from gradgpad.evaluation.metrics.metrics_demographics import MetricsDemographics
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
-from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
+from gradgpad.foundations.scores.approach import Approach
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.foundations.scores.scores_provider import ScoresProvider
 
 
 @pytest.mark.unit

@@ -1,7 +1,7 @@
 import pytest
 
-from gradgpad.reproducible_research.results.results_provider import ResultsProvider
-from gradgpad.reproducible_research.scores.approach import Approach
+from gradgpad.foundations.results import ResultsProvider
+from gradgpad.foundations.scores import Approach
 
 
 @pytest.fixture

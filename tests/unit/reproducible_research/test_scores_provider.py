@@ -1,12 +1,12 @@
 import pytest
 
-from gradgpad.annotations.coarse_grain_pai import CoarseGrainPai
-from gradgpad.annotations.dataset import Dataset
-from gradgpad.annotations.device import Device
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
-from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
-from gradgpad.reproducible_research.scores.subset import Subset
+from gradgpad.foundations.annotations.coarse_grain_pai import CoarseGrainPai
+from gradgpad.foundations.annotations.dataset import Dataset
+from gradgpad.foundations.annotations import Device
+from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.foundations.scores import ScoresProvider
+from gradgpad.foundations.scores import Subset
 
 
 @pytest.mark.unit

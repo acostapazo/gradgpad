@@ -1,7 +1,7 @@
 import pytest
 
-from gradgpad.reproducible_research.results.results_provider import ResultsProvider
-from gradgpad.reproducible_research.scores.approach import Approach
+from gradgpad.foundations.results.results_provider import ResultsProvider
+from gradgpad.foundations.scores.approach import Approach
 from gradgpad.tools.create_apcer_detail import (
     WorkingPoint,
     create_apcer_by_pai,

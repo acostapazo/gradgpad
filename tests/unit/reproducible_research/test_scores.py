@@ -1,12 +1,12 @@
 import pytest
 
-from gradgpad.annotations.dataset import Dataset
-from gradgpad.annotations.filter import Filter
-from gradgpad.annotations.person_attributes import Sex, Age, SkinTone
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
-from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
-from gradgpad.reproducible_research.scores.subset import Subset
+from gradgpad.foundations.annotations.dataset import Dataset
+from gradgpad.foundations.annotations.filter import Filter
+from gradgpad.foundations.annotations.person_attributes import Sex, Age, SkinTone
+from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.foundations.scores import ScoresProvider
+from gradgpad.foundations.scores import Subset
 
 scores_approaches_test = [
     ScoresProvider.get(

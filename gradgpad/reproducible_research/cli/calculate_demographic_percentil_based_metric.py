@@ -8,10 +8,10 @@ from gradgpad.evaluation.metrics.metrics import Metrics
 from gradgpad.reproducible_research.cli.calculate_demographic_bias_metric import (
     calculate_demographic_bias_metric,
 )
-from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
-from gradgpad.foundations.scores import ScoresProvider
-from gradgpad.foundations.scores import Subset
+from gradgpad.foundations.scores.scores_provider import ScoresProvider
+from gradgpad.foundations.scores.subset import Subset
 
 COLORS = {
     "MALE": "b",

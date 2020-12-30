@@ -1,10 +1,10 @@
 import os
-from gradgpad.charts.create_radar_chart_comparison import create_radar_chart_comparison
+from gradgpad.evaluation.charts import create_radar_chart_comparison
 from gradgpad.reproducible_research.cli.calculate_generalization_metrics import (
     calculate_generalization_metrics,
 )
-from gradgpad.foundations.results import ResultsProvider
-from gradgpad.foundations.scores import Approach
+from gradgpad.foundations.results.results_provider import ResultsProvider
+from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_subprotocol
 

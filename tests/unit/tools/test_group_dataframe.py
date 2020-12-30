@@ -1,11 +1,14 @@
 import pytest
 from pandas import DataFrame
 
-from gradgpad.annotations.person_attributes import SKIN_TONE_GROUP_POLICY
-from gradgpad.charts import create_demographic_dataframe_comparision, Demographic
-from gradgpad.reproducible_research.scores.approach import Approach
-from gradgpad.reproducible_research.scores.protocol import Protocol
-from gradgpad.reproducible_research.scores.scores_provider import ScoresProvider
+from gradgpad.foundations.annotations.person_attributes import SKIN_TONE_GROUP_POLICY
+from gradgpad.evaluation.charts import (
+    create_demographic_dataframe_comparision,
+    Demographic,
+)
+from gradgpad.foundations.scores.approach import Approach
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.foundations.scores.scores_provider import ScoresProvider
 
 from gradgpad.tools import group_dataframe, Metric
 
