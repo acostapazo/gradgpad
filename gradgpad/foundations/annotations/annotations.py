@@ -8,9 +8,11 @@ from gradgpad.public_api import GRADGPAD_PATH
 
 class Annotations:
     def __init__(
-        self, annotations: List = [], correspondences: dict = ANNOTATION_CORRESPONDENCES
+        self,
+        annotated_samples: List = [],
+        correspondences: dict = ANNOTATION_CORRESPONDENCES,
     ):
-        self.annotations = annotations
+        self.annotated_samples = annotated_samples
         self.correspondences = correspondences
 
     @staticmethod
@@ -34,21 +36,25 @@ class Annotations:
         return Annotations.from_dict(kdict)
 
     def add_item(self, item):
-        self.annotations.append(Annotation.from_item(item))
+        self.annotated_samples.append(Annotation.from_item(item))
 
     def to_dict(self):
         return {
-            "annotations": [annotation.to_dict() for annotation in self.annotations],
-            "num_annotations": len(self.annotations),
+            "annotations": [
+                annotation.to_dict() for annotation in self.annotated_samples
+            ],
+            "num_annotations": len(self.annotated_samples),
             "correspondences": self.correspondences,
         }
 
     def get_annotations_from_ids(self, ids: List[str]):
-        return [annotation for annotation in self.annotations if annotation.id in ids]
+        return [
+            annotation for annotation in self.annotated_samples if annotation.id in ids
+        ]
 
     @property
     def num_annotations(self):
-        return len(self.annotations)
+        return len(self.annotated_samples)
 
     def save(self, filename: str):
         with open(filename, "w") as f:
@@ -59,7 +65,7 @@ class Annotations:
 
     def print_semantic(self, annotation_index: int = None):
         semantic_annotations = []
-        selected_annotations = self.annotations
+        selected_annotations = self.annotated_samples
         if annotation_index is not None:
             if annotation_index >= len(selected_annotations):
                 raise IndexError(

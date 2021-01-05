@@ -20,8 +20,8 @@ from gradgpad.reproducible_research.cli.calculate_hists_and_curves import (
 from gradgpad.reproducible_research.cli.calculate_lifelong_learning_apcer_generalization_protocols import (
     calculate_lifelong_learning_apcer_generalization_protocols,
 )
-from gradgpad.reproducible_research.cli.calculate_apcer_by_pai import (
-    calculate_apcer_by_pai,
+from gradgpad.reproducible_research.cli.calculate_pad_radar_by_pai import (
+    calculate_pad_radar_by_pai,
 )
 from gradgpad.reproducible_research.cli.summary_table import summary_table
 from gradgpad.foundations.scores.protocol import Protocol
@@ -39,7 +39,7 @@ def reproducible_research(output_path: str):
         calculate_hists_and_curves(output_path, only_grandtest=True)
 
         # Novel proposals
-        calculate_apcer_by_pai(output_path)
+        calculate_pad_radar_by_pai(output_path)
         calculate_apcer_generalization_protocols(output_path)
 
         # Demographic Experiments

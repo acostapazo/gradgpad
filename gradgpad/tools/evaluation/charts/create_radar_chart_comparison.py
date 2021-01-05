@@ -3,7 +3,7 @@ from typing import Dict
 import matplotlib.pyplot as plt
 
 from gradgpad.tools.evaluation.charts.radar_factory import radar_factory
-from gradgpad.tools.create_apcer_detail import ApcerDetail
+from gradgpad.tools.visualization.radar.create_apcer_detail import ApcerDetail
 
 
 def create_radar_chart_comparison(
@@ -97,6 +97,8 @@ def create_radar_chart_comparison(
         else:
             tick.set_color("green")
 
-    # plt.show()
-    plt.tight_layout()
-    plt.savefig(output_filename)
+    if output_filename is None:
+        plt.show()
+    else:
+        plt.tight_layout()
+        plt.savefig(output_filename)

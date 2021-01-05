@@ -2,7 +2,7 @@ from enum import Enum
 from typing import List
 
 
-class CoarseGrainPai(Enum):
+class CoarseGrainedPai(Enum):
     MASK = "mask"
     MAKEUP = "makeup"
     PARTIAL = "partial"
@@ -12,9 +12,9 @@ class CoarseGrainPai(Enum):
     @staticmethod
     def options() -> List:
         return [
-            CoarseGrainPai.MASK,
-            CoarseGrainPai.MAKEUP,
-            CoarseGrainPai.PARTIAL,
-            CoarseGrainPai.REPLAY,
-            CoarseGrainPai.PRINT,
+            CoarseGrainedPai.MASK,
+            CoarseGrainedPai.MAKEUP,
+            CoarseGrainedPai.PARTIAL,
+            CoarseGrainedPai.REPLAY,
+            CoarseGrainedPai.PRINT,
         ]

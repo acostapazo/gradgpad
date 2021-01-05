@@ -10,9 +10,9 @@ from gradgpad import (
     Metric,
 )
 from gradgpad.tools import group_dataframe
-from gradgpad.tools.evaluation.charts import create_metric_bar_chart_comparision
-from gradgpad.tools.evaluation.charts.create_demographic_dataframe_comparision import (
-    create_demographic_dataframe_comparision,
+from gradgpad.tools.evaluation.charts import create_metric_bar_chart_comparison
+from gradgpad.tools.evaluation.charts.create_demographic_dataframe_comparison import (
+    create_demographic_dataframe_comparison,
 )
 
 APPROACH_SCORES_SUBSET = {
@@ -75,7 +75,7 @@ APPROACH_SCORES_SUBSET = {
 def test_should_success_create_demographic_df_and_comparision_bar_chart(
     metric, demographic, approach_subset_scores, policy, filename
 ):
-    df = create_demographic_dataframe_comparision(
+    df = create_demographic_dataframe_comparison(
         metric, demographic, approach_subset_scores
     )
     assert isinstance(df, DataFrame)
@@ -83,4 +83,4 @@ def test_should_success_create_demographic_df_and_comparision_bar_chart(
     if policy:
         df = group_dataframe(df, policy)
 
-    create_metric_bar_chart_comparision(df, filename)
+    create_metric_bar_chart_comparison(df, filename)

@@ -88,37 +88,57 @@ class Scores:
             np.asarray(labels, dtype=np.int),
         )
 
-    def get_numpy_labels_by_type_pai(self):
+    def _get_numpy_labels_filter_by_filter(
+        self, options: List, filter_provider: Callable, unknown_label_value: int = None
+    ):
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)
-        genuine_filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(scenario=Scenario.GENUINE)
-        )
-        type_I_filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(scenario=Scenario.PAS_TYPE_I)
-        )
-        type_II_filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(scenario=Scenario.PAS_TYPE_II)
-        )
-        type_III_filtered_ids = self._get_filtered_ids(
-            annotations_from_ids, Filter(scenario=Scenario.PAS_TYPE_III)
-        )
+
+        filtered_ids_by_subdivision = {}
+        filtered_ids_order = {}
+
+        for order, option in enumerate(options):
+            filtered_ids_by_subdivision[option] = self._get_filtered_ids(
+                annotations_from_ids, filter_provider(option)
+            )
+            filtered_ids_order[option] = order
 
         labels = []
+
         for id in ids:
-            if id in genuine_filtered_ids:
-                label = 0
-            elif id in type_I_filtered_ids:
-                label = 1
-            elif id in type_II_filtered_ids:
-                label = 2
-            elif id in type_III_filtered_ids:
-                label = 3
-            else:
-                continue
-            labels.append(label)
+            value = None
+            for subdivision, filtered_ids in filtered_ids_by_subdivision.items():
+                if id in filtered_ids:
+                    value = subdivision.value
+                    break
+            if value is None and unknown_label_value is not None:
+                value = unknown_label_value
+
+            labels.append(value)
 
         return np.asarray(labels, dtype=np.int)
+
+    def get_numpy_labels_by_scenario(self):
+        return self._get_numpy_labels_filter_by_filter(
+            Scenario.options(), lambda option: Filter(scenario=option)
+        )
+
+    def get_numpy_labels_by_sex(self):
+        return self._get_numpy_labels_filter_by_filter(
+            Sex.options(), lambda option: Filter(sex=option), unknown_label_value=-1
+        )
+
+    def get_numpy_labels_by_age(self):
+        return self._get_numpy_labels_filter_by_filter(
+            Age.options(), lambda option: Filter(age=option), unknown_label_value=-1
+        )
+
+    def get_numpy_labels_by_skin_tone(self):
+        return self._get_numpy_labels_filter_by_filter(
+            SkinTone.options(),
+            lambda option: Filter(skin_tone=option),
+            unknown_label_value=-1,
+        )
 
     def get_numpy_specific_pai_labels(self):
         ids = self.scores.keys()

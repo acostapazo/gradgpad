@@ -6,12 +6,13 @@ from gradgpad.foundations.metrics.hter import hter
 from gradgpad.foundations.metrics.indepth_error_rates_analysis import (
     indepth_error_rates_analysis,
 )
+from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
 from gradgpad.reproducible_research import Scores, List
 from gradgpad.foundations.scores.subset import Subset
 
 
-def meta_label_info_provider(specific: bool = True):
-    if specific:
+def meta_label_info_provider(fine_grained_pais: bool = True):
+    if fine_grained_pais:
         meta_label_info = {
             "print_low_quality": [1],
             "print_medium_quality": [2],
@@ -92,10 +93,11 @@ class Metrics:
             labels = np.array(labels)
         return labels
 
-    def get_indeepth_analysis(
+    def get_indepth_analysis(
         self,
         bpcer_fixing_working_points: List[float],
         apcer_fixing_working_points: List[float],
+        selected_grained_pais: List = GrainedPaiMode.options(),
     ):
         analysis = {}
 
@@ -105,14 +107,14 @@ class Metrics:
         scores_test = self.test_scores.get_numpy_scores()
         labels_test = self.test_scores.get_numpy_specific_pai_labels()
 
-        for name in ["specific", "aggregate"]:
+        for selected_grained_pai in selected_grained_pais:
 
-            if name == "aggregate":
+            if selected_grained_pai == GrainedPaiMode.COARSE:
                 labels_devel = self._transform_labels(
-                    labels_devel, meta_label_info_provider(specific=False)
+                    labels_devel, meta_label_info_provider(fine_grained_pais=False)
                 )
                 labels_test = self._transform_labels(
-                    labels_test, meta_label_info_provider(specific=False)
+                    labels_test, meta_label_info_provider(fine_grained_pais=False)
                 )
 
             _, eer_th = eer(scores_devel, labels_devel)
@@ -120,17 +122,19 @@ class Metrics:
 
             hter_value = hter(scores_test, labels_test, eer_th)
 
-            specific = True if name == "specific" else False
+            fine_grained_pais = (
+                True if selected_grained_pai == GrainedPaiMode.FINE else False
+            )
 
-            analysis[name] = indepth_error_rates_analysis(
+            analysis[selected_grained_pai.value] = indepth_error_rates_analysis(
                 scores_test,
                 labels_test,
                 {"eer": eer_th},
-                meta_label_info_provider(specific),
+                meta_label_info_provider(fine_grained_pais),
                 bpcer_fixing_working_points,
                 apcer_fixing_working_points,
             )["eer"].to_dict(label_modificator="pai")
 
-            analysis[f"hter_{name}"] = hter_value * 100.0
+            analysis[f"hter_{selected_grained_pai.value}"] = hter_value * 100.0
 
         return analysis

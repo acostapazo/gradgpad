@@ -38,7 +38,7 @@ def create_dataframe_form_subset_scores(
     return df
 
 
-def create_demographic_dataframe_comparision(
+def create_demographic_dataframe_comparison(
     metric: Metric, demographic: Demographic, approach_subset_scores: Dict[str, Dict]
 ):
 

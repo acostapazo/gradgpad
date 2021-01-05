@@ -1,5 +1,6 @@
 import os
 
+from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
 from gradgpad.foundations.annotations.scenario import ScenarioColor
 from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.foundations.scores.approach import Approach
@@ -7,7 +8,24 @@ from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.foundations.scores.subset import Subset
 from gradgpad.tools.evaluation.plots.det_curve import det_curve
-from gradgpad.tools.evaluation.plots.histogram import save_histogram
+from gradgpad.tools.visualization.histogram.histogram import Histogram
+
+
+def get_filename(
+    output_path_hists_and_curves: str,
+    subset: str,
+    normalize_hist: bool,
+    suffix: str = "",
+):
+    if normalize_hist:
+        output_hist_filename = (
+            f"{output_path_hists_and_curves}/{subset}_hist_norm{suffix}.png"
+        )
+    else:
+        output_hist_filename = (
+            f"{output_path_hists_and_curves}/{subset}_hist{suffix}.png"
+        )
+    return output_hist_filename
 
 
 def calculate_hists_and_curves(output_path: str, only_grandtest: bool = False):
@@ -55,22 +73,17 @@ def calculate_hists_and_curves(output_path: str, only_grandtest: bool = False):
                 det_curve(data, output_det_filename)
 
                 for normalize_hist in [True, False]:
-                    if normalize_hist:
-                        output_hist_filename = (
-                            f"{output_path_hists_and_curves}/{subset}_hist_norm.png"
-                        )
-                    else:
-                        output_hist_filename = (
-                            f"{output_path_hists_and_curves}/{subset}_hist.png"
-                        )
-                    save_histogram(
-                        data,
-                        output_hist_filename,
-                        genuine_label=0,
-                        th=eer_th,
-                        th_legend="EER @ Devel",
-                        normalize_hist=normalize_hist,
+                    output_hist_filename = get_filename(
+                        output_path_hists_and_curves, subset, normalize_hist
                     )
+
+                    histogram = Histogram(
+                        genuine_label=0,
+                        plot_vertical_line_on_value=eer_th,
+                        legend_vertical_line="EER @ Devel",
+                        normalize=normalize_hist,
+                    )
+                    histogram.save(output_hist_filename, scores)
 
                 if protocol_name == Protocol.GRANDTEST.value:
                     calculate_hists_and_curves_pai_types(
@@ -85,7 +98,7 @@ def calculate_hists_and_curves_pai_types(
 
     data = {
         "scores": scores.get_numpy_scores(),
-        "labels": scores.get_numpy_labels_by_type_pai(),
+        "labels": scores.get_numpy_labels_by_scenario(),
     }
 
     det_curve(
@@ -101,21 +114,14 @@ def calculate_hists_and_curves_pai_types(
     )
 
     for normalize_hist in [True, False]:
-        if normalize_hist:
-            output_hist_filename = (
-                f"{output_path_hists_and_curves}/{subset}_hist_norm_detail.png"
-            )
-        else:
-            output_hist_filename = (
-                f"{output_path_hists_and_curves}/{subset}_hist_detail.png"
-            )
-
-        save_histogram(
-            data,
-            output_hist_filename,
-            genuine_label=0,
-            th=eer_th,
-            th_legend="EER @ Devel",
-            normalize_hist=normalize_hist,
-            subtypes=["PAI Type I", "PAI Type II", "PAI Type III"],
+        output_hist_filename = get_filename(
+            output_path_hists_and_curves, subset, normalize_hist, "_detail"
         )
+
+        histogram = Histogram(
+            plot_vertical_line_on_value=eer_th,
+            legend_vertical_line="EER @ Devel",
+            normalize=normalize_hist,
+            split_by_label_mode=SplitByLabelMode.PAS,
+        )
+        histogram.save(output_hist_filename, scores)

@@ -55,9 +55,9 @@ def test_should_calculate_indeepth_analysis(devel_scores, test_scores):
     bpcer_fixing_working_points = [0.10]
     apcer_fixing_working_points = [0.10]
 
-    indepth_analysis = metrics.get_indeepth_analysis(
+    indepth_analysis = metrics.get_indepth_analysis(
         bpcer_fixing_working_points, apcer_fixing_working_points
     )
 
-    assert pytest.approx(indepth_analysis["specific"]["acer"], 0.01) == 59.60
-    assert pytest.approx(indepth_analysis["aggregate"]["acer"], 0.01) == 36.06
+    assert pytest.approx(indepth_analysis["fine-grained-pais"]["acer"], 0.01) == 59.60
+    assert pytest.approx(indepth_analysis["coarse-grained-pais"]["acer"], 0.01) == 36.06

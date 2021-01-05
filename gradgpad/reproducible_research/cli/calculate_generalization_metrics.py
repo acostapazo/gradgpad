@@ -40,7 +40,7 @@ def calculate_generalization_metrics(
                 data["HTGER (APCER@BPCER=10%)"].append(apcer_data.get("htger"))
                 data["AGER (APCER@BPCER=10%)"].append(apcer_data.get("ager"))
 
-        df_by_protocol = pd.DataFrame(data, columns=data.keys())
+        df_by_protocol = pd.DataFrame(data, columns=list(data.keys()))
 
         df_htger = df_by_protocol.groupby("Approach").agg(
             {"HTGER (APCER@BPCER=10%)": ["mean", "std"]}

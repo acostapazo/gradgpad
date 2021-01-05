@@ -1,6 +1,6 @@
 import pytest
 
-from gradgpad import ResultsProvider, Approach
+from gradgpad import ResultsProvider, Approach, Demographic
 
 
 @pytest.fixture
@@ -55,3 +55,15 @@ def test_should_success_provide_results(approach: Approach, expected_protocols):
     results = ResultsProvider.all(approach)
     assert len(results.keys()) == 35
     assert sorted(results.keys()) == sorted(expected_protocols)
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize("demographic", Demographic.options())
+def test_should_success_provide_demographic_results(demographic):
+    results = ResultsProvider.grandtest_fair_demographic_bpcer(
+        Approach.AUXILIARY, demographic
+    )
+
+    bpcer = results.get("bpcer")
+
+    assert isinstance(bpcer, dict)

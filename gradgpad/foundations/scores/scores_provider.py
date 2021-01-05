@@ -1,7 +1,7 @@
 import sys
 
 from gradgpad.public_api import GRADGPAD_SCORES_PATH
-from gradgpad.foundations.annotations.coarse_grain_pai import CoarseGrainPai
+from gradgpad.foundations.annotations.coarse_grained_pai import CoarseGrainedPai
 from gradgpad.foundations.annotations.dataset import Dataset
 from gradgpad.foundations.annotations.device import Device
 from gradgpad.reproducible_research import Scores
@@ -18,7 +18,7 @@ def get_filename(
     subset: Subset,
     dataset: Dataset = None,
     device: Device = None,
-    pai: CoarseGrainPai = None,
+    pai: CoarseGrainedPai = None,
 ):
     base_path = f"{GRADGPAD_SCORES_PATH}/{approach.value}"
     filename = f"{approach.value}_{protocol.value}"
@@ -88,7 +88,7 @@ class ScoresProvider:
                             device=device,
                         )
             elif protocol == Protocol.UNSEEN_ATTACK:
-                for pai in CoarseGrainPai.options():
+                for pai in CoarseGrainedPai.options():
                     key = f"{protocol.value}_{pai.value}"
                     scores[key] = {}
                     for subset in Subset.options():
@@ -104,7 +104,7 @@ class ScoresProvider:
         subset: Subset,
         dataset: Dataset = None,
         device: Device = None,
-        pai: CoarseGrainPai = None,
+        pai: CoarseGrainedPai = None,
     ) -> Scores:
         filename = get_filename(approach, protocol, subset, dataset, device, pai)
         return Scores.from_filename(filename)

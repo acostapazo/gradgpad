@@ -35,7 +35,7 @@ def calculate_pai_stats(annotations: Annotations):
         },
     }
 
-    for annotation in annotations.annotations:
+    for annotation in annotations.annotated_samples:
         spai = annotation.spai
         coarse_grain_pai = ANNOTATION_CORRESPONDENCES["spai"]["classical"][
             spai.get("classical")

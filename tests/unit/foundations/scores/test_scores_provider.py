@@ -1,7 +1,7 @@
 import pytest
 
 from gradgpad import (
-    CoarseGrainPai,
+    CoarseGrainedPai,
     Dataset,
     Device,
     Approach,
@@ -97,7 +97,7 @@ def test_should_success_get_scores_from_provider_cross_device_protocol(
         (approach, Protocol.UNSEEN_ATTACK, subset, pai)
         for approach in Approach.options()
         for subset in Subset.options()
-        for pai in CoarseGrainPai.options()
+        for pai in CoarseGrainedPai.options()
     ],
 )
 def test_should_success_get_scores_from_provider_unseen_attack_protocol(

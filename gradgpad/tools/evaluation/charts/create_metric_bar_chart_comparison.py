@@ -2,7 +2,7 @@ import seaborn as sns
 from pandas import DataFrame
 
 
-def create_metric_bar_chart_comparision(
+def create_metric_bar_chart_comparison(
     df: DataFrame, output_filename: str, max_y_limit: int = None
 ):
     metric = df.columns[1]

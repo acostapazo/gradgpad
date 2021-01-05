@@ -7,11 +7,10 @@ from gradgpad import (
     Approach,
     Protocol,
     ScoresProvider,
-    Metric,
 )
-from gradgpad.tools import group_dataframe
-from gradgpad.tools.evaluation.charts.create_demographic_dataframe_comparision import (
-    create_demographic_dataframe_comparision,
+from gradgpad.tools import group_dataframe, Metric
+from gradgpad.tools.evaluation.charts.create_demographic_dataframe_comparison import (
+    create_demographic_dataframe_comparison,
 )
 
 
@@ -31,7 +30,7 @@ def test_should_group_dataframe():
         ),
     }
 
-    df = create_demographic_dataframe_comparision(
+    df = create_demographic_dataframe_comparison(
         metric, demographic, approach_scores_subset
     )
 

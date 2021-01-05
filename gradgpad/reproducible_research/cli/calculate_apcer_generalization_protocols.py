@@ -6,7 +6,10 @@ from gradgpad.reproducible_research.cli.calculate_generalization_metrics import 
 from gradgpad.foundations.results.results_provider import ResultsProvider
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
-from gradgpad.tools.create_apcer_detail import WorkingPoint, create_apcer_by_subprotocol
+from gradgpad.tools.visualization.radar.create_apcer_detail import (
+    WorkingPoint,
+    create_apcer_by_subprotocol,
+)
 from gradgpad.tools.evaluation.charts.create_radar_chart_comparison import (
     create_radar_chart_comparison,
 )
@@ -54,12 +57,6 @@ def calculate_apcer_generalization_protocols(output_path: str):
     )
 
     output_path_generalization = f"{output_path}/radar/generalization"
-
-    # approach_results_all = {
-    #     "Quality SVM RBF": ResultsProvider.all(Approach.QUALITY_RBF),
-    #     "Quality SVM LINEAR": ResultsProvider.all(Approach.QUALITY_LINEAR),
-    #     "Auxiliary": ResultsProvider.all(Approach.AUXILIARY),
-    # }
 
     approach_results_all = {
         "Quality": ResultsProvider.all(Approach.QUALITY_RBF),

@@ -17,6 +17,22 @@ class WorkingPoint(Enum):
     BPCER_45 = "apcer_fixing_bpcer45"
     BPCER_50 = "apcer_fixing_bpcer50"
 
+    @staticmethod
+    def options():
+        return [
+            WorkingPoint.BPCER_1,
+            WorkingPoint.BPCER_5,
+            WorkingPoint.BPCER_10,
+            WorkingPoint.BPCER_15,
+            WorkingPoint.BPCER_20,
+            WorkingPoint.BPCER_25,
+            WorkingPoint.BPCER_30,
+            WorkingPoint.BPCER_35,
+            WorkingPoint.BPCER_40,
+            WorkingPoint.BPCER_45,
+            WorkingPoint.BPCER_50,
+        ]
+
 
 def value_bpcer(working_point: WorkingPoint) -> str:
     correspondences = {
@@ -73,7 +89,7 @@ def create_apcer_by_pai(
     detail_values = []
     apcers = {}
     for approach_name, result_protocol in results_protocol.items():
-        apcer_per_pai_fixing_bpcer = result_protocol["specific"][
+        apcer_per_pai_fixing_bpcer = result_protocol["fine-grained-pais"][
             "apcer_per_pai_fixing_bpcer"
         ]
 
@@ -94,7 +110,7 @@ def create_apcer_by_subprotocol(
     results,
     working_point: WorkingPoint,
     filter_common: str = None,
-    type_apcer="specific",
+    type_apcer="fine-grained-pais",
 ):
     detail_values = []
     apcers = {}
