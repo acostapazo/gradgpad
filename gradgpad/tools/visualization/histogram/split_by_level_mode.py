@@ -32,9 +32,9 @@ class SplitByLabelMode(Enum):
     @staticmethod
     def options_for_curves():
         return [
+            SplitByLabelMode.NONE,
             SplitByLabelMode.SEX,
             SplitByLabelMode.AGE,
             SplitByLabelMode.SKIN_TONE,
-            SplitByLabelMode.DATASET,
             SplitByLabelMode.PAS,
         ]

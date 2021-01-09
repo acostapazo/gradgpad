@@ -81,6 +81,7 @@ class Det:
 
     def _calculate_det_curve(self, np_scores, np_labels):
 
+        plt.figure(figsize=(10, 10))
         plt.title(self.title)
         plt.ylim((0, 1))
         plt.xlim((0, 1))
@@ -208,6 +209,6 @@ class Det:
         np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
             scores, self.split_by_label_mode
         )
-        plt = self._calculate_histogram(np_scores, np_labels)
+        plt = self._calculate_det_curve(np_scores, np_labels)
         plt.savefig(output_filename)
         plt.close("all")

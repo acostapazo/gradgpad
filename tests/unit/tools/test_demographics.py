@@ -10,8 +10,8 @@ from gradgpad import (
     Metric,
 )
 from gradgpad.tools import group_dataframe
-from gradgpad.tools.evaluation.charts import create_metric_bar_chart_comparison
-from gradgpad.tools.evaluation.charts.create_demographic_dataframe_comparison import (
+from gradgpad.tools.visualization.charts import create_metric_bar_chart_comparison
+from gradgpad.tools.visualization.charts.create_demographic_dataframe_comparison import (
     create_demographic_dataframe_comparison,
 )
 

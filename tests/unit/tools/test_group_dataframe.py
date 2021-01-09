@@ -9,7 +9,7 @@ from gradgpad import (
     ScoresProvider,
 )
 from gradgpad.tools import group_dataframe, Metric
-from gradgpad.tools.evaluation.charts.create_demographic_dataframe_comparison import (
+from gradgpad.tools.visualization.charts.create_demographic_dataframe_comparison import (
     create_demographic_dataframe_comparison,
 )
 

@@ -10,7 +10,7 @@ from gradgpad.tools.visualization.radar.create_apcer_detail import (
     WorkingPoint,
     create_apcer_by_subprotocol,
 )
-from gradgpad.tools.evaluation.charts.create_radar_chart_comparison import (
+from gradgpad.tools.visualization.charts.create_radar_chart_comparison import (
     create_radar_chart_comparison,
 )
 

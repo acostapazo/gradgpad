@@ -1,13 +1,12 @@
 import os
 
+from gradgpad import Det
 from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
-from gradgpad.foundations.annotations.scenario import ScenarioColor
 from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.foundations.scores.subset import Subset
-from gradgpad.tools.evaluation.plots.det_curve import det_curve
 from gradgpad.tools.visualization.histogram.histogram import Histogram
 
 
@@ -63,14 +62,10 @@ def calculate_hists_and_curves(output_path: str, only_grandtest: bool = False):
             eer_th = metrics.get_eer_th(Subset.DEVEL)
 
             for subset, scores in subset_scores.items():
-
-                data = {
-                    "scores": scores.get_numpy_scores(),
-                    "labels": scores.get_numpy_labels(),
-                }
-
                 output_det_filename = f"{output_path_hists_and_curves}/{subset}_det.png"
-                det_curve(data, output_det_filename)
+
+                det = Det(title=f"Det Curve ({subset})")
+                det.save(output_det_filename, scores)
 
                 for normalize_hist in [True, False]:
                     output_hist_filename = get_filename(
@@ -95,23 +90,8 @@ def calculate_hists_and_curves_pai_types(
     output_path_hists_and_curves, subset, scores, eer_th
 ):
     output_det_filename = f"{output_path_hists_and_curves}/{subset}_det_detail.png"
-
-    data = {
-        "scores": scores.get_numpy_scores(),
-        "labels": scores.get_numpy_labels_by_scenario(),
-    }
-
-    det_curve(
-        data,
-        output_det_filename,
-        subtypes={1: "PAI Type I", 2: "PAI Type II", 3: "PAI Type III", 0: "All"},
-        colors={
-            1: ScenarioColor.PAS_TYPE_I.value,
-            2: ScenarioColor.PAS_TYPE_II.value,
-            3: ScenarioColor.PAS_TYPE_III.value,
-            0: "b",
-        },
-    )
+    det = Det(title=f"Det Curve ({subset})", split_by_label_mode=SplitByLabelMode.PAS)
+    det.save(output_det_filename, scores)
 
     for normalize_hist in [True, False]:
         output_hist_filename = get_filename(
