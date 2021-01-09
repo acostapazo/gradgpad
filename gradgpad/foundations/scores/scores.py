@@ -3,6 +3,8 @@ import numpy as np
 
 from typing import List, Dict, Callable
 
+from sklearn.preprocessing import LabelEncoder
+
 from gradgpad.foundations.annotations.annotation import Annotation
 from gradgpad.foundations.annotations.dataset import Dataset
 from gradgpad.foundations.annotations.filter import Filter
@@ -76,10 +78,10 @@ class Scores:
             annotation = [
                 annotation for annotation in annotations_from_ids if annotation.id == id
             ][0]
-            if annotation.scenario.get("specific") == 0:
+            if annotation.categorization.get("fine_grained_pai") == 0:
                 scores.append(self.scores[id])
                 labels.append(0)
-            elif annotation.scenario.get("specific") in pai_labels:
+            elif annotation.categorization.get("fine_grained_pai") in pai_labels:
                 scores.append(self.scores[id])
                 labels.append(1)
 
@@ -89,7 +91,11 @@ class Scores:
         )
 
     def _get_numpy_labels_filter_by_filter(
-        self, options: List, filter_provider: Callable, unknown_label_value: int = None
+        self,
+        options: List,
+        filter_provider: Callable,
+        unknown_label_value: int = None,
+        encode_label: bool = False,
     ):
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)
@@ -116,6 +122,13 @@ class Scores:
 
             labels.append(value)
 
+        if encode_label:
+            le = LabelEncoder()
+            labels = le.fit_transform(labels)
+            le_name_mapping = dict(zip(le.classes_, le.transform(le.classes_)))
+            if le_name_mapping.get(str(unknown_label_value)) is not None:
+                labels = [label - 1 for label in labels]
+
         return np.asarray(labels, dtype=np.int)
 
     def get_numpy_labels_by_scenario(self):
@@ -140,13 +153,30 @@ class Scores:
             unknown_label_value=-1,
         )
 
-    def get_numpy_specific_pai_labels(self):
+    def get_numpy_labels_by_dataset(self):
+        return self._get_numpy_labels_filter_by_filter(
+            Dataset.options(),
+            lambda option: Filter(dataset=option),
+            unknown_label_value=-1,
+            encode_label=True,
+        )
+
+    def get_numpy_labels_by_dataset_and_scenario(self, scenario: Scenario):
+        return self._get_numpy_labels_filter_by_filter(
+            Dataset.options(),
+            lambda option: Filter(scenario=scenario, dataset=option),
+            unknown_label_value=-1,
+            encode_label=True,
+        )
+
+    def get_numpy_fine_grained_pai_labels(self):
         ids = self.scores.keys()
         annotations_from_ids = annotations.get_annotations_from_ids(ids)
-        specific_pais_labels = [
-            annotation.spai.get("specific") for annotation in annotations_from_ids
+        fine_grained_pai_labels = [
+            annotation.categorization.get("fine_grained_pai")
+            for annotation in annotations_from_ids
         ]
-        return np.asarray(specific_pais_labels, dtype=np.int)
+        return np.asarray(fine_grained_pai_labels, dtype=np.int)
 
     def _get_smallest_length(self, x):
         return [
@@ -257,7 +287,10 @@ class Scores:
     def _get_filtered_ids(self, annotations_from_ids: List[Annotation], filter: Filter):
         ids = []
         for annotation in annotations_from_ids:
-            if filter.scenario and annotation.spai.get("type") != filter.scenario.value:
+            if (
+                filter.scenario
+                and annotation.categorization.get("pas_type") != filter.scenario.value
+            ):
                 continue
             if filter.sex and annotation.attributes.person.sex != filter.sex.value:
                 continue

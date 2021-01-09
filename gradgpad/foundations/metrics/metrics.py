@@ -102,10 +102,10 @@ class Metrics:
         analysis = {}
 
         scores_devel = self.devel_scores.get_numpy_scores()
-        labels_devel = self.devel_scores.get_numpy_specific_pai_labels()
+        labels_devel = self.devel_scores.get_numpy_fine_grained_pai_labels()
 
         scores_test = self.test_scores.get_numpy_scores()
-        labels_test = self.test_scores.get_numpy_specific_pai_labels()
+        labels_test = self.test_scores.get_numpy_fine_grained_pai_labels()
 
         for selected_grained_pai in selected_grained_pais:
 

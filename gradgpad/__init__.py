@@ -30,6 +30,7 @@ from gradgpad.foundations.scores.approach import Approach  # noqa
 from gradgpad.foundations.scores.protocol import Protocol  # noqa
 from gradgpad.foundations.scores.scores_provider import ScoresProvider  # noqa
 from gradgpad.foundations.scores.subset import Subset  # noqa
+from gradgpad.tools.visualization.det.det import Det  # noqa
 from gradgpad.tools.visualization.histogram.histogram import Histogram  # noqa
 from gradgpad.tools.visualization.gif_creator import GifCreator  # noqa
 from gradgpad.tools.visualization.histogram.split_by_level_mode import (  # noqa

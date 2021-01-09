@@ -31,13 +31,13 @@ def summary_table(output_path: str, protocol: Protocol = Protocol.GRANDTEST):
 
         performance_info = approach_results[protocol.value]
         try:
-            hter_specific = performance_info.get("hter_specific")
-            hter_aggregate = performance_info.get("hter_aggregate")
+            hter_fine_grained_pai = performance_info.get("hter_fine_grained_pai")
+            hter_coarse_grained_pai = performance_info.get("hter_coarse_grained_pai")
 
-            assert hter_specific == hter_aggregate
+            assert hter_fine_grained_pai == hter_coarse_grained_pai
 
             # Aggregate
-            aggregate_acer_info = performance_info["aggregate"]
+            aggregate_acer_info = performance_info["coarse_grained_pai"]
             # bpcer = aggregate_acer_info.get("bpcer")
             acer = aggregate_acer_info.get("acer")
             # wrost_apcer_pai = aggregate_acer_info.get("max_apcer_pai")
@@ -49,7 +49,7 @@ def summary_table(output_path: str, protocol: Protocol = Protocol.GRANDTEST):
             )
 
             # Specific
-            specific_acer_info = performance_info["specific"]
+            specific_acer_info = performance_info["fine_grained_pai"]
             sacer = specific_acer_info.get("acer")
             # wrost_specific_apcer_pai = specific_acer_info.get("max_apcer_pai")
             # wsacer = specific_acer_info.get("wacer")
@@ -60,7 +60,7 @@ def summary_table(output_path: str, protocol: Protocol = Protocol.GRANDTEST):
             )
 
             data["Protocol"].append(protocol.name)
-            data["HTER"].append(hter_aggregate)
+            data["HTER"].append(hter_coarse_grained_pai)
             data["ACER (Coarse-grain)"].append(acer)
             data["APCER@BPCER=10% (Coarse-grain)"].append(apcer_bpcer10)
             data["ACER (Fine-grain)"].append(sacer)

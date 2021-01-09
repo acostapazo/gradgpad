@@ -15,12 +15,12 @@ class Annotations:
         self.annotated_samples = annotated_samples
         self.correspondences = correspondences
 
-    @staticmethod
-    def from_items(items):
-        annotations = Annotations()
-        for item in items:
-            annotations.add_item(item)
-        return annotations
+    # @staticmethod
+    # def from_items(items):
+    #     annotations = Annotations()
+    #     for item in items:
+    #         annotations.add_item(item)
+    #     return annotations
 
     @staticmethod
     def from_dict(kdicts):
@@ -35,8 +35,8 @@ class Annotations:
             kdict = json.load(f)
         return Annotations.from_dict(kdict)
 
-    def add_item(self, item):
-        self.annotated_samples.append(Annotation.from_item(item))
+    # def add_item(self, item):
+    #     self.annotated_samples.append(Annotation.from_item(item))
 
     def to_dict(self):
         return {
@@ -79,14 +79,18 @@ class Annotations:
                     "id": annotation.id,
                     "media": annotation.media,
                     "dataset": annotation.dataset.value,
-                    "spai": {
-                        "classical": self.correspondences.get("spai", {})
-                        .get("classical")
-                        .get(annotation.spai.get("classical")),
-                        "specific": self.correspondences.get("spai", {})
-                        .get("specific")
-                        .get(annotation.spai.get("specific")),
-                        "type": annotation.spai.get("type"),
+                    "categorization": {
+                        "coarse_grained_pai": self.correspondences.get(
+                            "categorization", {}
+                        )
+                        .get("coarse_grained_pai")
+                        .get(annotation.categorization.get("coarse_grained_pai")),
+                        "fine_grained_pai": self.correspondences.get(
+                            "categorization", {}
+                        )
+                        .get("fine_grained_pai")
+                        .get(annotation.categorization.get("fine_grained_pai")),
+                        "pas_type": annotation.categorization.get("pas_type"),
                     },
                     "attributes": {
                         "person": {

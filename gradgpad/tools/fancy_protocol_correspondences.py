@@ -22,7 +22,7 @@ fancy_protocol_correspondences = {
     "cross-dataset-test-threedmad": "Cross-Dataset - 3DMAD",
     "cross-dataset-test-uvad": "Cross-Dataset - UVAD",
     "cross-dataset-test-siw-m": "Cross-Dataset - SiW-M",
-    "cross-dataset-test-hkbuv2": "Cross-Dataset - HKBU v2",
+    "cross-dataset-test-hkbuV2": "Cross-Dataset - HKBU V2",
     "cross-device-test-webcam": "Cross-Device - Webcam",
     "cross-device-test-mobile-tablet": "Cross-Device - Mobile|Tablet",
     "cross-device-test-digital_camera": "Cross-Device - Digital Camera",
@@ -43,7 +43,7 @@ fancy_protocol_correspondences = {
     "threedmad-leave-other-datasets-out": "LODO - 3DMAD",
     "uvad-leave-other-datasets-out": "LODO - UVAD",
     "siw-m-leave-other-datasets-out": "LODO - SiW-M",
-    "hkbuv2-leave-other-datasets-out": "LODO - HKBU v2",
+    "hkbuV2-leave-other-datasets-out": "LODO - HKBU V2",
 }
 
 

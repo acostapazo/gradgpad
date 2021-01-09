@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from sklearn import metrics
 import os
-import random
 import numpy as np
+
+from gradgpad.tools.visualization.colors import get_color_random_style
 
 GENUINE_FLAG = 0
 
@@ -116,7 +117,7 @@ def save_several_det_curves(dict_results, path_to_save):
 
             assert len(scores) == len(labels)
 
-            color, linestyle, marker = get_random_style()
+            color, linestyle, marker = get_color_random_style()
             inv_scores = -1.0 * scores
             far, tpr, _ = metrics.roc_curve(labels, inv_scores, pos_label=0)
             ax.plot(
@@ -147,41 +148,3 @@ def valid_labels(results_dict):
 def flatten_array(array):
     flat_labels_list = [item for sublist in array.tolist() for item in sublist]
     return np.array(flat_labels_list)
-
-
-def get_random_style():
-    colors = [
-        "blue",
-        "green",
-        "red",
-        "cyan",
-        "magenta",
-        "black",
-        "brown",
-        "chocolate",
-        "fuchsia",
-        "yellowgreen",
-        "darkorange",
-        "peru",
-        "firebrick",
-        "darkcyan",
-        "lime",
-        "gold",
-        "olive",
-        "royalblue",
-        "teal",
-        "violet",
-        "darkviolet",
-        "salmon",
-        "bisque",
-        "tan",
-        "grey",
-    ]
-    linestyles = [":", "--", "-.", "-"]
-    markers = [".", ",", "o", "v"]
-
-    color_index = random.randint(0, len(colors) - 1)
-    linestyle_index = random.randint(0, len(linestyles) - 1)
-    markers_index = random.randint(0, len(markers) - 1)
-
-    return colors[color_index], linestyles[linestyle_index], markers[markers_index]

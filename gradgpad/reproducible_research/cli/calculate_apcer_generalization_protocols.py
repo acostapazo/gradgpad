@@ -25,7 +25,7 @@ DATASET_CORRESPONDENCES = {
     "replay-attack": "Replay-Attack",
     "oulu-npu": "Oulu-NPU",
     "msu-mfsd": "MSU-MFSD",
-    "hkbuV2": "$HKBU_{v2}$",
+    "hkbuV2": "$HKBU_{V2}$",
     "hkbu": "$HKBU_{v1}$",
     "csmad": "CSMAD",
 }
@@ -84,7 +84,7 @@ def calculate_apcer_generalization_protocols(output_path: str):
         }
         for title, working_point in selected_working_points.items():
 
-            for type_apcer in ["specific", "aggregate"]:
+            for type_apcer in ["fine_grained_pai", "coarse_grained_pai"]:
                 output_path_generalization_approach = (
                     f"{output_path_generalization}/{type_apcer}/{protocol_name}"
                 )

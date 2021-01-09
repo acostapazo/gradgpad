@@ -19,10 +19,10 @@ def test_should_calculate_pai_stats():
     assert list(pai_stats.keys()) == [
         "num_genuines",
         "num_attacks",
-        "num_type_pai",
+        "num_samples_pas_type",
         "num_coarse_grained_pai",
         "num_fine_grained_pai",
-        "percentage_num_type_pai",
+        "percentage_num_samples_pas_type",
         "percentage_num_coarse_grained_pai",
         "percentage_num_fine_grained_pai",
     ]

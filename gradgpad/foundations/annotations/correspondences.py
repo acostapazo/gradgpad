@@ -1,6 +1,6 @@
 ANNOTATION_CORRESPONDENCES = {
-    "spai": {
-        "classical": {
+    "categorization": {
+        "coarse_grained_pai": {
             0: "genuine",
             1: "print",
             2: "replay",
@@ -8,7 +8,7 @@ ANNOTATION_CORRESPONDENCES = {
             5: "makeup",
             6: "partial",
         },
-        "specific": {
+        "fine_grained_pai": {
             0: "genuine",
             1: "print low quality",  # dpi <= 600
             2: "print medium quality",  # 609 < dpi <= 1000

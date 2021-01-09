@@ -89,7 +89,7 @@ def create_apcer_by_pai(
     detail_values = []
     apcers = {}
     for approach_name, result_protocol in results_protocol.items():
-        apcer_per_pai_fixing_bpcer = result_protocol["fine-grained-pais"][
+        apcer_per_pai_fixing_bpcer = result_protocol["fine_grained_pai"][
             "apcer_per_pai_fixing_bpcer"
         ]
 
@@ -110,7 +110,7 @@ def create_apcer_by_subprotocol(
     results,
     working_point: WorkingPoint,
     filter_common: str = None,
-    type_apcer="fine-grained-pais",
+    type_apcer="fine_grained_pai",
 ):
     detail_values = []
     apcers = {}

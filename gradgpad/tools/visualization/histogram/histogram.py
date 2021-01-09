@@ -6,8 +6,13 @@ import matplotlib.patches as mpatches
 import numpy as np
 import warnings
 
+from typing import List
 from gradgpad.foundations.scores import Scores
+from gradgpad.tools.visualization.colors import COLORS_LABEL_CORRESPONDENCES
 from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
+from gradgpad.tools.visualization.scores_and_labels_formatter import (
+    ScoresAndLabelsFormatter,
+)
 
 warnings.filterwarnings("ignore", module="matplotlib")
 
@@ -28,11 +33,10 @@ class Histogram:
         normalize=False,
         y_max_value=None,
         split_by_label_mode: SplitByLabelMode = SplitByLabelMode.NONE,
-        genuine_label=0,
+        genuine_label: int = 0,
+        exclude_labels: List[int] = None,
     ):
         """
-        This function saves a static histogram
-
         Parameters
         ----------
         title: str
@@ -49,6 +53,8 @@ class Histogram:
             Select the way of subdivision of labels
         genuine_label: int
             label that corresponds to the genuine class
+        exclude_labels: list
+            List of excluded labels
         """
         self.title = title
         self.plot_vertical_line_on_value = plot_vertical_line_on_value
@@ -58,6 +64,7 @@ class Histogram:
         self.split_by_label_mode = split_by_label_mode
         self.split_labels_correspondences = None
         self.genuine_label = genuine_label
+        self.exclude_labels = exclude_labels
 
     def _calculate_genuine_and_impostor_histogram(self, np_scores, np_labels, plt):
         # Genuine
@@ -97,97 +104,56 @@ class Histogram:
         return legend, max_value
 
     def _calculate_subdivided_histogram(self, np_scores, np_labels, plt):
-        colors = {
-            -1: "red",
-            0: "green",
-            1: "blue",
-            2: "orange",
-            3: "magenta",
-            4: "indigo",
-            5: "yellowgreen",
-            6: "hotpink",
-            7: "springgreen",
-        }
+
+        unique_labels = np.unique(np_labels)
 
         legend = []
         max_value = 0
-        for label in np.unique(np_labels):
+        alpha = 0.9
+        alpha_interval_decreasing = 0.5 / len(unique_labels)
+        for label in unique_labels:
+            color = COLORS_LABEL_CORRESPONDENCES.get(label)
+
+            if self.exclude_labels and label in self.exclude_labels:
+                continue
             scores_subdivision = np_scores[np_labels == label]
             hist_subdivision, edges_subdivision = np.histogram(
                 scores_subdivision, bins=50
             )
             if self.normalize:
-                hist_subdivision = (
-                    hist_subdivision / hist_subdivision.max()
-                )  # TODO REVIEW
+                hist_subdivision = hist_subdivision / hist_subdivision.max()
+
+            if alpha >= 0.5:
+                alpha -= alpha_interval_decreasing
 
             plt.bar(
                 (edges_subdivision[1:] + edges_subdivision[:-1]) * 0.5,
                 hist_subdivision,
                 width=(edges_subdivision[1] - edges_subdivision[0]),
-                facecolor=colors[label],
-                alpha=0.5,
+                facecolor=color,
+                alpha=alpha,
             )
 
-            label_correspondence = self.split_labels_correspondences.get(label)
-
-            impostor_subtype_patch = mpatches.Patch(
-                color=colors[label],
-                label=f"{label_correspondence} ({len(scores_subdivision)})",
+            label_correspondence = self.split_labels_correspondences.get(
+                label, "Unknown"
             )
-            legend.append(impostor_subtype_patch)
+
+            patch = mpatches.Patch(
+                color=color, label=f"{label_correspondence} ({len(scores_subdivision)})"
+            )
+            legend.append(patch)
 
             if max(hist_subdivision) > max_value:
                 max_value = max(hist_subdivision)
 
-        # genuine = np_scores[np_labels == self.genuine_label]
-        # hist_gen, edges_gen = np.histogram(genuine, bins=50)
-        # if self.normalize:
-        #     hist_gen = hist_gen / hist_gen.max()
-        #
-        # impostors = np_scores[np_labels != self.genuine_label]
-        #
-        # hist_impos, edges_impos = np.histogram(impostors, bins=50)
-        # if self.normalize:
-        #     hist_impos = hist_impos / hist_impos.max()
-        #
-        # red_patch = mpatches.Patch(
-        #     color="red", label="Impostors ({})".format(len(impostors)), alpha=0.5
-        # )
-        # green_patch = mpatches.Patch(
-        #     color="green", label="Genuine ({})".format(len(genuine)), alpha=0.5
-        # )
-
-        # for label in range(1, max(np_labels) + 1):
-        #     impostors_subtype = np_scores[np_labels == label]
-        #     hist_impos_subtype, edges_impos_subtype = np.histogram(
-        #         impostors_subtype, bins=50
-        #     )
-        #     if self.normalize:
-        #         hist_impos_subtype = hist_impos_subtype / hist_impos_subtype.max()
-        #
-        #     plt.bar(
-        #         (edges_impos[1:] + edges_impos[:-1]) * 0.5,
-        #         hist_impos_subtype,
-        #         width=(edges_impos_subtype[1] - edges_impos_subtype[0]),
-        #         facecolor=colors[label],
-        #         alpha=0.5,
-        #     )
-        #
-        #     label_correspondence = self.split_labels_correspondences.get(label)
-        #
-        #     impostor_subtype_patch = mpatches.Patch(
-        #         color=colors[label],
-        #         label=f"Impostors {label_correspondence} ({len(impostors_subtype)})",
-        #     )
-        #     legend.append(impostor_subtype_patch)
         return legend, max_value
 
     def _calculate_histogram(self, np_scores, np_labels):
 
         scores = copy.deepcopy(np.ravel(np_scores))
 
-        plt.figure()
+        plt.close()
+        plt.figure(figsize=(10, 10))
         plt.xlabel("Score")
         plt.ylabel("Count")
         plt.title(self.title)
@@ -256,43 +222,11 @@ class Histogram:
 
         return plt
 
-    def _get_operative_data(self, scores):
-        np_scores = scores.get_numpy_scores()
-
-        if self.split_by_label_mode == SplitByLabelMode.NONE:
-            np_labels = scores.get_numpy_labels()
-        elif self.split_by_label_mode == SplitByLabelMode.PAS:
-            np_labels = scores.get_numpy_labels_by_scenario()
-            self.split_labels_correspondences = {
-                0: "Genuine",
-                1: "PAS Type I",
-                2: "PAS Type II",
-                3: "PAS Type III",
-            }
-        elif self.split_by_label_mode == SplitByLabelMode.SEX:
-            np_labels = scores.get_numpy_labels_by_sex()
-            self.split_labels_correspondences = {-1: "IMPOSTOR", 0: "MALE", 1: "FEMALE"}
-        elif self.split_by_label_mode == SplitByLabelMode.AGE:
-            np_labels = scores.get_numpy_labels_by_age()
-            self.split_labels_correspondences = {
-                -1: "IMPOSTOR",
-                0: "YOUNG",
-                1: "ADULT",
-                2: "SENIOR",
-            }
-        elif self.split_by_label_mode == SplitByLabelMode.SKIN_TONE:
-            np_labels = scores.get_numpy_labels_by_skin_tone()
-            self.split_labels_correspondences = {
-                -1: "IMPOSTOR",
-                0: "YOUNG",
-                1: "ADULT",
-                3: "SENIOR",
-            }
-
-        return np_scores, np_labels
-
     def show(self, scores: Scores):
-        np_scores, np_labels = self._get_operative_data(scores)
+        np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
+            scores, self.split_by_label_mode, self.exclude_labels
+        )
+
         plt = self._calculate_histogram(np_scores, np_labels)
         plt.show()
 
@@ -305,7 +239,9 @@ class Histogram:
                 )
             )
 
-        np_scores, np_labels = self._get_operative_data(scores)
+        np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
+            scores, self.split_by_label_mode, self.exclude_labels
+        )
         plt = self._calculate_histogram(np_scores, np_labels)
         plt.savefig(output_filename)
         plt.close("all")

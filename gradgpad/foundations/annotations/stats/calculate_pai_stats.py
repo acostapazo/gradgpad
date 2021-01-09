@@ -6,7 +6,7 @@ def calculate_pai_stats(annotations: Annotations):
     pai_stats = {
         "num_genuines": 0,
         "num_attacks": 0,
-        "num_type_pai": {"type_1": 0, "type_2": 0, "type_3": 0},
+        "num_samples_pas_type": {"pas_type_1": 0, "pas_type_2": 0, "pas_type_3": 0},
         "num_coarse_grained_pai": {
             "print": 0,
             "replay": 0,
@@ -36,13 +36,13 @@ def calculate_pai_stats(annotations: Annotations):
     }
 
     for annotation in annotations.annotated_samples:
-        spai = annotation.spai
-        coarse_grain_pai = ANNOTATION_CORRESPONDENCES["spai"]["classical"][
-            spai.get("classical")
-        ]
-        fine_grain_pai = ANNOTATION_CORRESPONDENCES["spai"]["specific"][
-            spai.get("specific")
-        ]
+        categorization = annotation.categorization
+        coarse_grain_pai = ANNOTATION_CORRESPONDENCES["categorization"][
+            "coarse_grained_pai"
+        ][categorization.get("coarse_grained_pai")]
+        fine_grain_pai = ANNOTATION_CORRESPONDENCES["categorization"][
+            "fine_grained_pai"
+        ][categorization.get("fine_grained_pai")]
 
         if coarse_grain_pai == "genuine":
             pai_stats["num_genuines"] += 1
@@ -50,10 +50,10 @@ def calculate_pai_stats(annotations: Annotations):
             pai_stats["num_attacks"] += 1
             pai_stats["num_coarse_grained_pai"][coarse_grain_pai] += 1
             pai_stats["num_fine_grained_pai"][fine_grain_pai] += 1
-            type_pai = spai["type"]
-            pai_stats["num_type_pai"][f"type_{type_pai}"] += 1
+            pas_type = categorization["pas_type"]
+            pai_stats["num_samples_pas_type"][f"pas_type_{pas_type}"] += 1
 
-    pai_stats = add_percentages_to_pai_stats(pai_stats, "num_type_pai")
+    pai_stats = add_percentages_to_pai_stats(pai_stats, "num_samples_pas_type")
     pai_stats = add_percentages_to_pai_stats(pai_stats, "num_coarse_grained_pai")
     pai_stats = add_percentages_to_pai_stats(pai_stats, "num_fine_grained_pai")
     return pai_stats

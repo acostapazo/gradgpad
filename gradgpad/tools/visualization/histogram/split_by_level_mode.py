@@ -8,6 +8,11 @@ class SplitByLabelMode(Enum):
     SEX = "sex"
     AGE = "age"
     SKIN_TONE = "skin_tone"
+    DATASET = "dataset"
+    DATASET_GENUINE = "dataset_genuine"
+    DATASET_PAS_TYPE_I = "dataset_pas_type_I"
+    DATASET_PAS_TYPE_II = "dataset_pas_type_II"
+    DATASET_PAS_TYPE_III = "dataset_pas_type_III"
 
     @staticmethod
     def options() -> List:
@@ -17,4 +22,19 @@ class SplitByLabelMode(Enum):
             SplitByLabelMode.SEX,
             SplitByLabelMode.AGE,
             SplitByLabelMode.SKIN_TONE,
+            SplitByLabelMode.DATASET,
+            SplitByLabelMode.DATASET_GENUINE,
+            SplitByLabelMode.DATASET_PAS_TYPE_I,
+            SplitByLabelMode.DATASET_PAS_TYPE_II,
+            SplitByLabelMode.DATASET_PAS_TYPE_III,
+        ]
+
+    @staticmethod
+    def options_for_curves():
+        return [
+            SplitByLabelMode.SEX,
+            SplitByLabelMode.AGE,
+            SplitByLabelMode.SKIN_TONE,
+            SplitByLabelMode.DATASET,
+            SplitByLabelMode.PAS,
         ]

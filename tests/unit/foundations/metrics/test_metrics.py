@@ -59,5 +59,5 @@ def test_should_calculate_indeepth_analysis(devel_scores, test_scores):
         bpcer_fixing_working_points, apcer_fixing_working_points
     )
 
-    assert pytest.approx(indepth_analysis["fine-grained-pais"]["acer"], 0.01) == 59.60
-    assert pytest.approx(indepth_analysis["coarse-grained-pais"]["acer"], 0.01) == 36.06
+    assert pytest.approx(indepth_analysis["fine_grained_pai"]["acer"], 0.01) == 59.60
+    assert pytest.approx(indepth_analysis["coarse_grained_pai"]["acer"], 0.01) == 36.06

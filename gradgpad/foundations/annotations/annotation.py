@@ -11,28 +11,28 @@ class Annotation:
         id: str,
         media: str,
         dataset: DatasetName,
-        spai: Dict[str, Any],
+        categorization: Dict[str, Any],
         attributes: Attributes,
     ):
         self.id = id
         self.media = media
         self.dataset = dataset
-        self.spai = spai
+        self.categorization = categorization
         self.attributes = attributes
 
-    @staticmethod
-    def from_item(item):
-        return Annotation(
-            id=item.id,
-            media=item.media,
-            dataset=DatasetName.from_item(item),
-            spai={
-                "classical": int(item.label),
-                "specific": int(item.info.get("common_pai", -1)),
-                "type": int(item.info.get("type_pai", -1)),
-            },
-            attributes=Attributes.from_item(item),
-        )
+    # @staticmethod
+    # def from_item(item):
+    #     return Annotation(
+    #         id=item.id,
+    #         media=item.media,
+    #         dataset=DatasetName.from_item(item),
+    #         categorization={
+    #             "coarse_grained_pai": int(item.label),
+    #             "fine_grained_pai": int(item.info.get("common_pai", -1)),
+    #             "pas_type": int(item.info.get("type_pai", -1)),
+    #         },
+    #         attributes=Attributes.from_item(item),
+    #     )
 
     @staticmethod
     def from_dict(kdict):
@@ -40,7 +40,7 @@ class Annotation:
             id=kdict.get("id"),
             media=kdict.get("media"),
             dataset=DatasetName(kdict.get("dataset")),
-            spai=kdict.get("spai"),
+            categorization=kdict.get("categorization"),
             attributes=Attributes.from_dict(kdict.get("attributes")),
         )
 
@@ -49,7 +49,7 @@ class Annotation:
             "id": self.id,
             "media": self.media,
             "dataset": self.dataset.value,
-            "spai": self.spai,
+            "categorization": self.categorization,
             "attributes": self.attributes.to_dict(),
         }
 
