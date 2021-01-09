@@ -1,7 +1,3 @@
-from typing import List
-
-from gradgpad.tools.visualization.radar.create_apcer_detail import WorkingPoint
-
 REGULAR_AND_BOLD_PAI_CORRESPONDENCES = {
     "MAKEUP COSMETIC": "Makeup\n" + r"$\bf{Cosmetic}$",
     "MAKEUP IMPERSONATION": "Makeup\n" + r"$\bf{Impersonation}$",
@@ -60,23 +56,3 @@ BOLD_PAI_CORRESPONDENCES = {
     "REPLAY MEDIUM QUALITY": r"$\bf{Replay}$" + "\n" + r"$\bf{Medium Quality}$",
     "REPLAY HIGH QUALITY": r"$\bf{Replay}$" + "\n" + r"$\bf{High Quality}$",
 }
-
-
-class ConfigRadar:
-    def __init__(
-        self,
-        title: str,
-        working_point: WorkingPoint,
-        filter_pais: List[str] = None,
-        correspondences: dict = None,
-        fontsize_vertices: int = 30,
-        representation_order: list = PAI_REPRESENTATION_ORDER,
-        fancy_correspondences: dict = BOLD_PAI_CORRESPONDENCES,
-    ):
-        self.title = title
-        self.working_point = working_point
-        self.filter_pais = filter_pais
-        self.correspondences = correspondences
-        self.fontsize_vertices = fontsize_vertices
-        self.representation_order = representation_order
-        self.fancy_correspondences = fancy_correspondences

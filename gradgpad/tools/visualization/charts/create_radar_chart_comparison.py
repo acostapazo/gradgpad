@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Tuple
 
 import matplotlib.pyplot as plt
 
@@ -12,6 +12,7 @@ def create_radar_chart_comparison(
     output_filename: str,
     correspondences: Dict = None,
     fontsize_vertices=30,
+    figsize: Tuple = None,
 ):
 
     # apcer_by_pai.print()
@@ -25,9 +26,10 @@ def create_radar_chart_comparison(
     spoke_labels = data.pop(0)
     title, case_data = data[0]
 
-    figsize = (15, 14)
-    if N <= 3:
-        figsize = (15, 12)
+    if figsize:
+        figsize = (15, 14)
+        if N <= 3:
+            figsize = (15, 12)
 
     fig, ax = plt.subplots(figsize=figsize, subplot_kw=dict(projection="radar"))
     # fig.subplots_adjust(top=0.95, bottom=0.0)

@@ -39,13 +39,15 @@ from gradgpad.tools.visualization.histogram.split_by_level_mode import (  # noqa
 from gradgpad.tools.visualization.radar.combined_scenario import (  # noqa
     CombinedScenario,  # noqa
 )  # noqa
-from gradgpad.tools.visualization.radar.config_radar import ConfigRadar  # noqa
 from gradgpad.tools.visualization.radar.fine_grained_pais_provider import (  # noqa
     FineGrainedPaisProvider,  # noqa
 )  # noqa
 from gradgpad.tools.visualization.radar.radar import Radar  # noqa
 from gradgpad.tools.visualization.radar.create_apcer_detail import (  # noqa
     WorkingPoint,  # noqa
+)  # noqa
+from gradgpad.tools.visualization.radar.radar_correspondences import (  # noqa
+    BOLD_PAI_CORRESPONDENCES,  # noqa
 )  # noqa
 
 

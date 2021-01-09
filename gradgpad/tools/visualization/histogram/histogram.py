@@ -6,7 +6,7 @@ import matplotlib.patches as mpatches
 import numpy as np
 import warnings
 
-from typing import List
+from typing import List, Tuple
 from gradgpad.foundations.scores import Scores
 from gradgpad.tools.visualization.colors import COLORS_LABEL_CORRESPONDENCES
 from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
@@ -35,6 +35,7 @@ class Histogram:
         split_by_label_mode: SplitByLabelMode = SplitByLabelMode.NONE,
         genuine_label: int = 0,
         exclude_labels: List[int] = None,
+        figsize: Tuple = (8, 8),
     ):
         """
         Parameters
@@ -55,6 +56,8 @@ class Histogram:
             label that corresponds to the genuine class
         exclude_labels: list
             List of excluded labels
+        figsize: Tuple
+            size of the figure
         """
         self.title = title
         self.plot_vertical_line_on_value = plot_vertical_line_on_value
@@ -65,6 +68,7 @@ class Histogram:
         self.split_labels_correspondences = None
         self.genuine_label = genuine_label
         self.exclude_labels = exclude_labels
+        self.figsize = figsize
 
     def _calculate_genuine_and_impostor_histogram(self, np_scores, np_labels, plt):
         # Genuine

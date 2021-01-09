@@ -1,4 +1,5 @@
 import os
+from typing import Tuple
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
@@ -30,6 +31,7 @@ class Det:
         split_by_label_mode: SplitByLabelMode = SplitByLabelMode.NONE,
         genuine_label: int = 0,
         exclude_labels: List[int] = None,
+        figsize: Tuple = (8, 8),
     ):
         """
         Parameters
@@ -42,6 +44,8 @@ class Det:
             label that corresponds to the genuine class
         exclude_labels: list
             List of excluded labels
+        figsize: Tupla
+            size of the figure
         """
         self.title = title
 
@@ -53,6 +57,7 @@ class Det:
         self.split_labels_correspondences = None
         self.genuine_label = genuine_label
         self.exclude_labels = exclude_labels
+        self.figsize = figsize
 
     def _plot_curve(
         self, plt, scores, labels, label_correspondence="All", suffix_label=""
@@ -81,7 +86,7 @@ class Det:
 
     def _calculate_det_curve(self, np_scores, np_labels):
 
-        plt.figure(figsize=(10, 10))
+        plt.figure(figsize=self.figsize)
         plt.title(self.title)
         plt.ylim((0, 1))
         plt.xlim((0, 1))
