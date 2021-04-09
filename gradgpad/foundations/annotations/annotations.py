@@ -3,6 +3,9 @@ from typing import List
 
 from gradgpad.foundations.annotations.annotation import Annotation
 from gradgpad.foundations.annotations.correspondences import ANNOTATION_CORRESPONDENCES
+from gradgpad.foundations.annotations.stats.calculate_pai_stats import (
+    calculate_pai_stats,
+)
 from gradgpad.public_api import GRADGPAD_PATH
 
 
@@ -59,6 +62,9 @@ class Annotations:
     def save(self, filename: str):
         with open(filename, "w") as f:
             json.dump(self.to_dict(), f, indent=4, sort_keys=True)
+
+    def statistics(self):
+        return calculate_pai_stats(self.annotated_samples)
 
     def print(self):
         print(json.dumps(self.to_dict(), indent=4, sort_keys=True))

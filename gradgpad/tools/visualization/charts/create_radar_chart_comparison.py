@@ -9,7 +9,6 @@ from gradgpad.tools.visualization.radar.create_apcer_detail import ApcerDetail
 def create_radar_chart_comparison(
     title: str,
     apcer_by_pai: ApcerDetail,
-    output_filename: str,
     correspondences: Dict = None,
     fontsize_vertices=30,
     figsize: Tuple = None,
@@ -26,7 +25,7 @@ def create_radar_chart_comparison(
     spoke_labels = data.pop(0)
     title, case_data = data[0]
 
-    if figsize:
+    if not figsize:
         figsize = (15, 14)
         if N <= 3:
             figsize = (15, 12)
@@ -99,8 +98,4 @@ def create_radar_chart_comparison(
         else:
             tick.set_color("green")
 
-    if output_filename is None:
-        plt.show()
-    else:
-        plt.tight_layout()
-        plt.savefig(output_filename)
+    return plt

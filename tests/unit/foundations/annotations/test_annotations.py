@@ -1,7 +1,5 @@
 import pytest
 
-from gradgpad import calculate_pai_stats
-
 
 @pytest.mark.unit
 def test_should_load_annotations():
@@ -11,10 +9,10 @@ def test_should_load_annotations():
 
 
 @pytest.mark.unit
-def test_should_calculate_pai_stats():
+def test_should_check_annotations_statistics():
     from gradgpad import annotations
 
-    pai_stats = calculate_pai_stats(annotations)
+    pai_stats = annotations.statistics()
 
     assert list(pai_stats.keys()) == [
         "num_genuines",

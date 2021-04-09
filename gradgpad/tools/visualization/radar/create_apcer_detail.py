@@ -3,6 +3,8 @@ from typing import List, Dict
 
 from dataclasses import dataclass
 
+from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
+
 
 class WorkingPoint(Enum):
     BPCER_1 = "apcer_fixing_bpcer1"
@@ -110,7 +112,7 @@ def create_apcer_by_subprotocol(
     results,
     working_point: WorkingPoint,
     filter_common: str = None,
-    type_apcer="fine_grained_pai",
+    grained_pai_mode: GrainedPaiMode = GrainedPaiMode.FINE,
 ):
     detail_values = []
     apcers = {}
@@ -122,14 +124,15 @@ def create_apcer_by_subprotocol(
         for subprotocol_name, result_subprotocol in sorted(result_protocols.items()):
 
             if filter_common:
+                if filter_common not in subprotocol_name:
+                    continue
                 subprotocol_name = subprotocol_name.replace(filter_common, "")
             detail_values.append(subprotocol_name)
-            apcer_subprotocol = result_subprotocol[type_apcer][
+
+            apcer_subprotocol = result_subprotocol[grained_pai_mode.value][
                 "relative_working_points"
             ]["apcer"][value_bpcer(working_point)]
 
             apcers[approach_name].append(apcer_subprotocol)
-
-            # print(f"{subprotocol_name} -> {apcer_subprotocol}")
 
     return ApcerDetail(detail_values, apcers)

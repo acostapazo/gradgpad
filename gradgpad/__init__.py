@@ -1,54 +1,41 @@
 from gradgpad import public_api
-from gradgpad.foundations.annotations.annotations import annotations  # noqa
-from gradgpad.foundations.annotations.demographic import Demographic  # noqa
-from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode  # noqa
-from gradgpad.foundations.annotations.person_attributes import (  # noqa
-    SKIN_TONE_GROUP_POLICY,  # noqa
-)  # noqa
-from gradgpad.foundations.annotations.stats.calculate_pai_stats import (  # noqa
-    calculate_pai_stats,  # noqa
-)  # noqa
-from gradgpad.foundations.annotations.dataset import Dataset  # noqa
-from gradgpad.foundations.annotations.filter import Filter  # noqa
-from gradgpad.foundations.annotations.device import Device  # noqa
-from gradgpad.foundations.annotations.coarse_grained_pai import CoarseGrainedPai  # noqa
-from gradgpad.foundations.annotations.scenario import Scenario  # noqa
-from gradgpad.foundations.annotations.person_attributes import (  # noqa
-    Sex,  # noqa
-    Age,  # noqa
-    SkinTone,  # noqa
-)  # noqa
-from gradgpad.foundations.metrics.metric import Metric  # noqa
-from gradgpad.foundations.metrics.metrics import Metrics  # noqa
-from gradgpad.foundations.metrics.metrics_demographics import (  # noqa
-    MetricsDemographics,  # noqa
-)  # noqa
-from gradgpad.foundations.results.results_provider import (  # noqa
-    ResultsProvider,  # noqa
-)  # noqa
-from gradgpad.foundations.scores.approach import Approach  # noqa
-from gradgpad.foundations.scores.protocol import Protocol  # noqa
-from gradgpad.foundations.scores.scores_provider import ScoresProvider  # noqa
-from gradgpad.foundations.scores.subset import Subset  # noqa
-from gradgpad.tools.visualization.det.det import Det  # noqa
-from gradgpad.tools.visualization.histogram.histogram import Histogram  # noqa
-from gradgpad.tools.visualization.gif_creator import GifCreator  # noqa
-from gradgpad.tools.visualization.histogram.split_by_level_mode import (  # noqa
-    SplitByLabelMode,  # noqa
-)  # noqa
-from gradgpad.tools.visualization.radar.combined_scenario import (  # noqa
-    CombinedScenario,  # noqa
-)  # noqa
-from gradgpad.tools.visualization.radar.fine_grained_pais_provider import (  # noqa
-    FineGrainedPaisProvider,  # noqa
-)  # noqa
-from gradgpad.tools.visualization.radar.radar import Radar  # noqa
-from gradgpad.tools.visualization.radar.create_apcer_detail import (  # noqa
-    WorkingPoint,  # noqa
-)  # noqa
-from gradgpad.tools.visualization.radar.radar_correspondences import (  # noqa
-    BOLD_PAI_CORRESPONDENCES,  # noqa
-)  # noqa
-
+from gradgpad.foundations.annotations.annotations import annotations
+from gradgpad.foundations.annotations.demographic import Demographic
+from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
+from gradgpad.foundations.annotations.person_attributes import SKIN_TONE_GROUP_POLICY
+from gradgpad.foundations.annotations.dataset import Dataset
+from gradgpad.foundations.annotations.filter import Filter
+from gradgpad.foundations.annotations.device import Device
+from gradgpad.foundations.annotations.coarse_grained_pai import CoarseGrainedPai
+from gradgpad.foundations.annotations.scenario import Scenario
+from gradgpad.foundations.annotations.person_attributes import Sex, Age, SkinTone
+from gradgpad.foundations.metrics.generalization_metrics import GeneralizationMetrics
+from gradgpad.foundations.metrics.metric import Metric
+from gradgpad.foundations.metrics.metrics import Metrics
+from gradgpad.foundations.metrics.metrics_demographics import MetricsDemographics
+from gradgpad.foundations.results.results_provider import ResultsProvider
+from gradgpad.foundations.scores.approach import Approach
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.foundations.scores.scores_provider import ScoresProvider
+from gradgpad.foundations.scores.subset import Subset
+from gradgpad.tools.visualization.det.det_plotter import DetPlotter
+from gradgpad.tools.visualization.histogram.histogram_plotter import HistogramPlotter
+from gradgpad.tools.visualization.gif_creator import GifCreator
+from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
+from gradgpad.tools.visualization.percentile.bias_percentile_plotter import (
+    BiasPercentilePlotter,
+)
+from gradgpad.tools.visualization.radar.combined_scenario import CombinedScenario
+from gradgpad.tools.visualization.radar.fine_grained_pais_provider import (
+    FineGrainedPaisProvider,
+)
+from gradgpad.tools.visualization.radar.pad_radar_pai_plotter import PadRadarPaiPlotter
+from gradgpad.tools.visualization.radar.create_apcer_detail import WorkingPoint
+from gradgpad.tools.visualization.radar.pad_radar_protocol_plotter import (
+    PadRadarProtocolPlotter,
+)
+from gradgpad.tools.visualization.radar.radar_correspondences import (
+    BOLD_PAI_CORRESPONDENCES,
+)
 
 __all__ = public_api.__all__

@@ -42,7 +42,16 @@ optional arguments:
                         Output path
 ```
 
-## Getting Started 
+## Getting Started: Development
+
+## Install
+
+```console
+>> conda create -n grad-gpad python=3.6
+>> conda activate grad-gpad
+(grad-gpad) >> pip install lume
+(grad-gpad) >> lume -install
+```
 
 
 ## Testing :white_check_mark:
@@ -52,9 +61,4 @@ optional arguments:
 ```console
 (myenv) >> lume -test
 ```
-
-
-## Contact :mailbox_with_mail:
-
-support@alicebiometrics.com
 

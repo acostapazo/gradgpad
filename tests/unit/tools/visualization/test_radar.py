@@ -5,13 +5,10 @@ import pytest
 from gradgpad import (
     ResultsProvider,
     Approach,
-    ConfigRadar,
-    Radar,
+    PadRadarPaiPlotter,
     WorkingPoint,
     Protocol,
-)
-from gradgpad.tools.visualization.radar.fine_grained_pais_provider import (
-    FineGrainedPaisProvider,
+    CombinedScenario,
 )
 
 APPROACH_RESULTS = {
@@ -32,12 +29,11 @@ APPROACH_RESULTS = {
 )
 def test_should_save_a_radar(working_point, approach_results):
     output_filename = "output/radar.png"
-    config_radar = ConfigRadar(
+    radar = PadRadarPaiPlotter(
         title="My Title",
         working_point=working_point,
-        filter_pais=FineGrainedPaisProvider.pas_I_and_II(),
+        combined_scenario=CombinedScenario.PAS_I_AND_II,
     )
-    radar = Radar(config_radar)
     radar.save(output_filename=output_filename, results=approach_results)
 
     assert os.path.isfile(output_filename)

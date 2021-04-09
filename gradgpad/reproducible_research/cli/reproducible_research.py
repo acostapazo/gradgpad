@@ -2,8 +2,8 @@ import os
 import time
 import warnings
 
-from gradgpad.reproducible_research.cli.calculate_apcer_generalization_protocols import (
-    calculate_apcer_generalization_protocols,
+from gradgpad.reproducible_research.cli.calculate_pad_radar_by_generalization_protocols import (
+    calculate_pad_radar_by_generalization_protocols,
 )
 from gradgpad.reproducible_research.cli.calculate_demographic_bpcer_bar_chart import (
     calculate_demographic_bpcer_bar_chart,
@@ -16,9 +16,6 @@ from gradgpad.reproducible_research.cli.calculate_demographic_percentile_compari
 )
 from gradgpad.reproducible_research.cli.calculate_hists_and_curves import (
     calculate_hists_and_curves,
-)
-from gradgpad.reproducible_research.cli.calculate_lifelong_learning_apcer_generalization_protocols import (
-    calculate_lifelong_learning_apcer_generalization_protocols,
 )
 from gradgpad.reproducible_research.cli.calculate_pad_radar_by_pai import (
     calculate_pad_radar_by_pai,
@@ -40,7 +37,7 @@ def reproducible_research(output_path: str):
 
         # Novel proposals
         calculate_pad_radar_by_pai(output_path)
-        calculate_apcer_generalization_protocols(output_path)
+        calculate_pad_radar_by_generalization_protocols(output_path)
 
         # Demographic Experiments
         calculate_demographic_bpcer_bar_chart(output_path)
@@ -56,7 +53,7 @@ def reproducible_research(output_path: str):
         )
 
         # Additional experiments
-        calculate_lifelong_learning_apcer_generalization_protocols(output_path)
+        # calculate_lifelong_learning_apcer_generalization_protocols(output_path)
 
     print(f"Reproducible Research Results: {output_path}")
     end = time.time()

@@ -32,7 +32,7 @@ def calculate_demographic_bpcer_bar_chart(output_path: str):
         ),
     }
 
-    for demographic in Demographic.options():
+    for demographic in [Demographic.SEX, Demographic.AGE, Demographic.SKIN_TONE]:
         filename = f"{output_path_demographic_bar_charts}/{demographic.value}_bpcer_comparision_bar_chart.png"
         df = create_demographic_dataframe_comparison(
             metric, demographic, approach_scores_subset

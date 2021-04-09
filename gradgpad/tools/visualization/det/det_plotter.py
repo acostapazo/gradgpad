@@ -10,6 +10,7 @@ from sklearn import metrics
 from gradgpad.foundations.scores import Scores, List
 from gradgpad.tools.visualization.colors import get_color_random_style
 from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
+from gradgpad.tools.visualization.interface_plotter import IPlotter
 from gradgpad.tools.visualization.scores_and_labels_formatter import (
     ScoresAndLabelsFormatter,
 )
@@ -17,14 +18,7 @@ from gradgpad.tools.visualization.scores_and_labels_formatter import (
 warnings.filterwarnings("ignore", module="matplotlib")
 
 
-def valid_labels(np_labels):
-    if np.any(np_labels == None):  # noqa
-        return False
-    else:
-        return True
-
-
-class Det:
+class DetPlotter(IPlotter):
     def __init__(
         self,
         title="DET",
@@ -194,12 +188,15 @@ class Det:
             plt.legend(handles=handles)
         return plt
 
-    def show(self, scores: Scores):
-
+    def create_figure(self, scores: Scores):
         np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
             scores, self.split_by_label_mode
         )
         plt = self._calculate_det_curve(np_scores, np_labels)
+        return plt
+
+    def show(self, scores: Scores):
+        plt = self.create_figure(scores)
         plt.show()
 
     def save(self, output_filename: str, scores: Scores):
@@ -211,9 +208,6 @@ class Det:
                 )
             )
 
-        np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
-            scores, self.split_by_label_mode
-        )
-        plt = self._calculate_det_curve(np_scores, np_labels)
+        plt = self.create_figure(scores)
         plt.savefig(output_filename)
         plt.close("all")

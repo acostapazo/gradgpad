@@ -1,8 +1,9 @@
-from gradgpad.foundations.annotations.annotations import Annotations
+from typing import List
+
 from gradgpad.foundations.annotations.correspondences import ANNOTATION_CORRESPONDENCES
 
 
-def calculate_pai_stats(annotations: Annotations):
+def calculate_pai_stats(annotated_samples: List):
     pai_stats = {
         "num_genuines": 0,
         "num_attacks": 0,
@@ -35,7 +36,7 @@ def calculate_pai_stats(annotations: Annotations):
         },
     }
 
-    for annotation in annotations.annotated_samples:
+    for annotation in annotated_samples:
         categorization = annotation.categorization
         coarse_grain_pai = ANNOTATION_CORRESPONDENCES["categorization"][
             "coarse_grained_pai"

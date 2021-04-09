@@ -36,3 +36,12 @@ class Protocol(Enum):
             Protocol.LODO,
             Protocol.UNSEEN_ATTACK,
         ]
+
+    @staticmethod
+    def grandtest_options() -> List:
+        return [
+            Protocol.GRANDTEST,
+            Protocol.GRANDTEST_SEX_50_50,
+            Protocol.GRANDTEST_SEX_80_20,
+            Protocol.GRANDTEST_SEX_90_10,
+        ]

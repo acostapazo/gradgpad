@@ -10,6 +10,7 @@ from typing import List, Tuple
 from gradgpad.foundations.scores import Scores
 from gradgpad.tools.visualization.colors import COLORS_LABEL_CORRESPONDENCES
 from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
+from gradgpad.tools.visualization.interface_plotter import IPlotter
 from gradgpad.tools.visualization.scores_and_labels_formatter import (
     ScoresAndLabelsFormatter,
 )
@@ -17,14 +18,7 @@ from gradgpad.tools.visualization.scores_and_labels_formatter import (
 warnings.filterwarnings("ignore", module="matplotlib")
 
 
-def valid_labels(np_labels):
-    if np.any(np_labels == None):  # noqa
-        return False
-    else:
-        return True
-
-
-class Histogram:
+class HistogramPlotter(IPlotter):
     def __init__(
         self,
         title="Histogram",
@@ -162,7 +156,7 @@ class Histogram:
         plt.ylabel("Count")
         plt.title(self.title)
 
-        if valid_labels(np_labels):
+        if self.valid_labels(np_labels):
             labels = copy.deepcopy(np.ravel(np_labels))
             assert len(scores) == len(
                 labels
@@ -226,12 +220,16 @@ class Histogram:
 
         return plt
 
-    def show(self, scores: Scores):
+    def create_figure(self, scores: Scores):
         np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
             scores, self.split_by_label_mode, self.exclude_labels
         )
 
         plt = self._calculate_histogram(np_scores, np_labels)
+        return plt
+
+    def show(self, scores: Scores):
+        plt = self.create_figure(scores)
         plt.show()
 
     def save(self, output_filename: str, scores: Scores):
@@ -243,9 +241,6 @@ class Histogram:
                 )
             )
 
-        np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
-            scores, self.split_by_label_mode, self.exclude_labels
-        )
-        plt = self._calculate_histogram(np_scores, np_labels)
+        plt = self.create_figure(scores)
         plt.savefig(output_filename)
         plt.close("all")
