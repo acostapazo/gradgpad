@@ -28,6 +28,7 @@ APPROACH_RESULTS = {
     ],
 )
 def test_should_save_a_radar(working_point, approach_results):
+    os.makedirs("output", exist_ok=True)
     output_filename = "output/radar.png"
     radar = PadRadarPaiPlotter(
         title="My Title",
