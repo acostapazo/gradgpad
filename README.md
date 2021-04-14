@@ -1,25 +1,27 @@
 # grad-gpad 🗿 [![version](https://img.shields.io/github/release/acostapazo/gradgpad/all.svg)](https://github.com/acostapazo/gradgpad/releases) [![ci](https://github.com/acostapazo/gradgpad/workflows/ci/badge.svg)](https://github.com/acostapazo/gradgpad/actions) [![pypi](https://img.shields.io/pypi/dm/gradgpad)](https://pypi.org/project/gradgpad/)
 
 
-The GRAD-GPAD framework is a comprehensive and modular framework to evaluate the performance of face-PAD (face Presentation Attack Detection) approaches in realistic settings, enabling accountability and fair comparison of most face-PAD approaches in the literature.
-GRAD-GPAD stand for Generalization Representation over Aggregated Datasets for Generalized Presentation Attack Detection
+👉 The GRAD-GPAD framework is a comprehensive and modular framework to evaluate the performance of face-PAD (face Presentation Attack Detection) approaches in realistic settings, enabling accountability and fair comparison of most face-PAD approaches in the literature.
+
+🙋 GRAD-GPAD stand for Generalization Representation over Aggregated Datasets for Generalized Presentation Attack Detection
 
 
-## Table of Contents
-- [Installation :computer:](#installation-computer)
-- [Reproducible Research :computer:](#reproducible-research-computer)
-- [Getting Started :computer:](#reproducible-research-computer)
-- [Testing :white_check_mark:](#testing-white_check_mark)
-- [Contact :mailbox_with_mail:](#contact-mailbox_with_mail)
-
-
-## Installation :computer:
+## 💻 Installation
+---
 
 ```console
 pip install gradgpad
 ```
 
-## Reproducible Research
+## 🚀 Getting Started
+---
+
+The best way to learn how to use the GRAD-GPAD framework is through the Notebook 📔 examples available in [gradgpad-notebooks](https://github.com/acostapazo/gradgpad-notebooks).
+
+An example video using the framework will be available soon.
+
+## 📰 Reproducible Research
+---
 
 ```console
 $ gradgpad --reproducible-research -o <output-folder> 
@@ -41,9 +43,12 @@ optional arguments:
                         Output path
 ```
 
-## Getting Started: Development
+## 🤔 Contributing
+---
 
-## Install
+There is a lot of work ahead (adding new categorizations, datasets, improving documentation...), feel free to add and propose any improvements you can think of! If you need help getting started, don't hesitate to contact us :)
+
+* 🛠️ Environment
 
 ```console
 >> conda create -n grad-gpad python=3.6
@@ -52,12 +57,9 @@ optional arguments:
 (grad-gpad) >> lume -install
 ```
 
-
-## Testing :white_check_mark:
-
-### Unit, Integration and Acceptance
+* ✅ Testing
 
 ```console
-(myenv) >> lume -test
+(grad-gpad) >> lume -test
 ```
 
