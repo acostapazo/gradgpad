@@ -7,21 +7,18 @@
 
 
 ## 💻 Installation
----
 
 ```console
 pip install gradgpad
 ```
 
 ## 🚀 Getting Started
----
 
 The best way to learn how to use the GRAD-GPAD framework is through the Notebook 📔 examples available in [gradgpad-notebooks](https://github.com/acostapazo/gradgpad-notebooks).
 
 An example video using the framework will be available soon.
 
 ## 📰 Reproducible Research
----
 
 ```console
 $ gradgpad --reproducible-research -o <output-folder> 
@@ -44,7 +41,6 @@ optional arguments:
 ```
 
 ## 🤔 Contributing
----
 
 There is a lot of work ahead (adding new categorizations, datasets, improving documentation...), feel free to add and propose any improvements you can think of! If you need help getting started, don't hesitate to contact us :)
 
