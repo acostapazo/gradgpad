@@ -42,7 +42,7 @@ optional arguments:
 
 ## 🤔 Contributing
 
-There is a lot of work ahead (adding new categorizations, datasets, improving documentation...), feel free to add and propose any improvements you can think of! If you need help getting started, don't hesitate to contact us :)
+There is a lot of work ahead (adding new categorizations, datasets, improving documentation...), feel free to add and propose any improvements you can think of! If you need help getting started, don't hesitate to contact us :v:
 
 * 🛠️ Environment
 
