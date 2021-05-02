@@ -1,9 +1,9 @@
 # The GRAD-GPAD framework 🗿 [![version](https://img.shields.io/github/release/acostapazo/gradgpad/all.svg)](https://github.com/acostapazo/gradgpad/releases) [![ci](https://github.com/acostapazo/gradgpad/workflows/ci/badge.svg)](https://github.com/acostapazo/gradgpad/actions) [![pypi](https://img.shields.io/pypi/dm/gradgpad)](https://pypi.org/project/gradgpad/)
 
 
-👉 The GRAD-GPAD framework is a comprehensive and modular framework to evaluate the performance of face-PAD (face Presentation Attack Detection) approaches in realistic settings, enabling accountability and fair comparison of most face-PAD approaches in the literature.
+👉  The GRAD-GPAD framework is a comprehensive and modular framework to evaluate the performance of face-PAD (face Presentation Attack Detection) approaches in realistic settings, enabling accountability and fair comparison of most face-PAD approaches in the literature.
 
-🙋 GRAD-GPAD stand for Generalization Representation over Aggregated Datasets for Generalized Presentation Attack Detection
+🙋  GRAD-GPAD stand for Generalization Representation over Aggregated Datasets for Generalized Presentation Attack Detection
 
 
 ## 💻 Installation
@@ -14,7 +14,9 @@ pip install gradgpad
 
 ## 🚀 Getting Started
 
-The best way to learn how to use the GRAD-GPAD framework is through the Notebook 📔 examples available in [gradgpad-notebooks](https://github.com/acostapazo/gradgpad-notebooks).
+The best way to learn how to use the GRAD-GPAD framework is through the Notebook examples available in:
+
+*  [gradgpad-notebooks](https://github.com/acostapazo/gradgpad-notebooks) 📔 
 
 An example video using the framework will be available soon.
 
