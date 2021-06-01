@@ -18,7 +18,9 @@ The best way to learn how to use the GRAD-GPAD framework is through the Notebook
 
 *  [gradgpad-notebooks](https://github.com/acostapazo/gradgpad-notebooks) 📔 
 
-An example video using the framework will be available soon.
+## 📺 Video Tutorial
+
+[![Tutorial](https://img.youtube.com/vi/y5lQox0hmGU/0.jpg)](https://www.youtube.com/watch?v=y5lQox0hmGU)
 
 ## 📰 Reproducible Research
 
