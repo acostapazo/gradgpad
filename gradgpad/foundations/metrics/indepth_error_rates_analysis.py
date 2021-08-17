@@ -1,9 +1,8 @@
 import itertools
-import numpy as np
-
-from typing import Dict, Any
-
 from dataclasses import dataclass
+from typing import Any, Dict
+
+import numpy as np
 
 from gradgpad.foundations.metrics.apcer_fixing_bpcer import apcer_fixing_bpcer
 from gradgpad.foundations.metrics.bpcer import bpcer
@@ -115,7 +114,13 @@ def indepth_error_rates_analysis(
     indepth_error_rate_results: Dict[str, InDepthErrorRatesResult] = {}
     for working_point, threshold in working_point_thresholds.items():
         bpcer_value = 100.0 * bpcer(scores, labels, threshold)
-        max_apcer_label, max_apcer_value, apcer_per_label, num_samples_per_label, apcer_per_label_fixing_bpcer = apcer_analysis(
+        (
+            max_apcer_label,
+            max_apcer_value,
+            apcer_per_label,
+            num_samples_per_label,
+            apcer_per_label_fixing_bpcer,
+        ) = apcer_analysis(
             scores,
             labels,
             threshold,
@@ -241,9 +246,10 @@ def apcer_analysis(
                         [0] * len(genuines_scores) + [1] * len(pai_scores)
                     )
                     key = f"apcer_fixing_bpcer{round(wp * 100.0)}"
-                    apcer_per_label_fixing_bpcer[reference][key] = (
-                        100.0
-                        * apcer_fixing_bpcer(aggregate_scores, aggregate_labels, wp)
+                    apcer_per_label_fixing_bpcer[reference][
+                        key
+                    ] = 100.0 * apcer_fixing_bpcer(
+                        aggregate_scores, aggregate_labels, wp
                     )
 
         num_samples_per_label[reference] = pai_scores.size

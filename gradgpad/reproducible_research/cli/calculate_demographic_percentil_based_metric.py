@@ -1,17 +1,17 @@
 import os
 
-import numpy as np
-import matplotlib.ticker as mtick
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+import numpy as np
 
 from gradgpad.foundations.metrics.metrics import Metrics
-from gradgpad.reproducible_research.cli.calculate_demographic_bias_metric import (
-    calculate_demographic_bias_metric,
-)
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.foundations.scores.subset import Subset
+from gradgpad.reproducible_research.cli.calculate_demographic_bias_metric import (
+    calculate_demographic_bias_metric,
+)
 
 COLORS = {
     "MALE": "b",
@@ -33,9 +33,7 @@ def calculate_demographic_percentile_based_metric(
 ):
     print("> Demographic | Calculating Percentile Graphs...")
 
-    output_path_percentiles = (
-        f"{output_path}/demographic/percentiles_with_metric/{protocol.value}"
-    )
+    output_path_percentiles = f"{output_path}/demographic/percentiles/{protocol.value}"
     os.makedirs(output_path_percentiles, exist_ok=True)
 
     quality_scores_devel = ScoresProvider.get(
@@ -94,7 +92,7 @@ def calculate_demographic_percentile_based_metric(
         demographic_scores = {
             "sex": scores.get_fair_sex_subset(),
             "age": scores.get_fair_age_subset(),
-            # "skin_tone": scores.get_fair_skin_tone_subset(),
+            "skin_tone": scores.get_fair_skin_tone_subset(),
             "grouped_skin_tone": scores.get_fair_grouped_skin_tone_subset(),
             "attacks": {"attacks": scores.get_attacks_with_ids()},
         }
@@ -169,7 +167,7 @@ def calculate_demographic_percentile_based_metric(
                     label="Working Points",
                 )
 
-                axlist[subplot_index].set_title(approach)
+                axlist[subplot_index].set_title(approach, fontsize=14)
 
                 axlist[subplot_index].grid(
                     b=True, which="major", color="#CCCCCC", linestyle="--"
@@ -197,20 +195,40 @@ def calculate_demographic_percentile_based_metric(
         # fig.text(0.5, 0.04, "Percentil", ha="center")
         # fig.text(0.02, 0.59, "Score", va="center", rotation="vertical")
 
-        # fig.text(0.5, 0.04, "Score", ha="center")
-        fig.text(0.01, 0.59, "BPCER", va="center", rotation="vertical")
-        fig.text(0.97, 0.59, "APCER", va="center", rotation="vertical", color="red")
+        loc_vertical_bpcer_and_apcer = 0.52
+        if demographic == "skin_tone":
+            loc_vertical_bpcer_and_apcer = 0.57
 
+        # fig.text(0.5, 0.04, "Score", ha="center")
+        fig.text(
+            0.01,
+            loc_vertical_bpcer_and_apcer,
+            "BPCER",
+            va="center",
+            rotation="vertical",
+        )
+        fig.text(
+            0.97,
+            loc_vertical_bpcer_and_apcer,
+            "APCER",
+            va="center",
+            rotation="vertical",
+            color="red",
+        )
+
+        bottom = 0.15
+        if demographic == "skin_tone":
+            bottom = 0.23
         fig.subplots_adjust(
-            top=0.9, left=0.1, right=0.9, bottom=0.15
+            top=0.9, left=0.1, right=0.9, bottom=bottom
         )  # create some space below the plots by increasing the bottom-value
 
         legend_without_duplicate_labels(axlist.flatten()[-2])
 
-        filename = f"{output_path_percentiles}/percentile_comparison_{demographic}.png"
+        filename = f"{output_path_percentiles}/percentile_comparison_{demographic}.pdf"
 
         # plt.tight_layout()
-        plt.savefig(filename)
+        plt.savefig(filename, format="pdf")
         plt.tight_layout()
         plt.close("all")
 
@@ -239,6 +257,8 @@ def legend_without_duplicate_labels(ax):
     ]
     unique_sorted = first_values + last_values
 
+    if ncol > 5:
+        ncol = 3
     ax.legend(
         *zip(*unique_sorted), loc="upper center", bbox_to_anchor=(1.1, -0.10), ncol=ncol
     )

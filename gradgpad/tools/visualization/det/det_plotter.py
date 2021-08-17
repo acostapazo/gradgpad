@@ -1,13 +1,13 @@
 import os
+import warnings
 from typing import Tuple
 
-import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
 import numpy as np
-import warnings
 from sklearn import metrics
 
-from gradgpad.foundations.scores import Scores, List
+from gradgpad.foundations.scores import List, Scores
 from gradgpad.tools.visualization.colors import get_color_random_style
 from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
 from gradgpad.tools.visualization.interface_plotter import IPlotter
@@ -189,9 +189,11 @@ class DetPlotter(IPlotter):
         return plt
 
     def create_figure(self, scores: Scores):
-        np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
-            scores, self.split_by_label_mode
-        )
+        (
+            np_scores,
+            np_labels,
+            self.split_labels_correspondences,
+        ) = ScoresAndLabelsFormatter.execute(scores, self.split_by_label_mode)
         plt = self._calculate_det_curve(np_scores, np_labels)
         return plt
 

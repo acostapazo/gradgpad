@@ -10,7 +10,7 @@ def create_radar_chart_comparison(
     title: str,
     apcer_by_pai: ApcerDetail,
     correspondences: Dict = None,
-    fontsize_vertices=30,
+    fontsize_vertices=20,
     figsize: Tuple = None,
 ):
 
@@ -70,7 +70,8 @@ def create_radar_chart_comparison(
     ax.set_varlabels(varlabels, fontsize=fontsize_vertices)
     ax.legend(
         apcer_by_pai.apcers.keys(),
-        # bbox_to_anchor=(1.05, 1),
+        # bbox_to_anchor=(1, 1),
+        bbox_to_anchor=(1.08, 1.05),
         loc="upper right",
         # ncol=2,
         # mode="expand",

@@ -6,7 +6,6 @@ from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.tools.visualization.gif_creator import GifCreator
 from gradgpad.tools.visualization.radar.combined_scenario import CombinedScenario
 from gradgpad.tools.visualization.radar.create_apcer_detail import WorkingPoint
-
 from gradgpad.tools.visualization.radar.pad_radar_pai_plotter import PadRadarPaiPlotter
 
 
@@ -45,19 +44,22 @@ def calculate_pad_radar_by_pai(output_path: str):
         combined_scenarios = {"test_type_I_and_II": CombinedScenario.PAS_I_AND_II}
 
         for pais_type, combined_scenario in combined_scenarios.items():
-            output_filename = f"{output_path_apcer_by_pais}/grandtest_trained_type_pai_I_{pais_type}_{working_point.value}_radar_chart.png"
+            for extension in ["pdf", "png"]:
+                output_filename = f"{output_path_apcer_by_pais}/grandtest_trained_type_pai_I_{pais_type}_{working_point.value}_radar_chart.{extension}"
 
-            if pais_type not in filenames_pais_types:
-                filenames_pais_types[pais_type] = [output_filename]
-            else:
-                filenames_pais_types[pais_type].append(output_filename)
+                if pais_type not in filenames_pais_types:
+                    filenames_pais_types[pais_type] = [output_filename]
+                else:
+                    filenames_pais_types[pais_type].append(output_filename)
 
-            plotter = PadRadarPaiPlotter(
-                title=title,
-                working_point=working_point,
-                combined_scenario=combined_scenario,
-            )
-            plotter.save(output_filename, results)
+                plotter = PadRadarPaiPlotter(
+                    title=title,
+                    working_point=working_point,
+                    combined_scenario=combined_scenario,
+                    fontsize_vertices=15,
+                    format=extension if extension == "pdf" else None,
+                )
+                plotter.save(output_filename, results)
 
     if filenames_pais_types:
         output_path_apcer_by_pais_gifs = f"{output_path_apcer_by_pais}/gifs/"

@@ -1,5 +1,5 @@
-import pytest
 import numpy as np
+import pytest
 
 from gradgpad.foundations.metrics.acer import acer
 from gradgpad.foundations.metrics.indepth_error_rates_analysis import (
@@ -3956,9 +3956,9 @@ def test_should_compare_acer_performance_with_indepth_error_rates_analysis_speci
         scores, labels, thresholds, specific_meta_label_info
     )
 
-    specific_pai_indepth_error_rates_result_eer = specific_pai_indepth_error_rates_result[
-        "eer"
-    ]
+    specific_pai_indepth_error_rates_result_eer = (
+        specific_pai_indepth_error_rates_result["eer"]
+    )
 
     assert acer_result == specific_pai_indepth_error_rates_result_eer.acer
     assert specific_pai_indepth_error_rates_result_eer.acer_per_label == {
@@ -4039,7 +4039,7 @@ def test_should_compare_acer_performance_with_indepth_error_rates_analyisis_aggr
     ],
 )
 def test_should_obtain_indepth_error_rates_analysis_result_and_dump_to_dict(
-    meta_label_info
+    meta_label_info,
 ):
     scores = np.array([0.1, 0.2, 0.12, 0.25, 0.28, 0.3, 0.22, 0.2, 0.5, 0.6, 0.7, 0.8])
     labels = np.array([0, 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5])
