@@ -1,12 +1,12 @@
 import copy
 import os
-
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import numpy as np
 import warnings
-
 from typing import List, Tuple
+
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+import numpy as np
+
 from gradgpad.foundations.scores import Scores
 from gradgpad.tools.visualization.colors import COLORS_LABEL_CORRESPONDENCES
 from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
@@ -183,7 +183,7 @@ class HistogramPlotter(IPlotter):
                     ],
                     [0, max_value],
                 )
-                th_line, = plt.plot(x, y, "b--", label=self.legend_vertical_line)
+                (th_line,) = plt.plot(x, y, "b--", label=self.legend_vertical_line)
                 legend = legend + [th_line]
 
             plt.legend(handles=legend)
@@ -213,7 +213,7 @@ class HistogramPlotter(IPlotter):
                     ],
                     [0, max_value],
                 )
-                th_line, = plt.plot(x, y, "b--", label=self.legend_vertical_line)
+                (th_line,) = plt.plot(x, y, "b--", label=self.legend_vertical_line)
                 plt.legend(handles=[patch, th_line])
             else:
                 plt.legend(handles=[patch])
@@ -221,7 +221,11 @@ class HistogramPlotter(IPlotter):
         return plt
 
     def create_figure(self, scores: Scores):
-        np_scores, np_labels, self.split_labels_correspondences = ScoresAndLabelsFormatter.execute(
+        (
+            np_scores,
+            np_labels,
+            self.split_labels_correspondences,
+        ) = ScoresAndLabelsFormatter.execute(
             scores, self.split_by_label_mode, self.exclude_labels
         )
 

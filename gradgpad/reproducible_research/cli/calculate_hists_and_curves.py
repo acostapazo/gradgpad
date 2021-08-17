@@ -1,13 +1,13 @@
 import os
 
 from gradgpad import DetPlotter
-from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
 from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.foundations.scores.subset import Subset
 from gradgpad.tools.visualization.histogram.histogram_plotter import HistogramPlotter
+from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
 
 
 def get_filename(
@@ -18,11 +18,11 @@ def get_filename(
 ):
     if normalize_hist:
         output_hist_filename = (
-            f"{output_path_hists_and_curves}/{subset}_hist_norm{suffix}.png"
+            f"{output_path_hists_and_curves}/{subset}_hist_norm{suffix}.pdf"
         )
     else:
         output_hist_filename = (
-            f"{output_path_hists_and_curves}/{subset}_hist{suffix}.png"
+            f"{output_path_hists_and_curves}/{subset}_hist{suffix}.pdf"
         )
     return output_hist_filename
 
@@ -62,7 +62,7 @@ def calculate_hists_and_curves(output_path: str, only_grandtest: bool = False):
             eer_th = metrics.get_eer_th(Subset.DEVEL)
 
             for subset, scores in subset_scores.items():
-                output_det_filename = f"{output_path_hists_and_curves}/{subset}_det.png"
+                output_det_filename = f"{output_path_hists_and_curves}/{subset}_det.pdf"
 
                 det = DetPlotter(title=f"Det Curve ({subset})")
                 det.save(output_det_filename, scores)
@@ -89,7 +89,7 @@ def calculate_hists_and_curves(output_path: str, only_grandtest: bool = False):
 def calculate_hists_and_curves_pai_types(
     output_path_hists_and_curves, subset, scores, eer_th
 ):
-    output_det_filename = f"{output_path_hists_and_curves}/{subset}_det_detail.png"
+    output_det_filename = f"{output_path_hists_and_curves}/{subset}_det_detail.pdf"
     det = DetPlotter(
         title=f"Det Curve ({subset})", split_by_label_mode=SplitByLabelMode.PAS
     )

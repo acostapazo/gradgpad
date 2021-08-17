@@ -1,18 +1,20 @@
-import pandas as pd
-
 from statistics import mean
 
+import pandas as pd
+
 from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
+from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.reproducible_research import Dict
 from gradgpad.tools.visualization.radar.create_apcer_detail import (
-    create_apcer_by_subprotocol,
     WorkingPoint,
+    create_apcer_by_subprotocol,
 )
-from gradgpad.foundations.scores.protocol import Protocol
 
 
 class GeneralizationMetrics:
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         self.generalization_protocols = Protocol.generalization_options()
 
         self.selected_working_points = {"APCER @ BPCER 10 %": WorkingPoint.BPCER_10}

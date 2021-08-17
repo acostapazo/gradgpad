@@ -1,13 +1,13 @@
-from typing import Tuple, Dict
+from typing import Dict, Tuple
 
-from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
+from gradgpad.foundations.scores.protocol import Protocol
+from gradgpad.tools.visualization.charts.create_radar_chart_comparison import (
+    create_radar_chart_comparison,
+)
 from gradgpad.tools.visualization.radar.create_apcer_detail import (
     WorkingPoint,
     create_apcer_by_subprotocol,
-)
-from gradgpad.tools.visualization.charts.create_radar_chart_comparison import (
-    create_radar_chart_comparison,
 )
 
 DATASET_CORRESPONDENCES = {
@@ -21,7 +21,7 @@ DATASET_CORRESPONDENCES = {
     "replay-attack": "Replay-Attack",
     "oulu-npu": "Oulu-NPU",
     "msu-mfsd": "MSU-MFSD",
-    "hkbuV2": "$HKBU_{V2}$",
+    "hkbuv2": "$HKBU_{V2}$",
     "hkbu": "$HKBU_{v1}$",
     "csmad": "CSMAD",
 }
@@ -55,8 +55,9 @@ class PadRadarProtocolPlotter:
         grained_pai_mode: GrainedPaiMode,
         protocol: Protocol = None,
         correspondences: dict = None,
-        fontsize_vertices: int = 30,
+        fontsize_vertices: int = 17,
         figsize: Tuple = (10, 10),
+        format: str = None,
     ):
         self.title = title
         self.working_point = working_point
@@ -67,6 +68,7 @@ class PadRadarProtocolPlotter:
         self.fancy_correspondences = CORRESPONDENCES.get(self.protocol.value)
         self.apcer_detail = None
         self.figsize = figsize
+        self.format = format
 
     def _calculate_apcer_detail(self, results: dict):
         if self.apcer_detail is None:
@@ -83,7 +85,7 @@ class PadRadarProtocolPlotter:
             self.title,
             self.apcer_detail,
             self.fancy_correspondences,
-            17,
+            fontsize_vertices=self.fontsize_vertices,
             figsize=self.figsize,
         )
         return plt
@@ -95,4 +97,4 @@ class PadRadarProtocolPlotter:
     def save(self, output_filename: str, results: dict):
         plt = self.create_figure(results)
         plt.tight_layout()
-        plt.savefig(output_filename)
+        plt.savefig(output_filename, format=self.format, pad_inches=0)

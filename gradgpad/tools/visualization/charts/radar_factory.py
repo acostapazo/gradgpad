@@ -1,9 +1,8 @@
 import numpy as np
-
 from matplotlib.patches import Circle, RegularPolygon
 from matplotlib.path import Path
-from matplotlib.projections.polar import PolarAxes
 from matplotlib.projections import register_projection
+from matplotlib.projections.polar import PolarAxes
 from matplotlib.spines import Spine
 from matplotlib.transforms import Affine2D
 
@@ -68,7 +67,7 @@ def radar_factory(num_vars, frame="circle"):
                 raise ValueError("unknown value for 'frame': %s" % frame)
 
         def draw(self, renderer):
-            """ Draw. If frame is polygon, make gridlines polygon-shaped """
+            """Draw. If frame is polygon, make gridlines polygon-shaped"""
             if frame == "polygon":
                 gridlines = self.yaxis.get_gridlines()
                 for gl in gridlines:

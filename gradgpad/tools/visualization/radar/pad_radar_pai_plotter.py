@@ -1,19 +1,19 @@
-from typing import Tuple, Dict
+from typing import Dict, Tuple
 
-from gradgpad.tools.visualization.radar.fine_grained_pais_provider import (
-    FineGrainedPaisProvider,
-)
-from gradgpad.tools.visualization.radar.combined_scenario import CombinedScenario
-from gradgpad.tools.visualization.radar.create_apcer_detail import (
-    create_apcer_by_pai,
-    WorkingPoint,
-)
 from gradgpad.tools.visualization.charts.create_radar_chart_comparison import (
     create_radar_chart_comparison,
 )
+from gradgpad.tools.visualization.radar.combined_scenario import CombinedScenario
+from gradgpad.tools.visualization.radar.create_apcer_detail import (
+    WorkingPoint,
+    create_apcer_by_pai,
+)
+from gradgpad.tools.visualization.radar.fine_grained_pais_provider import (
+    FineGrainedPaisProvider,
+)
 from gradgpad.tools.visualization.radar.radar_correspondences import (
-    PAI_REPRESENTATION_ORDER,
     BOLD_PAI_CORRESPONDENCES,
+    PAI_REPRESENTATION_ORDER,
 )
 
 
@@ -25,8 +25,9 @@ class PadRadarPaiPlotter:
         combined_scenario: CombinedScenario = None,
         representation_order: list = PAI_REPRESENTATION_ORDER,
         correspondences: dict = BOLD_PAI_CORRESPONDENCES,
-        fontsize_vertices: int = 30,
+        fontsize_vertices: int = 20,
         figsize: Tuple = (10, 10),
+        format: str = None,
     ):
         self.title = title
         self.working_point = working_point
@@ -35,6 +36,7 @@ class PadRadarPaiPlotter:
         self.correspondences = correspondences
         self.fontsize_vertices = fontsize_vertices
         self.figsize = figsize
+        self.format = format
         self.apcer_detail = None
 
     def _calculate_apcer_detail(self, results: dict):
@@ -50,7 +52,7 @@ class PadRadarPaiPlotter:
             self.title,
             self.apcer_detail,
             self.correspondences,
-            20,
+            fontsize_vertices=self.fontsize_vertices,
             figsize=self.figsize,
         )
         return plt
@@ -62,4 +64,4 @@ class PadRadarPaiPlotter:
     def save(self, output_filename: str, results: dict):
         plt = self.create_figure(results)
         plt.tight_layout()
-        plt.savefig(output_filename)
+        plt.savefig(output_filename, format=self.format, pad_inches=0)
