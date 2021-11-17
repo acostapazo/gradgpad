@@ -22,6 +22,22 @@ The best way to learn how to use the GRAD-GPAD framework is through the Notebook
 
 [![Tutorial](https://img.youtube.com/vi/y5lQox0hmGU/0.jpg)](https://www.youtube.com/watch?v=y5lQox0hmGU)
 
+
+## 👍 Annotations
+
+Labels and annotations are available through the Python package. 
+
+Example:
+
+```python
+from gradgpad import annotations
+print(f"Total GRAD-GPAD Annotations: {annotations.num_annotations}")
+print(annotations.annotated_samples[0])
+annotations.print_semantic(annotation_index=0)
+```
+
+This annotations are publicly available also in a [json file](https://github.com/acostapazo/gradgpad/blob/master/gradgpad/data/gradgpad_annotations.json).
+
 ## 📰 Reproducible Research
 
 ```console
