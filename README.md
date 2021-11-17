@@ -36,7 +36,7 @@ print(annotations.annotated_samples[0])
 annotations.print_semantic(annotation_index=0)
 ```
 
-This annotations are publicly available also in a [json file](https://github.com/acostapazo/gradgpad/blob/master/gradgpad/data/gradgpad_annotations.json).
+These annotations are also publicly available in [json file](https://github.com/acostapazo/gradgpad/blob/master/gradgpad/data/gradgpad_annotations.json).
 
 ## 📰 Reproducible Research
 
