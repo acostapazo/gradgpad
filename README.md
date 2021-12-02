@@ -5,6 +5,30 @@
 
 🙋  GRAD-GPAD stand for Generalization Representation over Aggregated Datasets for Generalized Presentation Attack Detection
 
+## 🤔 Abstract 
+
+Face recognition technology is now mature enough to reach commercial products, such as smart phones or tablets. However, it still needs to increase robustness against imposter attacks. In this regard, face Presentation Attack Detection (face-PAD) is a key component in providing trustable facial access to digital devices. Despite the success of several face-PAD works in publicly available datasets, most of them fail to reach the market, revealing the lack of evaluation frameworks that represent realistic settings. Here, an extensive analysis of the generalisation problem in face-PAD is provided, jointly with an evaluation strategy based on the aggregation of most publicly available datasets and a set of novel protocols to cover the most realistic settings, including a novel demographic bias analysis. Besides, a new fine-grained categorisation of presentation attacks and instruments is provided, enabling higher flexibility in assessing the generalisation of different algorithms under a common framework. As a result, GRAD-GPAD v2, a comprehensive and modular framework is presented to evaluate the performance of face-PAD approaches in realistic settings, enabling accountability and fair comparison of most face-PAD approaches in the literature.
+
+
+## 🙏 Acknowledgements
+
+If you use this framework, please cite the following publication:
+
+```
+@article{https://doi.org/10.1049/bme2.12049,
+author = {Costa-Pazo, Artur and Pérez-Cabo, Daniel and Jiménez-Cabello, David and Alba-Castro, José Luis and Vazquez-Fernandez, Esteban},
+title = {Face presentation attack detection. A comprehensive evaluation of the generalisation problem},
+journal = {IET Biometrics},
+volume = {10},
+number = {4},
+pages = {408-429},
+doi = {https://doi.org/10.1049/bme2.12049},
+url = {https://ietresearch.onlinelibrary.wiley.com/doi/abs/10.1049/bme2.12049},
+eprint = {https://ietresearch.onlinelibrary.wiley.com/doi/pdf/10.1049/bme2.12049},
+abstract = {Abstract Face recognition technology is now mature enough to reach commercial products, such as smart phones or tablets. However, it still needs to increase robustness against imposter attacks. In this regard, face Presentation Attack Detection (face-PAD) is a key component in providing trustable facial access to digital devices. Despite the success of several face-PAD works in publicly available datasets, most of them fail to reach the market, revealing the lack of evaluation frameworks that represent realistic settings. Here, an extensive analysis of the generalisation problem in face-PAD is provided, jointly with an evaluation strategy based on the aggregation of most publicly available datasets and a set of novel protocols to cover the most realistic settings, including a novel demographic bias analysis. Besides, a new fine-grained categorisation of presentation attacks and instruments is provided, enabling higher flexibility in assessing the generalisation of different algorithms under a common framework. As a result, GRAD-GPAD v2, a comprehensive and modular framework is presented to evaluate the performance of face-PAD approaches in realistic settings, enabling accountability and fair comparison of most face-PAD approaches in the literature.},
+year = {2021}
+}
+```
 
 ## 💻 Installation
 
