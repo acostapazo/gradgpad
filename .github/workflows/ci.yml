@@ -43,8 +43,8 @@ jobs:
         run: lume -lint
       - name: Check Requirements
         run: lume -check-requirements
-      - name: Static Analysis
-        run: lume -static-analysis
+#      - name: Static Analysis
+#        run: lume -static-analysis
       - name: Tests
         run: lume -build -test
       - uses: codecov/codecov-action@v2
