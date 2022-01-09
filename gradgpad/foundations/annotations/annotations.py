@@ -2,10 +2,10 @@ import json
 from typing import List
 
 from gradgpad.foundations.annotations.annotation import Annotation
-from gradgpad.foundations.annotations.correspondences import ANNOTATION_CORRESPONDENCES
-from gradgpad.foundations.annotations.stats.calculate_pai_stats import (
-    calculate_pai_stats,
-)
+from gradgpad.foundations.annotations.correspondences import \
+    ANNOTATION_CORRESPONDENCES
+from gradgpad.foundations.annotations.stats.calculate_pai_stats import \
+    calculate_pai_stats
 from gradgpad.public_api import GRADGPAD_PATH
 
 

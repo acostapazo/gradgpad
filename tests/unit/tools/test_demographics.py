@@ -1,19 +1,13 @@
 import pytest
 from pandas import DataFrame
 
-from gradgpad import (
-    Approach,
-    Protocol,
-    ScoresProvider,
-    Demographic,
-    SKIN_TONE_GROUP_POLICY,
-    Metric,
-)
+from gradgpad import (SKIN_TONE_GROUP_POLICY, Approach, Demographic, Metric,
+                      Protocol, ScoresProvider)
 from gradgpad.tools import group_dataframe
-from gradgpad.tools.visualization.charts import create_metric_bar_chart_comparison
-from gradgpad.tools.visualization.charts.create_demographic_dataframe_comparison import (
-    create_demographic_dataframe_comparison,
-)
+from gradgpad.tools.visualization.charts import \
+    create_metric_bar_chart_comparison
+from gradgpad.tools.visualization.charts.create_demographic_dataframe_comparison import \
+    create_demographic_dataframe_comparison
 
 APPROACH_SCORES_SUBSET = {
     "Quality SVM Linear": ScoresProvider.get_subsets(

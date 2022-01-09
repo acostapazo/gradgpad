@@ -1,6 +1,6 @@
 import pytest
 
-from gradgpad import MetricsDemographics, Approach, Protocol, ScoresProvider
+from gradgpad import Approach, MetricsDemographics, Protocol, ScoresProvider
 
 
 @pytest.mark.unit

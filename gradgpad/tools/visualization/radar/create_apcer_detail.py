@@ -1,7 +1,6 @@
-from enum import Enum
-from typing import List, Dict
-
 from dataclasses import dataclass
+from enum import Enum
+from typing import Dict, List
 
 from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
 

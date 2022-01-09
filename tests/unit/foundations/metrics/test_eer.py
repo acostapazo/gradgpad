@@ -1,5 +1,5 @@
-import pytest
 import numpy as np
+import pytest
 
 from gradgpad.foundations.metrics.eer import eer
 from gradgpad.foundations.scores.approach import Approach

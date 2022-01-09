@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Any
+from typing import Any, Dict
 
 from gradgpad.foundations.annotations.attributes.attributes import Attributes
 from gradgpad.foundations.annotations.dataset_name import DatasetName

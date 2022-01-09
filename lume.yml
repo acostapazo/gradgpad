@@ -2,9 +2,14 @@ name: gradgpad
 
 install:
   run:
-  - pip install -U -r requirements/dev.txt -r requirements/requirements.txt
+  - pip install -U -r requirements/dev-requirements.txt -r requirements/requirements.txt
+
+envs:
+  PACKAGE_NAME: gradgpad
 
 steps:
+  uninstall:
+    run: pip freeze | xargs pip uninstall -y
   clean:
     run:
     - rm -rf deps
@@ -14,7 +19,14 @@ steps:
   lint:
     run:
       - black .
-      - flake8 gradgpad
+      - flake8 $PACKAGE_NAME
+      - isort .
+  check-requirements:
+    run: safety check -r requirements/requirements.txt
+  static-analysis:
+    run: mypy $PACKAGE_NAME
+  coverage:
+    run: pytest -c pytest.coverage.ini
   build:
     run: pip install -e .
   test:

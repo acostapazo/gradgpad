@@ -91,15 +91,15 @@ There is a lot of work ahead (adding new categorizations, datasets, improving do
 * 🛠️ Environment
 
 ```console
->> conda create -n grad-gpad python=3.6
->> conda activate grad-gpad
-(grad-gpad) >> pip install lume
-(grad-gpad) >> lume -install
+>> python -m venv venv
+>> source venv/bin/activate
+(venv) >> pip install lume
+(venv) >> lume -install
 ```
 
 * ✅ Testing
 
 ```console
-(grad-gpad) >> lume -test
+(venv) >> lume -test
 ```
 

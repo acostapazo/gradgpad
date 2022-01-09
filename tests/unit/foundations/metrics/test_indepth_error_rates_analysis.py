@@ -2,9 +2,8 @@ import numpy as np
 import pytest
 
 from gradgpad.foundations.metrics.acer import acer
-from gradgpad.foundations.metrics.indepth_error_rates_analysis import (
-    indepth_error_rates_analysis,
-)
+from gradgpad.foundations.metrics.indepth_error_rates_analysis import \
+    indepth_error_rates_analysis
 
 
 @pytest.mark.unit

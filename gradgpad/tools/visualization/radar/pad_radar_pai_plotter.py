@@ -1,20 +1,15 @@
 from typing import Dict, Tuple
 
-from gradgpad.tools.visualization.charts.create_radar_chart_comparison import (
-    create_radar_chart_comparison,
-)
-from gradgpad.tools.visualization.radar.combined_scenario import CombinedScenario
+from gradgpad.tools.visualization.charts.create_radar_chart_comparison import \
+    create_radar_chart_comparison
+from gradgpad.tools.visualization.radar.combined_scenario import \
+    CombinedScenario
 from gradgpad.tools.visualization.radar.create_apcer_detail import (
-    WorkingPoint,
-    create_apcer_by_pai,
-)
-from gradgpad.tools.visualization.radar.fine_grained_pais_provider import (
-    FineGrainedPaisProvider,
-)
+    WorkingPoint, create_apcer_by_pai)
+from gradgpad.tools.visualization.radar.fine_grained_pais_provider import \
+    FineGrainedPaisProvider
 from gradgpad.tools.visualization.radar.radar_correspondences import (
-    BOLD_PAI_CORRESPONDENCES,
-    PAI_REPRESENTATION_ORDER,
-)
+    BOLD_PAI_CORRESPONDENCES, PAI_REPRESENTATION_ORDER)
 
 
 class PadRadarPaiPlotter:

@@ -4,13 +4,11 @@ from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
 from gradgpad.foundations.results.results_provider import ResultsProvider
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
-from gradgpad.reproducible_research.cli.calculate_generalization_metrics import (
-    calculate_generalization_metrics,
-)
+from gradgpad.reproducible_research.cli.calculate_generalization_metrics import \
+    calculate_generalization_metrics
 from gradgpad.tools.visualization.radar.create_apcer_detail import WorkingPoint
-from gradgpad.tools.visualization.radar.pad_radar_protocol_plotter import (
-    PadRadarProtocolPlotter,
-)
+from gradgpad.tools.visualization.radar.pad_radar_protocol_plotter import \
+    PadRadarProtocolPlotter
 
 
 def calculate_pad_radar_by_generalization_protocols(output_path: str):

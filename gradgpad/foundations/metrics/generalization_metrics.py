@@ -6,9 +6,7 @@ from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.reproducible_research import Dict
 from gradgpad.tools.visualization.radar.create_apcer_detail import (
-    WorkingPoint,
-    create_apcer_by_subprotocol,
-)
+    WorkingPoint, create_apcer_by_subprotocol)
 
 
 class GeneralizationMetrics:

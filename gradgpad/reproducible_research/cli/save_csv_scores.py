@@ -2,7 +2,6 @@ import csv
 import os
 from typing import Dict
 
-
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider

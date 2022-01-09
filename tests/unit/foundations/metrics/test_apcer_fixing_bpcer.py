@@ -1,5 +1,5 @@
-import pytest
 import numpy as np
+import pytest
 
 from gradgpad.foundations.metrics.apcer_fixing_bpcer import apcer_fixing_bpcer
 from gradgpad.reproducible_research import Scores

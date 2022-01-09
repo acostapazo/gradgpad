@@ -1,17 +1,14 @@
 from typing import Tuple
 
-from gradgpad import Demographic
-import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
+import numpy as np
 
+from gradgpad import Demographic
 from gradgpad.foundations.scores import Scores
 from gradgpad.tools.visualization.interface_plotter import IPlotter
 from gradgpad.tools.visualization.percentile.legend_tools import (
-    legend_without_duplicate_labels,
-    COLORS,
-    MARKERS,
-)
+    COLORS, MARKERS, legend_without_duplicate_labels)
 
 
 class BiasPercentilePlotter(IPlotter):

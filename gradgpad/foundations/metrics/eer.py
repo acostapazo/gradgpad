@@ -1,7 +1,7 @@
 import numpy as np
-from sklearn import metrics
-from scipy.optimize import brentq
 from scipy.interpolate import interp1d
+from scipy.optimize import brentq
+from sklearn import metrics
 
 
 def eer(scores, labels):

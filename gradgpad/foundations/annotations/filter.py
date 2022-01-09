@@ -1,5 +1,6 @@
 from gradgpad.foundations.annotations.dataset import Dataset
-from gradgpad.foundations.annotations.person_attributes import Sex, Age, SkinTone
+from gradgpad.foundations.annotations.person_attributes import (Age, Sex,
+                                                                SkinTone)
 from gradgpad.foundations.annotations.scenario import Scenario
 
 

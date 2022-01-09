@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 
-from gradgpad.foundations.scores import Scores
-
 import numpy as np
+
+from gradgpad.foundations.scores import Scores
 
 
 class IPlotter(ABC):

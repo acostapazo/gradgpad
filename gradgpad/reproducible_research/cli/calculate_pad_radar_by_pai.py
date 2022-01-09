@@ -4,9 +4,11 @@ from gradgpad.foundations.results.results_provider import ResultsProvider
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.tools.visualization.gif_creator import GifCreator
-from gradgpad.tools.visualization.radar.combined_scenario import CombinedScenario
+from gradgpad.tools.visualization.radar.combined_scenario import \
+    CombinedScenario
 from gradgpad.tools.visualization.radar.create_apcer_detail import WorkingPoint
-from gradgpad.tools.visualization.radar.pad_radar_pai_plotter import PadRadarPaiPlotter
+from gradgpad.tools.visualization.radar.pad_radar_pai_plotter import \
+    PadRadarPaiPlotter
 
 
 def calculate_pad_radar_by_pai(output_path: str):

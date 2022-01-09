@@ -6,8 +6,10 @@ from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.foundations.scores.subset import Subset
-from gradgpad.tools.visualization.histogram.histogram_plotter import HistogramPlotter
-from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
+from gradgpad.tools.visualization.histogram.histogram_plotter import \
+    HistogramPlotter
+from gradgpad.tools.visualization.histogram.split_by_level_mode import \
+    SplitByLabelMode
 
 
 def get_filename(

@@ -1,15 +1,14 @@
 import os
 
-import numpy as np
-import matplotlib.ticker as mtick
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+import numpy as np
 
 from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.foundations.scores.subset import Subset
-
 
 COLORS = {
     "MALE": "b",
