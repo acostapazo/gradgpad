@@ -1,10 +1,6 @@
 import numpy as np
 import pytest
 
-# scores = np.array([0.5, 0.6, 0.2, 0.0, 0.0])
-# labels = np.array([1, 2, 2, 0, 0])
-# expected_apcer = 0.0
-# th_eer_dev = 0.15
 from gradgpad.foundations.metrics.apcer import apcer
 
 

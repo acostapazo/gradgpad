@@ -26,6 +26,9 @@ from gradgpad.tools.visualization.det.det_plotter import DetPlotter
 from gradgpad.tools.visualization.gif_creator import GifCreator
 from gradgpad.tools.visualization.histogram.histogram_plotter import HistogramPlotter
 from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
+from gradgpad.tools.visualization.percentile.bias_percentile_comparison_plotter import (
+    BiasPercentileComparisonPlotter,
+)
 from gradgpad.tools.visualization.percentile.bias_percentile_plotter import (
     BiasPercentilePlotter,
 )
