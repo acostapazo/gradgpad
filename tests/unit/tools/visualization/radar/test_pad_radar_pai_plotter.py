@@ -27,7 +27,7 @@ APPROACH_RESULTS = {
         (WorkingPoint.BPCER_10, APPROACH_RESULTS),
     ],
 )
-def test_should_save_a_radar(working_point, approach_results):
+def test_should_save_a_pad_radar_pai_plotter(working_point, approach_results):
     os.makedirs("output", exist_ok=True)
     output_filename = "output/radar.png"
     radar = PadRadarPaiPlotter(
