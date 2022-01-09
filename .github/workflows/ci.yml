@@ -49,7 +49,7 @@ jobs:
         run: lume -build -test
       - uses: codecov/codecov-action@v2
         with:
-          files: output/coverage/cobertur_coverage.xml
+          files: output/coverage/cobertura_coverage.xml
           name: gradgpad
           fail_ci_if_error: true
       - name: Check Installation (--no-binary)
