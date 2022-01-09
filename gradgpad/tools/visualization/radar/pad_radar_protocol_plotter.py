@@ -2,10 +2,13 @@ from typing import Dict, Tuple
 
 from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
 from gradgpad.foundations.scores.protocol import Protocol
-from gradgpad.tools.visualization.charts.create_radar_chart_comparison import \
-    create_radar_chart_comparison
+from gradgpad.tools.visualization.charts.create_radar_chart_comparison import (
+    create_radar_chart_comparison,
+)
 from gradgpad.tools.visualization.radar.create_apcer_detail import (
-    WorkingPoint, create_apcer_by_subprotocol)
+    WorkingPoint,
+    create_apcer_by_subprotocol,
+)
 
 DATASET_CORRESPONDENCES = {
     "casia-fasd": "CASIA-FASD",

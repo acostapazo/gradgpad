@@ -19,9 +19,9 @@ steps:
     - find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
   lint:
     run:
-      - black .
-      - flake8 $PACKAGE_NAME
-      - isort .
+      - black --check .
+      - flake8 $PACKAGE_NAME tests
+      - isort --check .
   check-requirements:
     run: safety check -r requirements/requirements.txt
   static-analysis:

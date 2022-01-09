@@ -1,7 +1,14 @@
 import pytest
 
-from gradgpad import (Approach, CoarseGrainedPai, Dataset, Device, Protocol,
-                      ScoresProvider, Subset)
+from gradgpad import (
+    Approach,
+    CoarseGrainedPai,
+    Dataset,
+    Device,
+    Protocol,
+    ScoresProvider,
+    Subset,
+)
 
 
 @pytest.mark.unit

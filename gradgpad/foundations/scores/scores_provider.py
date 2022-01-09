@@ -1,7 +1,6 @@
 import sys
 
-from gradgpad.foundations.annotations.coarse_grained_pai import \
-    CoarseGrainedPai
+from gradgpad.foundations.annotations.coarse_grained_pai import CoarseGrainedPai
 from gradgpad.foundations.annotations.dataset import Dataset
 from gradgpad.foundations.annotations.device import Device
 from gradgpad.foundations.scores.approach import Approach

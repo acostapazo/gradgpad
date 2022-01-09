@@ -8,7 +8,10 @@ from gradgpad import Demographic
 from gradgpad.foundations.scores import Scores
 from gradgpad.tools.visualization.interface_plotter import IPlotter
 from gradgpad.tools.visualization.percentile.legend_tools import (
-    COLORS, MARKERS, legend_without_duplicate_labels)
+    COLORS,
+    MARKERS,
+    legend_without_duplicate_labels,
+)
 
 
 class BiasPercentilePlotter(IPlotter):

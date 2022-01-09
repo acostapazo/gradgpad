@@ -1,7 +1,6 @@
 from typing import List
 
-from gradgpad.foundations.annotations.correspondences import \
-    ANNOTATION_CORRESPONDENCES
+from gradgpad.foundations.annotations.correspondences import ANNOTATION_CORRESPONDENCES
 
 
 def calculate_pai_stats(annotated_samples: List):

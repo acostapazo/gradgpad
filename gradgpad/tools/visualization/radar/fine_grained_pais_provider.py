@@ -1,7 +1,6 @@
 from typing import List
 
-from gradgpad.tools.visualization.radar.combined_scenario import \
-    CombinedScenario
+from gradgpad.tools.visualization.radar.combined_scenario import CombinedScenario
 
 
 class FineGrainedPaisProvider:

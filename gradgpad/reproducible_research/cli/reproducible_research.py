@@ -3,14 +3,18 @@ import time
 import warnings
 
 from gradgpad.foundations.scores.protocol import Protocol
-from gradgpad.reproducible_research.cli.calculate_demographic_percentil_based_metric import \
-    calculate_demographic_percentile_based_metric
-from gradgpad.reproducible_research.cli.calculate_demographic_percentile_comparison import \
-    calculate_demographic_percentile_comparison
-from gradgpad.reproducible_research.cli.calculate_pad_radar_by_generalization_protocols import \
-    calculate_pad_radar_by_generalization_protocols
-from gradgpad.reproducible_research.cli.calculate_pad_radar_by_pai import \
-    calculate_pad_radar_by_pai
+from gradgpad.reproducible_research.cli.calculate_demographic_percentil_based_metric import (
+    calculate_demographic_percentile_based_metric,
+)
+from gradgpad.reproducible_research.cli.calculate_demographic_percentile_comparison import (
+    calculate_demographic_percentile_comparison,
+)
+from gradgpad.reproducible_research.cli.calculate_pad_radar_by_generalization_protocols import (
+    calculate_pad_radar_by_generalization_protocols,
+)
+from gradgpad.reproducible_research.cli.calculate_pad_radar_by_pai import (
+    calculate_pad_radar_by_pai,
+)
 from gradgpad.reproducible_research.cli.summary_table import summary_table
 
 

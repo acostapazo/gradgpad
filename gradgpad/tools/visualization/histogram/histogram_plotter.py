@@ -9,11 +9,11 @@ import numpy as np
 
 from gradgpad.foundations.scores import Scores
 from gradgpad.tools.visualization.colors import COLORS_LABEL_CORRESPONDENCES
-from gradgpad.tools.visualization.histogram.split_by_level_mode import \
-    SplitByLabelMode
+from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
 from gradgpad.tools.visualization.interface_plotter import IPlotter
-from gradgpad.tools.visualization.scores_and_labels_formatter import \
-    ScoresAndLabelsFormatter
+from gradgpad.tools.visualization.scores_and_labels_formatter import (
+    ScoresAndLabelsFormatter,
+)
 
 warnings.filterwarnings("ignore", module="matplotlib")
 

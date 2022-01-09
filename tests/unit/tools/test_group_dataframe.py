@@ -1,11 +1,17 @@
 import pytest
 from pandas import DataFrame
 
-from gradgpad import (SKIN_TONE_GROUP_POLICY, Approach, Demographic, Protocol,
-                      ScoresProvider)
+from gradgpad import (
+    SKIN_TONE_GROUP_POLICY,
+    Approach,
+    Demographic,
+    Protocol,
+    ScoresProvider,
+)
 from gradgpad.tools import Metric, group_dataframe
-from gradgpad.tools.visualization.charts.create_demographic_dataframe_comparison import \
-    create_demographic_dataframe_comparison
+from gradgpad.tools.visualization.charts.create_demographic_dataframe_comparison import (
+    create_demographic_dataframe_comparison,
+)
 
 
 @pytest.mark.unit

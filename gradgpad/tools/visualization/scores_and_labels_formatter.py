@@ -1,8 +1,7 @@
 from typing import List
 
 from gradgpad.foundations.scores import Scenario, Scores
-from gradgpad.tools.visualization.histogram.split_by_level_mode import \
-    SplitByLabelMode
+from gradgpad.tools.visualization.histogram.split_by_level_mode import SplitByLabelMode
 
 
 class ScoresAndLabelsFormatter:

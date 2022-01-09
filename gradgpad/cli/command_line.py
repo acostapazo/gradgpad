@@ -5,8 +5,9 @@ import zipfile
 
 from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.foundations.scores.subset import Subset
-from gradgpad.reproducible_research.cli.reproducible_research import \
-    reproducible_research
+from gradgpad.reproducible_research.cli.reproducible_research import (
+    reproducible_research,
+)
 
 
 def zipdir(path, ziph):

@@ -2,8 +2,14 @@ import os
 
 import pytest
 
-from gradgpad import (Approach, CombinedScenario, PadRadarPaiPlotter, Protocol,
-                      ResultsProvider, WorkingPoint)
+from gradgpad import (
+    Approach,
+    CombinedScenario,
+    PadRadarPaiPlotter,
+    Protocol,
+    ResultsProvider,
+    WorkingPoint,
+)
 
 APPROACH_RESULTS = {
     "Quality SVM RBF": ResultsProvider.get(

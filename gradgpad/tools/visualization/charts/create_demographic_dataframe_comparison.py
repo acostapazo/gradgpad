@@ -3,8 +3,7 @@ from typing import Dict
 import pandas as pd
 
 from gradgpad.foundations.annotations.demographic import Demographic
-from gradgpad.foundations.metrics.metrics_demographics import \
-    MetricsDemographics
+from gradgpad.foundations.metrics.metrics_demographics import MetricsDemographics
 from gradgpad.tools import Metric
 
 

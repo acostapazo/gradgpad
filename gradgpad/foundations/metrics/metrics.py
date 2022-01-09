@@ -4,8 +4,9 @@ from gradgpad.foundations.annotations.grained_pai_mode import GrainedPaiMode
 from gradgpad.foundations.metrics.eer import eer
 from gradgpad.foundations.metrics.frr import frr
 from gradgpad.foundations.metrics.hter import hter
-from gradgpad.foundations.metrics.indepth_error_rates_analysis import \
-    indepth_error_rates_analysis
+from gradgpad.foundations.metrics.indepth_error_rates_analysis import (
+    indepth_error_rates_analysis,
+)
 from gradgpad.foundations.scores.subset import Subset
 from gradgpad.reproducible_research import List, Scores
 

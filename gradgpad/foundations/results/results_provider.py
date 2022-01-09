@@ -1,11 +1,9 @@
-from gradgpad.foundations.annotations.coarse_grained_pai import \
-    CoarseGrainedPai
+from gradgpad.foundations.annotations.coarse_grained_pai import CoarseGrainedPai
 from gradgpad.foundations.annotations.dataset import Dataset
 from gradgpad.foundations.annotations.demographic import Demographic
 from gradgpad.foundations.annotations.device import Device
 from gradgpad.foundations.metrics.metrics import Metrics
-from gradgpad.foundations.metrics.metrics_demographics import \
-    MetricsDemographics
+from gradgpad.foundations.metrics.metrics_demographics import MetricsDemographics
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
