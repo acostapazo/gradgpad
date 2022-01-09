@@ -1,12 +1,11 @@
 import pytest
 
-from gradgpad import ResultsProvider, Approach
+from gradgpad import Approach, ResultsProvider
 from gradgpad.tools.visualization.radar.create_apcer_detail import (
+    ApcerDetail,
     WorkingPoint,
     create_apcer_by_pai,
-    ApcerDetail,
 )
-
 
 APPROACH_RESULTS_GRANDTEST = {
     "Quality SVM RBF": ResultsProvider.grandtest(Approach.QUALITY_RBF)["grandtest"],

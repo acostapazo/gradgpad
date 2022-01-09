@@ -1,8 +1,8 @@
 import numpy as np
+
 from gradgpad.foundations.metrics.bpcer import bpcer
 from gradgpad.foundations.metrics.eer import eer
-
-from gradgpad.reproducible_research import Scores, Callable, Dict
+from gradgpad.reproducible_research import Callable, Dict, Scores
 
 
 class MetricsDemographics:

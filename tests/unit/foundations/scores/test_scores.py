@@ -1,17 +1,16 @@
 import pytest
 
 from gradgpad import (
+    Age,
+    Approach,
     Dataset,
     Filter,
-    Sex,
-    Age,
-    SkinTone,
-    Approach,
     Protocol,
     ScoresProvider,
+    Sex,
+    SkinTone,
     Subset,
 )
-
 
 scores_approaches_test = [
     ScoresProvider.get(

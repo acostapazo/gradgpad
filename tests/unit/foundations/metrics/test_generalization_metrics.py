@@ -1,4 +1,5 @@
 import pytest
+
 from gradgpad.foundations.metrics.metrics import Metrics
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol

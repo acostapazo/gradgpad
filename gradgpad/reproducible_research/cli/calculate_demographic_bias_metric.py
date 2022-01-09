@@ -1,6 +1,7 @@
 import json
-import numpy as np
 from statistics import mean
+
+import numpy as np
 
 
 def find_nearest(array, value):

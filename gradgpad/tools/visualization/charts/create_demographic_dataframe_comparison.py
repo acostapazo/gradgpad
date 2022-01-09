@@ -1,9 +1,9 @@
-import pandas as pd
-
 from typing import Dict
 
-from gradgpad.foundations.metrics.metrics_demographics import MetricsDemographics
+import pandas as pd
+
 from gradgpad.foundations.annotations.demographic import Demographic
+from gradgpad.foundations.metrics.metrics_demographics import MetricsDemographics
 from gradgpad.tools import Metric
 
 

@@ -2,12 +2,12 @@ import pytest
 from pandas import DataFrame
 
 from gradgpad import (
+    SKIN_TONE_GROUP_POLICY,
     Approach,
+    Demographic,
+    Metric,
     Protocol,
     ScoresProvider,
-    Demographic,
-    SKIN_TONE_GROUP_POLICY,
-    Metric,
 )
 from gradgpad.tools import group_dataframe
 from gradgpad.tools.visualization.charts import create_metric_bar_chart_comparison

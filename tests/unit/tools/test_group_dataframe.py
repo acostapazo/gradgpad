@@ -2,13 +2,13 @@ import pytest
 from pandas import DataFrame
 
 from gradgpad import (
-    Demographic,
     SKIN_TONE_GROUP_POLICY,
     Approach,
+    Demographic,
     Protocol,
     ScoresProvider,
 )
-from gradgpad.tools import group_dataframe, Metric
+from gradgpad.tools import Metric, group_dataframe
 from gradgpad.tools.visualization.charts.create_demographic_dataframe_comparison import (
     create_demographic_dataframe_comparison,
 )

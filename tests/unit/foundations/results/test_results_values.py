@@ -1,6 +1,6 @@
 import pytest
 
-from gradgpad import ResultsProvider, Approach
+from gradgpad import Approach, ResultsProvider
 
 
 def check_all_values(nested_dictionary):

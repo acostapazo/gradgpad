@@ -26,45 +26,34 @@ jobs:
     runs-on: ${{matrix.os}}
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - uses: actions/cache@v1
-      if: startsWith(runner.os, 'Linux')
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/dev.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - uses: actions/cache@v1
-      if: startsWith(runner.os, 'macOS')
-      with:
-        path: ~/Library/Caches/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/dev.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - uses: actions/cache@v1
-      if: startsWith(runner.os, 'Windows')
-      with:
-        path: ~\AppData\Local\pip\Cache
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/dev.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install lume
-        lume -install
-    - name: Lint
-      run: |
-        lume -lint
-    - name: Tests
-      run: |
-        lume -build -test
-    - name: Check Installation (--no-binary)
-      run: |
-        pip install wheel
-        python setup.py sdist
-        pip wheel --no-binary gradgpad -w /tmp/ext dist/gradgpad-*.tar.gz
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('dev-requirements.txt') }}
+      - name: Install dependencies
+        run: |
+          pip install lume
+          lume -install
+      - name: Lint
+        run: lume -lint
+      - name: Check Requirements
+        run: lume -check-requirements
+#      - name: Static Analysis
+#        run: lume -static-analysis
+      - name: Tests
+        run: lume -build -test
+      - uses: codecov/codecov-action@v2
+        with:
+          files: output/coverage/cobertura_coverage.xml
+          name: gradgpad
+          fail_ci_if_error: true
+      - name: Check Installation (--no-binary)
+        run: |
+          pip install wheel
+          python setup.py sdist
+          pip wheel --no-binary gradgpad -w /tmp/ext dist/gradgpad-*.tar.gz

@@ -1,14 +1,14 @@
-from gradgpad.foundations.metrics.metrics_demographics import MetricsDemographics
-from gradgpad.foundations.annotations.demographic import Demographic
 from gradgpad.foundations.annotations.coarse_grained_pai import CoarseGrainedPai
 from gradgpad.foundations.annotations.dataset import Dataset
+from gradgpad.foundations.annotations.demographic import Demographic
 from gradgpad.foundations.annotations.device import Device
 from gradgpad.foundations.metrics.metrics import Metrics
-from gradgpad.reproducible_research import Dict
+from gradgpad.foundations.metrics.metrics_demographics import MetricsDemographics
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.scores_provider import ScoresProvider
 from gradgpad.foundations.scores.subset import Subset
+from gradgpad.reproducible_research import Dict
 
 
 def get_analysis_from_metrics(metrics: Metrics) -> Dict:

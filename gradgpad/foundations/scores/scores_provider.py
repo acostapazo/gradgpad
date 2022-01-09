@@ -1,13 +1,13 @@
 import sys
 
-from gradgpad.public_api import GRADGPAD_SCORES_PATH
 from gradgpad.foundations.annotations.coarse_grained_pai import CoarseGrainedPai
 from gradgpad.foundations.annotations.dataset import Dataset
 from gradgpad.foundations.annotations.device import Device
-from gradgpad.reproducible_research import Scores
 from gradgpad.foundations.scores.approach import Approach
 from gradgpad.foundations.scores.protocol import Protocol
 from gradgpad.foundations.scores.subset import Subset
+from gradgpad.public_api import GRADGPAD_SCORES_PATH
+from gradgpad.reproducible_research import Scores
 
 sys.path.insert(0, GRADGPAD_SCORES_PATH)
 

@@ -1,6 +1,6 @@
 import pytest
 
-from gradgpad import ResultsProvider, Approach, Demographic
+from gradgpad import Approach, Demographic, ResultsProvider
 
 
 @pytest.fixture

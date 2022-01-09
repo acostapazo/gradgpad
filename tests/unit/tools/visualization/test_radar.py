@@ -3,12 +3,12 @@ import os
 import pytest
 
 from gradgpad import (
-    ResultsProvider,
     Approach,
-    PadRadarPaiPlotter,
-    WorkingPoint,
-    Protocol,
     CombinedScenario,
+    PadRadarPaiPlotter,
+    Protocol,
+    ResultsProvider,
+    WorkingPoint,
 )
 
 APPROACH_RESULTS = {

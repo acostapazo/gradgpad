@@ -1,8 +1,8 @@
-from gradgpad.foundations.annotations.attributes.personal_attributes import (
-    PersonAttributes,
-)
 from gradgpad.foundations.annotations.attributes.conditions_attributes import (
     ConditionsAttributes,
+)
+from gradgpad.foundations.annotations.attributes.personal_attributes import (
+    PersonAttributes,
 )
 
 

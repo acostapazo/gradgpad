@@ -1,9 +1,9 @@
 import pytest
 
-from gradgpad import ResultsProvider, Approach
+from gradgpad import Approach, ResultsProvider
 from gradgpad.tools.visualization.radar.create_apcer_detail import (
-    WorkingPoint,
     ApcerDetail,
+    WorkingPoint,
     create_apcer_by_subprotocol,
 )
 

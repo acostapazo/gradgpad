@@ -1,10 +1,10 @@
 import pytest
 
 from gradgpad import (
+    Approach,
     CoarseGrainedPai,
     Dataset,
     Device,
-    Approach,
     Protocol,
     ScoresProvider,
     Subset,

@@ -1,17 +1,16 @@
 import random
+from typing import Callable, Dict, List
+
 import numpy as np
-
-from typing import List, Dict, Callable
-
 from sklearn.preprocessing import LabelEncoder
 
+from gradgpad import annotations
 from gradgpad.foundations.annotations.annotation import Annotation
 from gradgpad.foundations.annotations.dataset import Dataset
 from gradgpad.foundations.annotations.filter import Filter
-from gradgpad.foundations.annotations.person_attributes import Sex, Age, SkinTone
+from gradgpad.foundations.annotations.person_attributes import Age, Sex, SkinTone
 from gradgpad.foundations.annotations.scenario import Scenario
 from gradgpad.tools.open_result_json import open_result_json
-from gradgpad import annotations
 
 
 class Scores:
