@@ -3,6 +3,7 @@ name: gradgpad
 install:
   run:
   - pip install -U -r requirements/dev-requirements.txt -r requirements/requirements.txt
+  - pre-commit install
 
 envs:
   PACKAGE_NAME: gradgpad
