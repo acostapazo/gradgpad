@@ -1,10 +1,9 @@
-# The GRAD-GPAD framework 🗿 [![version](https://img.shields.io/github/release/acostapazo/gradgpad/all.svg)](https://github.com/acostapazo/gradgpad/releases) [![ci](https://github.com/acostapazo/gradgpad/workflows/ci/badge.svg)](https://github.com/acostapazo/gradgpad/actions) [![pypi](https://img.shields.io/pypi/dm/gradgpad)](https://pypi.org/project/gradgpad/) [![codecov](https://codecov.io/gh/acostapazo/gradgpad/branch/master/graph/badge.svg?token=HXTGF8ZBJ7)](https://codecov.io/gh/acostapazo/gradgpad)
-
+# gradgpad 🗿 [![version](https://img.shields.io/github/release/acostapazo/gradgpad/all.svg)](https://github.com/acostapazo/gradgpad/releases) [![ci](https://github.com/acostapazo/gradgpad/workflows/ci/badge.svg)](https://github.com/acostapazo/gradgpad/actions) [![pypi](https://img.shields.io/pypi/dm/gradgpad)](https://pypi.org/project/gradgpad/) [![codecov](https://codecov.io/gh/acostapazo/gradgpad/branch/master/graph/badge.svg?token=HXTGF8ZBJ7)](https://codecov.io/gh/acostapazo/gradgpad)
 
 
 👉  The GRAD-GPAD framework is a comprehensive and modular framework to evaluate the performance of face-PAD (face Presentation Attack Detection) approaches in realistic settings, enabling accountability and fair comparison of most face-PAD approaches in the literature.
 
-🙋  GRAD-GPAD stand for Generalization Representation over Aggregated Datasets for Generalized Presentation Attack Detection
+🙋  GRAD-GPAD stand for Generalization Representation over Aggregated Datasets for Generalized Presentation Attack Detection.
 
 ## 🤔 Abstract 
 
@@ -87,7 +86,7 @@ optional arguments:
 
 ## 🤔 Contributing
 
-There is a lot of work ahead (adding new categorizations, datasets, improving documentation...), feel free to add and propose any improvements you can think of! If you need help getting started, don't hesitate to contact us :v:
+There is a lot of work ahead (adding new categorizations, datasets, improving documentation...), feel free to add and propose any improvements you can think of! If you need help getting started, don't hesitate to contact us ✌️
 
 * 🛠️ Environment
 
