@@ -12,6 +12,12 @@ from gradgpad import (
 
 
 @pytest.mark.unit
+def test_should_success_get_all_scores_auxiliary():
+    scores = ScoresProvider.all(Approach.AUXILIARY)
+    assert len(scores.keys()) == 35
+
+
+@pytest.mark.unit
 @pytest.mark.parametrize(
     "approach,protocol,subset,expected_scores_length",
     [

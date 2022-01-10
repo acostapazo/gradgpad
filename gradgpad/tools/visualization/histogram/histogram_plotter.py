@@ -240,9 +240,7 @@ class HistogramPlotter(IPlotter):
 
         if not os.path.isdir(os.path.dirname(output_filename)):
             raise IOError(
-                "Output path [{}] does not exist".format(
-                    os.path.dirname(output_filename)
-                )
+                f"Output path [{os.path.dirname(output_filename)}] does not exist"
             )
 
         plt = self.create_figure(scores)

@@ -116,3 +116,35 @@ def test_should_load_scores_with_fair_skin_tone_subset(scores):
     fair_skin_tone_subset = scores.get_fair_skin_tone_subset()
     for skin_tone in SkinTone.options():
         assert len(fair_skin_tone_subset.get(skin_tone.name)) == 34  # 113
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize("scores", scores_approaches_test)
+def test_should_load_scores_filter_with_random_values(scores):
+    assert len(scores.filtered_by(Filter(random_values=10))) == 10
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize("scores", scores_approaches_test)
+def test_should_load_scores_filter_with_pseudo_random_values(scores):
+    assert len(scores.filtered_by(Filter(pseudo_random_values=10))) == 10
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize("scores", scores_approaches_test)
+def test_should_load_scores_get_genuine(scores):
+    assert len(scores.get_genuine()) == 2281
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize("scores", scores_approaches_test)
+def test_should_load_scores_get_attacks(scores):
+    assert len(scores.get_attacks()) == 10209
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize("scores", scores_approaches_test)
+def test_should_load_scores_get_numpy_scores_and_labels_filtered_by_labels(scores):
+    scores, labels = scores.get_numpy_scores_and_labels_filtered_by_labels()
+    assert len(scores) == 12490
+    assert len(labels) == 12490
