@@ -31,6 +31,10 @@ year = {2021}
 }
 ```
 
+
+This publication has been financed by the "Agencia Estatal de Investigación. Gobierno de España"  ref. `DIN2019-010735 / AEI / 10.13039/501100011033`
+
+
 ## 💻 Installation
 
 ```console
