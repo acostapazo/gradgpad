@@ -13,18 +13,15 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest]
-        python-version: [3.6, 3.7, 3.8]
+        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11-dev']
     runs-on: ${{matrix.os}}
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('dev-requirements.txt') }}
+          cache: pip
+          cache-dependency-path: '**/*requirements.txt'
       - name: Install dependencies
         run: |
           pip install lume
@@ -47,3 +44,5 @@ jobs:
           pip install wheel
           python setup.py sdist
           pip wheel --no-binary gradgpad -w /tmp/ext dist/gradgpad-*.tar.gz
+      - name: Check Installation (temporary)
+          pip install gradgpad
