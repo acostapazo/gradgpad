@@ -34,8 +34,7 @@ jobs:
         git config --global user.email "acosta@alicebiometrics.com"
         git config --global user.name "Alice Biometrics"
         git commit -m "Update version to ${RELEASE_VERSION}"
-    - name: Push changes
-      uses: alice-biometrics/github-push-action@master
+    - uses: alice-biometrics/github-push-action@master
       with:
         github_token: ${{ secrets.GIT_ACCESS_TOKEN }}
     - name: Check pip installation
