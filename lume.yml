@@ -5,18 +5,22 @@ install:
   - pip install -U -r requirements/dev-requirements.txt -r requirements/requirements.txt
   - pre-commit install
 
+uninstall:
+  run:
+    - pip uninstall gradgpad -y
+    - pip freeze | xargs pip uninstall -y
+    - pip install lume
+
 envs:
   PACKAGE_NAME: gradgpad
 
 steps:
-  uninstall:
-    run: pip freeze | xargs pip uninstall -y
   clean:
     run:
-    - rm -rf deps
-    - rm -rf output
-    - rm -rf docs/build
-    - find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
+      - rm -rf deps
+      - rm -rf output
+      - rm -rf docs/build
+      - find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
   lint:
     run:
       - black --check .
