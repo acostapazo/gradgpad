@@ -44,5 +44,3 @@ jobs:
           pip install wheel
           python setup.py sdist
           pip wheel --no-binary gradgpad -w /tmp/ext dist/gradgpad-*.tar.gz
-      - name: Check Installation (temporary)
-        run: pip install gradgpad
