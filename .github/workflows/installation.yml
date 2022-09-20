@@ -14,5 +14,11 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install numpy(temporary)
+        run: pip install numpy
+      - name: Install pandas(temporary)
+        run: pip install "pandas<2"
+      - name: Install scikit-learn(temporary)
+        run: pip install "scikit-learn<2"
       - name: Install package
         run: pip install gradgpad
