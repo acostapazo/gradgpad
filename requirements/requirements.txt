@@ -1,4 +1,3 @@
-meiga==1.2.9
 pandas<2
 seaborn==0.11.2
 scikit-learn<2

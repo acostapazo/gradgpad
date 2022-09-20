@@ -13,11 +13,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
       with:
-        python-version: '3.x'
+        python-version: '3.9'
     - name: Set RELEASE_VERSION
       run: echo "RELEASE_VERSION=$(echo ${GITHUB_REF:11})" >> $GITHUB_ENV
     - name: Update VERSION file
@@ -35,8 +34,7 @@ jobs:
         git config --global user.email "acosta@alicebiometrics.com"
         git config --global user.name "Alice Biometrics"
         git commit -m "Update version to ${RELEASE_VERSION}"
-    - name: Push changes
-      uses: alice-biometrics/github-push-action@master
+    - uses: alice-biometrics/github-push-action@master
       with:
         github_token: ${{ secrets.GIT_ACCESS_TOKEN }}
     - name: Check pip installation
