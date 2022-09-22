@@ -1,4 +1,10 @@
+numpy<2
 pandas<2
-seaborn==0.11.2
-scikit-learn<2
-tabulate==0.8.9
+seaborn<1
+scikit-learn<2; python_version > '3.7'
+tabulate<1
+
+# Python 3.6 compatibility
+scikit-learn<1; python_version < '3.7'
+
+
