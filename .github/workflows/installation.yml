@@ -8,18 +8,12 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest]
-        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11-dev']
+        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10'] # TODO '3.11-dev' waiting for scikit-learn compatibility
     runs-on: ${{matrix.os}}
     continue-on-error: true
     steps:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install numpy(temporary)
-        run: pip install numpy
-      - name: Install pandas(temporary)
-        run: pip install "pandas<2"
-      - name: Install scikit-learn(temporary)
-        run: pip install "scikit-learn<2"
       - name: Install package
         run: pip install gradgpad

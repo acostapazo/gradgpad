@@ -1,7 +1,7 @@
 numpy<2
 pandas<2
 seaborn<1
-scikit-learn<2; python_version > '3.7'
+scikit-learn<2; python_version >= '3.7'
 tabulate<1
 
 # Python 3.6 compatibility
