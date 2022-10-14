@@ -10,8 +10,16 @@ th_eer_dev = 0.25
 
 
 @pytest.mark.unit
-def test_should_throw_an_exception_when_input_is_not_np_array():
-    pytest.raises(TypeError, lambda: bpcer(scores.tolist(), labels, th_eer_dev))
+@pytest.mark.parametrize(
+    "scores, labels",
+    [
+        (scores.tolist(), labels),
+        (scores, labels.tolist()),
+        (scores.tolist(), labels.tolist()),
+    ],
+)
+def test_should_throw_an_exception_when_input_is_not_np_array(scores, labels):
+    pytest.raises(TypeError, lambda: bpcer(scores, labels, 0.15))
 
 
 @pytest.mark.unit

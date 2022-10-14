@@ -5,10 +5,16 @@ from gradgpad.foundations.metrics.apcer import apcer
 
 
 @pytest.mark.unit
-def test_should_throw_an_exception_when_input_is_not_np_array():
-    pytest.raises(
-        TypeError, lambda: apcer([0.5, 0.6, 0.2, 0.0, 0.0], [1, 2, 2, 0, 0], 0.15)
-    )
+@pytest.mark.parametrize(
+    "scores, labels",
+    [
+        ([0.5, 0.6, 0.2, 0.0, 0.0], np.array([1, 2, 2, 0, 0])),
+        (np.array([0.1, 0.6, 0.2, 0.0, 0.0]), [1, 2, 2, 0, 0]),
+        ([0.5, 0.6, 0.2, 0.0, 0.0], [1, 2, 2, 0, 0]),
+    ],
+)
+def test_should_throw_an_exception_when_input_is_not_np_array(scores, labels):
+    pytest.raises(TypeError, lambda: apcer(scores, labels, 0.15))
 
 
 @pytest.mark.unit

@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def apcer(scores, labels, th_eer_dev):
+def apcer(scores: np.ndarray, labels: np.ndarray, th_eer_dev: float):
     """
     Computes the Attack Presentation Classification Error Rate.
 
@@ -21,7 +21,7 @@ def apcer(scores, labels, th_eer_dev):
 
     """
 
-    if not isinstance(scores, np.ndarray) or not isinstance(scores, np.ndarray):
+    if not isinstance(scores, np.ndarray) or not isinstance(labels, np.ndarray):
         raise TypeError(
             "Scores [{}] and labels [{}] must be numpy arrays.".format(
                 type(scores), type(labels)
