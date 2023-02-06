@@ -96,18 +96,14 @@ optional arguments:
 No, it is not necessary, although the more datasets you add to the test, the greater the statistical significance of 
 your evaluation set. 
 
-From the paper:
-
-> "The unified categorisation added in GRAD-GPAD v2 brings the opportunity both to create novel protocols and to visualise the results from different perspectives. Also, the extended GRAD-GPAD v2 dataset allows a better statistical significance of the results of previous protocols, leveraging their added-value for assessing face-PAD generalisation on current and future algorithms."
+From the paper: *"The unified categorisation added in GRAD-GPAD v2 brings the opportunity both to create novel protocols and to visualise the results from different perspectives. Also, the extended GRAD-GPAD v2 dataset allows a better statistical significance of the results of previous protocols, leveraging their added-value for assessing face-PAD generalisation on current and future algorithms."*
 
 > **Note**
-> Even if you only have access to a few datasets, you can take advantage of annotations and perform tests on your datasets.
+> Even if you only have access to a few datasets, you can take advantage of annotations and perform tests on your datasets. Filter by datasets with the following code:
 > ```python
 > from gradgpad import annotations
 > 
 > my_datasets = ["replay-mobile", "replay-attack"]
-> 
-> 
 > selected_annotations = annotations.get_annotations_filtered_by_datasets(my_datasets)
 > ```
 
@@ -115,7 +111,7 @@ From the paper:
 #### I want to evaluate my own algorithms in the GRAD-GPAD framework? How should I start?
 
 We strongly recommend using the python client for easy access to the annotations (available in a json file [here](https://github.com/acostapazo/gradgpad/blob/main/gradgpad/data/gradgpad_annotations.json)). 
-Integrate your algorithm and define a score file format compatible with GRAD-GPAD (examples in [scores](https://github.com/acostapazo/gradgpad/tree/main/gradgpad/data/scores)), so you can use the available evaluation tools.
+If you integrate your algorithm and define a score file format compatible with GRAD-GPAD (examples in [scores](https://github.com/acostapazo/gradgpad/tree/main/gradgpad/data/scores)), your will be able to use the available evaluation tools.
 
 ```mermaid
 flowchart LR
@@ -153,14 +149,15 @@ flowchart LR
 >    filename = f"{my_datasets.get(annotation.dataset.value)}/{annotation.media}"
 >    print(f"{filename=}")
 >
->    # load the media file
+>    # 1. Load the media file
 >
->    # perform your algorithm
+>    # 2. Perform your algorithm
 >
->    # save to a file like this {annotation.media: score}
->    # like in https://github.com/acostapazo/gradgpad/tree/main/gradgpad/data/scores/auxiliary
->    # once you have the score files, you can use the evaluation tools
->    # check notebooks in https://github.com/acostapazo/gradgpad-notebooks
+>    # 3. Save to a file like this {annotation.media: score} 
+>    #    like in https://github.com/acostapazo/gradgpad/tree/main/gradgpad/data/scores/auxiliary
+>
+>    # 4. Once you have the score files, you can use the evaluation tools
+>    #    check notebooks in https://github.com/acostapazo/gradgpad-notebooks
 >```
 
 
