@@ -55,6 +55,13 @@ class Annotations:
             annotation for annotation in self.annotated_samples if annotation.id in ids
         ]
 
+    def get_annotations_filtered_by_datasets(self, datasets: List[str]):
+        return [
+            annotation
+            for annotation in self.annotated_samples
+            if annotation.dataset in datasets
+        ]
+
     @property
     def num_annotations(self):
         return len(self.annotated_samples)
