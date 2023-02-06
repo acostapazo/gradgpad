@@ -60,7 +60,7 @@ class Scores:
             annotations_from_ids, Filter(scenario=Scenario.GENUINE)
         )
         labels = [0 if id in filtered_ids else 1 for id in ids]
-        return np.asarray(labels, dtype=np.int)
+        return np.asarray(labels, dtype=np.int32)
 
     def get_numpy_scores_and_labels_filtered_by_labels(self, pai_labels=None):
         if not pai_labels:
@@ -86,7 +86,7 @@ class Scores:
 
         return (
             np.asarray(list(scores), dtype=np.float32),
-            np.asarray(labels, dtype=np.int),
+            np.asarray(labels, dtype=np.int32),
         )
 
     def _get_numpy_labels_filter_by_filter(
@@ -128,7 +128,7 @@ class Scores:
             if le_name_mapping.get(str(unknown_label_value)) is not None:
                 labels = [label - 1 for label in labels]
 
-        return np.asarray(labels, dtype=np.int)
+        return np.asarray(labels, dtype=np.int32)
 
     def get_numpy_labels_by_scenario(self):
         return self._get_numpy_labels_filter_by_filter(
@@ -175,7 +175,7 @@ class Scores:
             annotation.categorization.get("fine_grained_pai")
             for annotation in annotations_from_ids
         ]
-        return np.asarray(fine_grained_pai_labels, dtype=np.int)
+        return np.asarray(fine_grained_pai_labels, dtype=np.int32)
 
     def _get_smallest_length(self, x):
         return [

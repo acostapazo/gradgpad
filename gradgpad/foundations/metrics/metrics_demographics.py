@@ -42,7 +42,7 @@ class MetricsDemographics:
         bpcers = {}
         for demographic, scores in subset_scores.items():
             demographic_scores = np.asarray(list(scores.values()), dtype=np.float32)
-            labels = np.asarray([0] * len(demographic_scores), dtype=np.int)
+            labels = np.asarray([0] * len(demographic_scores), dtype=np.int32)
             bpcers[demographic] = bpcer(demographic_scores, labels, eer_th) * 100.0
 
         return bpcers
