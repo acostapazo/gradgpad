@@ -39,8 +39,10 @@ def eer(scores, labels):
     fars, tprs, ths = metrics.roc_curve(inlabels, inv_scores, pos_label=0)
     ths = -1.0 * ths
     ths = np.clip(ths, scores.min(), scores.max())
+    _ths = -1.0 * ths
+    _ths = np.clip(_ths, scores.min(), scores.max())
 
     eer = brentq(lambda x: 1.0 - x - interp1d(fars, tprs)(x), 0.0, 1.0)
-    eer_th = interp1d(fars, ths, kind="slinear")(eer)
+    eer_th = float(interp1d(fars, _ths)(eer))
 
     return eer, eer_th
