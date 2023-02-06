@@ -26,6 +26,28 @@ def test_should_check_annotations_statistics():
     ]
 
 
+@pytest.mark.unit
+def test_should_filter_by_ids():
+    from gradgpad import annotations
+
+    selected_annotations = annotations.get_annotations_from_ids(
+        ["casia-fasd_test_release/1/6.avi"]
+    )
+
+    assert len(selected_annotations) == 1
+
+
+@pytest.mark.unit
+def test_should_filter_annotations_by_dataset():
+    from gradgpad import annotations
+
+    selected_annotations = annotations.get_annotations_filtered_by_datasets(
+        ["replay-mobile"]
+    )
+
+    assert len(selected_annotations) == 1030
+
+
 @pytest.fixture
 def expected_pseudo_random_ids_values():
     return [
