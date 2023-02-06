@@ -21,7 +21,7 @@ def bpcer(scores, labels, th_eer_dev):
 
     """
 
-    if not isinstance(scores, np.ndarray) or not isinstance(scores, np.ndarray):
+    if not isinstance(scores, np.ndarray) or not isinstance(labels, np.ndarray):
         raise TypeError(
             "Scores [{}] and labels [{}] must be numpy arrays.".format(
                 type(scores), type(labels)
