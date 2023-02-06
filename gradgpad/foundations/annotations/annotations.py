@@ -59,7 +59,7 @@ class Annotations:
         return [
             annotation
             for annotation in self.annotated_samples
-            if annotation.dataset in datasets
+            if annotation.dataset.value in datasets
         ]
 
     @property
